@@ -32,7 +32,7 @@ pipeline {
       }
       steps {
         sh 'rm -rf /home/html/staging/*'
-        sh 'cp -aT /var/jenkins_home/workspace/manitoba-ryder-cup_staging/dist /home/html/staging'
+        sh 'cp -aT dist /home/html/staging'
       }
     }
     stage('Deploy to Production') {
@@ -41,7 +41,7 @@ pipeline {
       }
       steps {
         sh 'rm -rf /home/html/prod/*'
-        sh 'cp -aT /var/jenkins_home/workspace/manitoba-ryder-cup_master/dist /home/html/prod'
+        sh 'cp -aT dist /home/html/prod'
       }
     }
   }

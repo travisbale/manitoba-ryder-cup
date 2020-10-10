@@ -6,10 +6,10 @@
     <td class="px-3 py-2 border-r border-grey-300">
       {{ par }}
     </td>
-    <td class="px-3 py-2 border-r border-grey-300" :class="redColorClass">
+    <td class="px-3 py-2 border-r border-grey-500" :class="redColorClass">
       {{ redScore }}
     </td>
-    <td class="px-3 py-2 border-r border-grey-300" :class="matchColorClass">
+    <td class="px-3 py-2 border-r border-grey-500 font-bold shadow-2xl" :class="matchColorClass">
       {{ matchScore }}
     </td>
     <td class="px-3 py-2" :class="blueColorClass">
@@ -69,6 +69,7 @@ export default {
       return {
         'bg-blue-400': this.leader === 'blue',
         'bg-red-400': this.leader === 'red',
+        'bg-white': this.leader === 'null',
       };
     },
   },

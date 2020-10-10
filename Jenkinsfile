@@ -23,6 +23,7 @@ pipeline {
     }
     stage('Build') {
       steps {
+        sh 'cp /home/env/rydercup.env .env.production'
         sh 'npm run build'
       }
     }

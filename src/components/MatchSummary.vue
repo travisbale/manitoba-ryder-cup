@@ -45,14 +45,14 @@ export default {
   computed: {
     redGradientClass() {
       return {
-        'from-red-700': this.id > 1 && this.id !== 4,
+        'from-red-400': this.id > 1 && this.id !== 4,
         'from-grey-200': this.id < 2 || this.id === 4,
       };
     },
 
     blueGradientClass() {
       return {
-        'from-blue-700': this.id === 0,
+        'from-blue-400': this.id === 0,
         'from-grey-200': this.id > 0,
       };
     },

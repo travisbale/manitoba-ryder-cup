@@ -1,6 +1,6 @@
 <template>
   <div class="w-full mb-6">
-    <div class="w-full text-center py-4 mb-2 shadow-md font-semibold tracking-wide sticky top-0 bg-white">
+    <div class="w-full text-center py-4 mb-2 shadow-md font-semibold tracking-wide bg-white">
       Sunday Singles
     </div>
     <match-summary v-for="match in matches" :key="match.id" v-bind="match" />

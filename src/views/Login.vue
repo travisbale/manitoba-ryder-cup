@@ -7,7 +7,7 @@
       <h2 class="font-open-sans-bold text-3xl uppercase mb-8">
         Login
       </h2>
-      <base-alert v-if="errorMessage" variant="error">
+      <base-alert v-if="errorMessage" variant="danger">
         {{ errorMessage }}
       </base-alert>
       <base-label>Email</base-label>

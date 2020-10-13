@@ -18,6 +18,20 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
   },
   {
+    path: '/scorecards',
+    name: 'scorecards',
+    component: () => import(/* webpackChunkName: "scorecards" */ '../views/Scorecards.vue'),
+  },
+  {
+    path: '/scorecard/:id',
+    name: 'scorecard',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/match/:id',
     name: 'matchDetails',
     component: () => import(/* webpackChunkName: "match" */ '../views/MatchDetails.vue'),
@@ -30,6 +44,22 @@ const router = new VueRouter({
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
+  },
+  {
+    path: '/players',
+    name: 'players',
+    component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
+  },
+  {
+    path: '/players/:id',
+    name: 'player',
+    component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
+    props: true,
   }],
 });
 

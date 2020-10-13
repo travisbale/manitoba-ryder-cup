@@ -8,24 +8,49 @@
         <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
           <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
         </div>
-        <aside class="transform fixed w-64 h-screen left-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-200" :class="translationClass">
-          Nav Menu
+        <aside class="transform fixed w-64 h-screen left-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-300" :class="translationClass">
+          <div class="p-4 font-semibold text-lg border-b border-grey-800 mb-2">
+            Manitoba Ryder Cup
+          </div>
+          <router-link :to="{ name: 'news' }" class="flex items-center px-4 py-2" @click.native="navOpen = false">
+            <article-icon class="mr-4" />
+            News
+          </router-link>
+          <router-link :to="{ name: 'leaderboard' }" class="flex items-center px-4 py-2" @click.native="navOpen = false">
+            <leaderboard-icon class="mr-4" />
+            Leaderboard
+          </router-link>
+          <router-link :to="{ name: 'players' }" class="flex items-center px-4 py-2" @click.native="navOpen = false">
+            <groups-icon class="mr-4" />
+            Players
+          </router-link>
+          <div v-if="isUserLoggedIn">
+            <div class="border-t border-grey-800 my-2" />
+            <router-link :to="{ name: 'scorecards' }" class="flex items-center px-4 py-2" @click.native="navOpen = false">
+              <golf-course-icon class="mr-4" />
+              My Matches
+            </router-link>
+          </div>
+          <div v-else class="fixed bottom-0 w-full p-4">
+            <base-button class="w-full">
+              <router-link :to="{ name: 'login' }" class="block px-4 py-2" @click.native="navOpen = false">
+                Login
+              </router-link>
+            </base-button>
+          </div>
         </aside>
         <router-link :to="{ name: 'leaderboard' }" class="block text-grey-200 text-lg font-semibold">
           Manitoba Ryder Cup
         </router-link>
       </div>
 
-      <router-link v-if="!isUserLoggedIn" :to="{ name: 'login' }" class="block text-grey-200" @click.native="menuOpen = false">
-        <login-icon />
-      </router-link>
-      <div v-else class="relative" @keydown.escape="menuOpen = false">
+      <div v-if="isUserLoggedIn" class="relative" @keydown.escape="menuOpen = false">
         <button type="button" class="relative block text-grey-200 hover:text-white" @click="toggleMenu">
           <vertical-more-icon class="focus:outline-none" />
         </button>
         <div v-if="menuOpen" class="fixed inset-0 h-full w-full" tabindex="-1" @click="menuOpen = false" />
         <div v-if="menuOpen" class="absolute z-10 right-0 mt-2 w-48 py-2 bg-white border border-grey-300 rounded shadow-xl" @click="menuOpen = false">
-          <router-link :to="{ name: 'account' }" class="block px-4 py-2">
+          <router-link v-if="isUserLoggedIn" :to="{ name: 'account' }" class="block px-4 py-2">
             Account Settings
           </router-link>
           <a v-if="isUserLoggedIn" href="#" class="block px-4 py-2" @click="logUserOut">Logout</a>
@@ -37,12 +62,18 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import LoginIcon from '@/components/svg/LoginIcon.vue';
+import ArticleIcon from '@/components/svg/ArticleIcon.vue';
+import BaseButton from '@/components/BaseButton.vue';
+import GolfCourseIcon from '@/components/svg/GolfCourseIcon.vue';
+import GroupsIcon from '@/components/svg/GroupsIcon.vue';
+import LeaderboardIcon from '@/components/svg/LeaderboardIcon.vue';
 import MenuIcon from '@/components/svg/MenuIcon.vue';
 import VerticalMoreIcon from '@/components/svg/VerticalMoreIcon.vue';
 
 export default {
-  components: { LoginIcon, MenuIcon, VerticalMoreIcon },
+  components: {
+    ArticleIcon, BaseButton, GolfCourseIcon, GroupsIcon, LeaderboardIcon, MenuIcon, VerticalMoreIcon,
+  },
 
   data() {
     return {

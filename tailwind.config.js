@@ -310,6 +310,12 @@ module.exports = {
         semibold: ['OpenSansSemiBold'],
         bold: ['OpenSansBold'],
       },
+      height: {
+        72: '18rem',
+      },
+      width: {
+        72: '18rem',
+      },
     },
   },
   variants: {},

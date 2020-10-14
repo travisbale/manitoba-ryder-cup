@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  // TODO: use object to declare properties
+  // eslint-disable-next-line
   props: ['id'],
 
   data() {

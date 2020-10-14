@@ -62,17 +62,23 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import ArticleIcon from '@/components/svg/ArticleIcon.vue';
+import ArticleIcon from '@/components/icons/ArticleIcon.vue';
 import BaseButton from '@/components/BaseButton.vue';
-import GolfCourseIcon from '@/components/svg/GolfCourseIcon.vue';
-import GroupsIcon from '@/components/svg/GroupsIcon.vue';
-import LeaderboardIcon from '@/components/svg/LeaderboardIcon.vue';
-import MenuIcon from '@/components/svg/MenuIcon.vue';
-import VerticalMoreIcon from '@/components/svg/VerticalMoreIcon.vue';
+import GolfCourseIcon from '@/components/icons/GolfCourseIcon.vue';
+import GroupsIcon from '@/components/icons/GroupsIcon.vue';
+import LeaderboardIcon from '@/components/icons/LeaderboardIcon.vue';
+import MenuIcon from '@/components/icons/MenuIcon.vue';
+import VerticalMoreIcon from '@/components/icons/VerticalMoreIcon.vue';
 
 export default {
   components: {
-    ArticleIcon, BaseButton, GolfCourseIcon, GroupsIcon, LeaderboardIcon, MenuIcon, VerticalMoreIcon,
+    ArticleIcon,
+    BaseButton,
+    GolfCourseIcon,
+    GroupsIcon,
+    LeaderboardIcon,
+    MenuIcon,
+    VerticalMoreIcon,
   },
 
   data() {

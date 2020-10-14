@@ -25,7 +25,7 @@
 
 <script>
 import BaseBadge from '@/components/BaseBadge.vue';
-import StarIcon from '@/components/svg/StarIcon.vue';
+import StarIcon from '@/components/icons/StarIcon.vue';
 
 export default {
   components: { BaseBadge, StarIcon },

@@ -32,11 +32,11 @@
             </router-link>
           </div>
           <div v-else class="fixed bottom-0 w-full p-4">
-            <base-button class="w-full">
-              <router-link :to="{ name: 'login' }" class="block px-4 py-2" @click.native="navOpen = false">
-                Login
-              </router-link>
-            </base-button>
+            <router-link :to="{ name: 'login' }" class="block" @click.native="navOpen = false">
+              <base-button class="w-full py-4">
+                Sign in
+              </base-button>
+            </router-link>
           </div>
         </aside>
         <router-link :to="{ name: 'leaderboard' }" class="block text-grey-200 text-lg font-semibold">

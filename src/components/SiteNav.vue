@@ -26,6 +26,10 @@
           </router-link>
           <div v-if="isUserLoggedIn">
             <div class="border-t border-grey-800 my-2" />
+            <router-link :to="{ name: 'profile', params: { name: 'name' }}" class="flex items-center px-4 py-2" @click.native="navOpen = false">
+              <person-icon class="mr-4" />
+              My Profile
+            </router-link>
             <router-link :to="{ name: 'scorecards' }" class="flex items-center px-4 py-2" @click.native="navOpen = false">
               <golf-course-icon class="mr-4" />
               My Matches
@@ -67,6 +71,7 @@ import BaseButton from '@/components/BaseButton.vue';
 import GolfCourseIcon from '@/components/icons/GolfCourseIcon.vue';
 import GroupsIcon from '@/components/icons/GroupsIcon.vue';
 import LeaderboardIcon from '@/components/icons/LeaderboardIcon.vue';
+import PersonIcon from '@/components/icons/PersonIcon.vue';
 import MenuIcon from '@/components/icons/MenuIcon.vue';
 import VerticalMoreIcon from '@/components/icons/VerticalMoreIcon.vue';
 
@@ -76,6 +81,7 @@ export default {
     BaseButton,
     GolfCourseIcon,
     GroupsIcon,
+    PersonIcon,
     LeaderboardIcon,
     MenuIcon,
     VerticalMoreIcon,

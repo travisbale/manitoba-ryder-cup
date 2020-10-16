@@ -56,6 +56,12 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
   },
   {
+    path: '/profile/:name',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "players" */ '../views/Profile.vue'),
+    props: true,
+  },
+  {
     path: '/players/:id',
     name: 'player',
     component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),

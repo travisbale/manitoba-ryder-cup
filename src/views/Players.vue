@@ -1,7 +1,7 @@
 <template>
   <div class="lg:container lg:mx-auto">
     <div class="p-4">
-      <h1 class="font-bold text-3xl">
+      <h1 class="font-semibold text-2xl">
         Tournament Participants
       </h1>
       <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">

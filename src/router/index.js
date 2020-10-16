@@ -67,6 +67,15 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
     props: true,
   }],
+
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // Return the user to their previous position when using back/forward buttons
+      return savedPosition;
+    }
+    // Scroll to top for all other route navigations
+    return { x: 0, y: 0 };
+  },
 });
 
 router.beforeEach((to, from, next) => {

@@ -21,9 +21,12 @@ const router = new VueRouter({
     path: '/scorecards',
     name: 'scorecards',
     component: () => import(/* webpackChunkName: "scorecards" */ '../views/Scorecards.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
-    path: '/scorecard/:id',
+    path: '/scorecard/:id/',
     name: 'scorecard',
     component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
     props: true,
@@ -32,10 +35,13 @@ const router = new VueRouter({
     },
   },
   {
-    path: '/match/:id',
-    name: 'matchDetails',
-    component: () => import(/* webpackChunkName: "match" */ '../views/MatchDetails.vue'),
+    path: '/scorecard/:id/hole/:number',
+    name: 'hole',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/account',

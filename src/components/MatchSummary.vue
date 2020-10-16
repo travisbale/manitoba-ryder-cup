@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'matchDetails', params: { id }}">
+  <router-link :to="{ name: 'scorecard', params: { id }}" class="block">
     <div class="flex items-center text-center py-1">
       <div class="w-2/5 py-1 bg-gradient-to-l" :class="blueGradientClass">
         {{ blueName }}

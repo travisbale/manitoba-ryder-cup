@@ -1,18 +1,22 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center bg-cover h-full overflow-hidden" style="background-image: url('img/tee-it-up.jpg')">
     <div class="w-4/5 mt-8">
       <div class="flex justify-center">
         <img class="h-48 mb-8" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
       </div>
-      <h2 class="font-open-sans-bold text-3xl uppercase mb-8">
+      <h2 class="font-semibold text-white text-3xl mb-8">
         Login
       </h2>
       <base-alert v-if="errorMessage" variant="danger">
         {{ errorMessage }}
       </base-alert>
-      <base-label>Email</base-label>
+      <base-label class="text-white">
+        Email
+      </base-label>
       <base-input v-model="email" type="email" placeholder="example@email.com" />
-      <base-label>Password</base-label>
+      <base-label class="text-white">
+        Password
+      </base-label>
       <base-input v-model="password" type="password" @keyup.enter="login" />
       <base-button class="w-full mt-8 py-4" :loading="loggingIn" @click="login">
         {{ loginButtonText }}

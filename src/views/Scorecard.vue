@@ -22,26 +22,26 @@
               </div>
             </div>
             <div class="text-center pt-2">
-              <div class="text-sm leading-none text-blue-900">
+              <div class="text-sm leading-none">
                 Fordyce / Milnes
               </div>
-              <div class="text-3xl" :class="scores[i].blueScore < scores[i].redScore ? 'text-blue-700' : ''">
+              <div class="inline-block rounded mt-2 text-3xl px-3" :class="scores[i].blueScore < scores[i].redScore ? 'bg-blue-700 text-white' : ''">
                 {{ scores[i].blueScore }}
               </div>
             </div>
             <div class="text-center pt-2">
               <div class="text-sm leading-none text-white">
-                Alignment
+                Alignment issue
               </div>
-              <div class="text-3xl font-bold uppercase" :class="{ 'text-blue-700': scores[i].leader === 'blue', 'text-red-700': scores[i].leader === 'red' }">
+              <div class="text-3xl font-bold uppercase rounded mt-2" :class="{ 'bg-blue-700 text-white': scores[i].leader === 'blue', 'bg-red-700 text-white': scores[i].leader === 'red' }">
                 {{ scores[i].status }}
               </div>
             </div>
             <div class="text-center pt-2">
-              <div class="text-sm leading-none text-red-900">
+              <div class="text-sm leading-none">
                 Bale / Ray
               </div>
-              <div class="text-3xl" :class="scores[i].redScore < scores[i].blueScore ? 'text-red-700' : ''">
+              <div class="inline-block rounded mt-2 text-3xl px-3" :class="scores[i].redScore < scores[i].blueScore ? 'bg-red-700 text-white' : ''">
                 {{ scores[i].redScore }}
               </div>
             </div>

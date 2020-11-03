@@ -1,4 +1,6 @@
-# manitoba-ryder-cup
+# The Manitoba Ryder Cup
+
+This project serves as the the front end for a live scoring app dedicated to the Manitoba Ryder Cup. It is a single page application built using the Vue.js JavaScript framework.
 
 ## Project setup
 ```

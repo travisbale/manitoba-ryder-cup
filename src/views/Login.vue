@@ -26,12 +26,13 @@
 </template>
 
 <script>
-import BaseAlert from '@/components/BaseAlert.vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseLabel from '@/components/forms/BaseLabel.vue';
-import BaseInput from '@/components/forms/BaseInput.vue';
 import HttpStatus from 'http-status-codes';
 import { mapActions } from 'vuex';
+
+import BaseAlert from '@/components/BaseAlert.vue';
+import BaseButton from '@/components/BaseButton.vue';
+import BaseInput from '@/components/forms/BaseInput.vue';
+import BaseLabel from '@/components/forms/BaseLabel.vue';
 
 export default {
   components: {

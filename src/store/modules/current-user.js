@@ -9,29 +9,29 @@ export default {
   namespaced: true,
 
   state: {
-    user: anonymousUser,
+    currentUser: anonymousUser,
   },
 
   getters: {
     isLoggedIn(state) {
-      return state.user.email != null;
+      return state.currentUser.email != null;
     },
 
     isAdmin(state) {
-      return state.user.roles.includes('Administrator');
+      return state.currentUser.roles.includes('Administrator');
     },
   },
 
   mutations: {
-    setUser(state, user) {
-      state.user = user;
+    setCurrentUser(state, user) {
+      state.currentUser = user;
     },
   },
 
   actions: {
     login({ commit }, credentials) {
       return axios.post('login', credentials).then((response) => {
-        commit('setUser', response.data);
+        commit('setCurrentUser', response.data);
       });
     },
 
@@ -39,13 +39,13 @@ export default {
       const config = { xsrfCookieName: 'csrf_refresh_token' };
 
       return axios.post('refresh', null, config).then((response) => {
-        commit('setUser', response.data);
+        commit('setCurrentUser', response.data);
       });
     },
 
     logout({ commit }) {
       return axios.delete('logout').then(() => {
-        commit('setUser', null);
+        commit('setCurrentUser', null);
       });
     },
   },

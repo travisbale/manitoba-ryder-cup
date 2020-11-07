@@ -53,7 +53,7 @@ export default {
   },
 
   methods: {
-    ...mapActions({ submitCredentials: 'user/login' }),
+    ...mapActions({ submitCredentials: 'currentUser/login' }),
 
     login() {
       this.loggingIn = true;

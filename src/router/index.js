@@ -111,7 +111,7 @@ router.beforeEach((to, from, next) => {
   // Check if the user is going to a page that requires authentication and they didn't just login
   if (to.matched.some((record) => record.meta.requiresAuth) && from.name !== 'login') {
     // Try to get a new access token and redirect the user to the appropriate page
-    store.dispatch('user/refresh').then(() => next()).catch(() => next({ name: 'login' }));
+    store.dispatch('currentUser/refresh').then(() => next()).catch(() => next({ name: 'login' }));
   } else {
     next();
   }

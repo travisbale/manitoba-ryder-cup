@@ -143,8 +143,8 @@ export default {
   },
 
   computed: {
-    ...mapState('user', ['user']),
-    ...mapGetters('user', ['isLoggedIn', 'isAdmin']),
+    ...mapState('currentUser', ['currentUser']),
+    ...mapGetters('currentUser', ['isLoggedIn', 'isAdmin']),
 
     translationClass() {
       return {
@@ -160,7 +160,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('user', ['refresh', 'logout']),
+    ...mapActions('currentUser', ['refresh', 'logout']),
 
     openNav() {
       this.navOpen = true;

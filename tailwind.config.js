@@ -312,9 +312,14 @@ module.exports = {
       },
       height: {
         72: '18rem',
+        84: '20rem',
       },
       width: {
         72: '18rem',
+        84: '20rem',
+      },
+      zIndex: {
+        '-10': '-10',
       },
     },
   },

@@ -1,10 +1,25 @@
 import axios from '@/lib/axios';
 
+const anonymousUser = {
+  roles: [],
+  permissions: [],
+};
+
 export default {
   namespaced: true,
 
   state: {
-    user: null,
+    user: anonymousUser,
+  },
+
+  getters: {
+    isLoggedIn(state) {
+      return state.user.email != null;
+    },
+
+    isAdmin(state) {
+      return state.user.roles.includes('Administrator');
+    },
   },
 
   mutations: {

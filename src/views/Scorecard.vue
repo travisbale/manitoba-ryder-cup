@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import ScoreBar from '@/components/ScoreBar.vue';
+import ScoreBar from '@/components/ScoreBar';
 
 export default {
   components: { ScoreBar },

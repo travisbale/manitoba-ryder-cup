@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import MatchSummary from './MatchSummary.vue';
+import MatchSummary from './MatchSummary';
 
 export default {
   components: { MatchSummary },

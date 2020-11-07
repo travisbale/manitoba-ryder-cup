@@ -1,9 +1,9 @@
 <template>
   <div class="lg:container lg:mx-auto">
     <div class="p-4">
-      <h1 class="font-semibold text-2xl">
-        Tournament Participants
-      </h1>
+      <page-header>
+        The Players
+      </page-header>
       <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <player-card v-for="player in players" :key="player.id" v-bind="player" class="mt-4" />
       </div>
@@ -12,10 +12,11 @@
 </template>
 
 <script>
-import PlayerCard from '@/components/PlayerCard.vue';
+import PageHeader from '@/components/typography/PageHeader';
+import PlayerCard from '@/components/cards/player-card';
 
 export default {
-  components: { PlayerCard },
+  components: { PageHeader, PlayerCard },
 
   data() {
     return {

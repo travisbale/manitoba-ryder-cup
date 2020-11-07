@@ -18,6 +18,7 @@ module.exports = {
     'sort-imports': ['error', {
       allowSeparatedGroups: true,
     }],
+    'import/extensions': ['error', 'never'],
   },
   overrides: [
     {

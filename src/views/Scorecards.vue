@@ -2,6 +2,9 @@
   <div>
     <score-bar />
     <div class="p-4">
+      <page-header>
+        Scorecards
+      </page-header>
       <router-link v-for="scorecard in scorecards" :key="scorecard.id" :to="{ name: 'scorecard', params: { id: scorecard.id, hole: 1 }}">
         <div class="border rounded border-grey-300 w-full px-6 py-3 mb-4 shadow">
           <div class="mb-3">
@@ -27,10 +30,11 @@
 </template>
 
 <script>
-import ScoreBar from '@/components/ScoreBar.vue';
+import PageHeader from '@/components/typography/PageHeader';
+import ScoreBar from '@/components/ScoreBar';
 
 export default {
-  components: { ScoreBar },
+  components: { PageHeader, ScoreBar },
 
   data() {
     return {

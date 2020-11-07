@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import axios from '@/lib/axios';
+import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -57,6 +57,21 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
   },
   {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
+  },
+  {
+    path: '/courses',
+    name: 'courses',
+    component: () => import(/* webpackChunkName: "courses" */ '../views/Courses.vue'),
+  },
+  {
     path: '/players',
     name: 'players',
     component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
@@ -72,6 +87,14 @@ const router = new VueRouter({
     name: 'player',
     component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
     props: true,
+  },
+  {
+    path: '/tournament-setup',
+    name: 'tournament-setup',
+    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/TournamentSetup.vue'),
+    meta: {
+      requiresAuth: true,
+    },
   }],
 
   scrollBehavior(to, from, savedPosition) {
@@ -79,16 +102,16 @@ const router = new VueRouter({
       // Return the user to their previous position when using back/forward buttons
       return savedPosition;
     }
-    // Scroll to top for all other route navigations
+    // Scroll to top when navigating to all other routes
     return { x: 0, y: 0 };
   },
 });
 
 router.beforeEach((to, from, next) => {
+  // Check if the user is going to a page that requires authentication and they didn't just login
   if (to.matched.some((record) => record.meta.requiresAuth) && from.name !== 'login') {
-    axios.post('refresh', null, { xsrfCookieName: 'csrf_refresh_token' })
-      .then(() => next())
-      .catch(() => next({ name: 'login' }));
+    // Try to get a new access token and redirect the user to the appropriate page
+    store.dispatch('user/refresh').then(() => next()).catch(() => next({ name: 'login' }));
   } else {
     next();
   }

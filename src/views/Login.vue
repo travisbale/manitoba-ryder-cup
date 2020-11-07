@@ -1,24 +1,15 @@
 <template>
-  <div class="flex justify-center bg-cover h-full overflow-hidden" style="background-image: url('img/tee-it-up.jpg')">
-    <div class="w-4/5 mt-8">
-      <div class="flex justify-center">
-        <img class="h-48 mb-8" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
-      </div>
-      <h2 class="font-semibold text-white text-3xl mb-8">
-        Login
-      </h2>
-      <base-alert v-if="errorMessage" variant="danger">
+  <div class="flex justify-center flex-grow bg-cover" :style="style">
+    <div class="w-4/5">
+      <page-header class="text-white mt-16 mb-8">
+        Welcome Back
+      </page-header>
+      <base-alert v-if="errorMessage" variant="danger" class="mb-6">
         {{ errorMessage }}
       </base-alert>
-      <base-label class="text-white">
-        Email
-      </base-label>
-      <base-input v-model="email" type="email" placeholder="example@email.com" />
-      <base-label class="text-white">
-        Password
-      </base-label>
-      <base-input v-model="password" type="password" @keyup.enter="login" />
-      <base-button class="w-full mt-8 py-4" :loading="loggingIn" @click="login">
+      <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />
+      <base-input v-model="password" type="password" placeholder="Password" class="mb-12" @keyup.enter="login" />
+      <base-button class="w-full py-4" :loading="loggingIn" @click="login">
         {{ loginButtonText }}
       </base-button>
     </div>
@@ -29,15 +20,13 @@
 import HttpStatus from 'http-status-codes';
 import { mapActions } from 'vuex';
 
-import BaseAlert from '@/components/BaseAlert.vue';
-import BaseButton from '@/components/BaseButton.vue';
-import BaseInput from '@/components/forms/BaseInput.vue';
-import BaseLabel from '@/components/forms/BaseLabel.vue';
+import BaseAlert from '@/components/BaseAlert';
+import BaseButton from '@/components/BaseButton';
+import BaseInput from '@/components/forms/BaseInput';
+import PageHeader from '@/components/typography/PageHeader';
 
 export default {
-  components: {
-    BaseAlert, BaseButton, BaseLabel, BaseInput,
-  },
+  components: { BaseAlert, BaseButton, BaseInput, PageHeader },
 
   data() {
     return {
@@ -45,6 +34,7 @@ export default {
       password: '',
       loggingIn: false,
       errorMessage: '',
+      imageUrl: 'img/empty-course.jpg',
     };
   },
 
@@ -52,10 +42,18 @@ export default {
     loginButtonText() {
       return this.loggingIn ? 'Logging In' : 'Login';
     },
+
+    style() {
+      return `background-image: url(${this.imageUrl})`;
+    },
+  },
+
+  created() {
+    this.$emit('set-bg-image', 'img/tee-it-up.jpg');
   },
 
   methods: {
-    ...mapActions({ submitCredentials: 'auth/login' }),
+    ...mapActions({ submitCredentials: 'user/login' }),
 
     login() {
       this.loggingIn = true;

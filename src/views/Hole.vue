@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton.vue';
-import ScoreBar from '@/components/ScoreBar.vue';
-import ScoreSlider from '@/components/ScoreSlider.vue';
+import BaseButton from '@/components/BaseButton';
+import ScoreBar from '@/components/ScoreBar';
+import ScoreSlider from '@/components/ScoreSlider';
 
 export default {
   components: { BaseButton, ScoreBar, ScoreSlider },

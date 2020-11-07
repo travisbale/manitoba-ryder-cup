@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import ScoreBar from '@/components/ScoreBar.vue';
-import ScoringSummary from '@/components/ScoringSummary.vue';
+import ScoreBar from '@/components/ScoreBar';
+import ScoringSummary from '@/components/ScoringSummary';
 
 export default {
   components: { ScoreBar, ScoringSummary },

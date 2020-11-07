@@ -2,7 +2,7 @@
   <div class="lg:container lg:mx-auto">
     <div class="p-4">
       <page-header>
-        Profile
+        Courses
       </page-header>
     </div>
   </div>
@@ -13,13 +13,6 @@ import PageHeader from '@/components/typography/PageHeader';
 
 export default {
   components: { PageHeader },
-
-  props: {
-    name: {
-      type: String,
-      required: true,
-    },
-  },
 
   data() {
     return {};

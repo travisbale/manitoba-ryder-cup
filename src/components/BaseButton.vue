@@ -1,7 +1,7 @@
 <template>
   <button type="button"
           class="inline-flex items-center justify-center px-4 py-2 bg-blue-800
-          hover:bg-blue-900 rounded-sm text-white font-semibold shadow-md"
+          hover:bg-blue-900 rounded text-white font-semibold shadow-md"
           :disabled="loading"
           v-on="$listeners"
   >

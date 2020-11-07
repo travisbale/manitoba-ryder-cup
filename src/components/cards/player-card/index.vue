@@ -1,34 +1,37 @@
 <template>
-  <router-link :to="{ name: 'player', params: { id }}" class="block rounded-lg overflow-hidden border border-grey-300 shadow-md">
-    <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
-    <div class="p-4">
-      <div class="text-grey-600 uppercase font-semibold mt-2">
-        {{ record }} &bull; {{ cups }} {{ cupText }}
+  <router-link :to="{ name: 'player', params: { id }}" class="block">
+    <base-card>
+      <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
+      <div class="p-4">
+        <div class="text-grey-600 uppercase font-semibold mt-2">
+          {{ record }} &bull; {{ cups }} {{ cupText }}
+        </div>
+        <div class="flex items-center">
+          <h4 class="font-semibold text-2xl mr-2">
+            {{ fullName }}
+          </h4>
+          <base-badge :class="badgeColor">
+            {{ level }}
+          </base-badge>
+        </div>
+        <div class="leading-snug mt-2">
+          {{ bio }}
+        </div>
+        <div class="flex items-center mt-4">
+          <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
+        </div>
       </div>
-      <div class="flex items-center">
-        <h4 class="font-semibold text-2xl mr-2">
-          {{ fullName }}
-        </h4>
-        <base-badge :class="badgeColor">
-          {{ level }}
-        </base-badge>
-      </div>
-      <div class="leading-snug mt-2">
-        {{ bio }}
-      </div>
-      <div class="flex items-center mt-4">
-        <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
-      </div>
-    </div>
+    </base-card>
   </router-link>
 </template>
 
 <script>
-import BaseBadge from '@/components/BaseBadge.vue';
-import StarIcon from '@/components/icons/StarIcon.vue';
+import BaseBadge from '@/components/BaseBadge';
+import BaseCard from '@/components/cards/base-card';
+import StarIcon from '@/components/icons/StarIcon';
 
 export default {
-  components: { BaseBadge, StarIcon },
+  components: { BaseBadge, BaseCard, StarIcon },
 
   props: {
     id: {

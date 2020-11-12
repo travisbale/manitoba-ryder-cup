@@ -1,53 +1,54 @@
 <template>
-  <div class="w-full mb-6">
-    <div class="w-full text-center py-4 font-semibold text-xl bg-white">
-      Sunday Singles
+  <div class="p-4">
+    <div class="text-center mb-2">
+      <div class="text-xl font-semibold">
+        {{ matchFormat }}
+      </div>
+      <div class="text-grey-600 text-sm">
+        {{ matchDate | printDate }}
+      </div>
     </div>
-    <match-summary v-for="match in matches" :key="match.id" v-bind="match" />
+    <match-summary v-for="match in getMatches(matchFormat)" :key="match.id" v-bind="match" />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
+
+import datetimeFilters from '@/mixins/filters/datetime';
+
 import MatchSummary from './MatchSummary';
 
 export default {
   components: { MatchSummary },
 
+  mixins: [datetimeFilters],
+
+  props: {
+    matchFormat: {
+      type: String,
+      required: true,
+    },
+  },
+
   data() {
     return {
-      matches: [
-        {
-          id: 0,
-          blueName: 'Milnes',
-          redName: 'Fordyce',
-          score: '2 up',
-        },
-        {
-          id: 1,
-          blueName: 'Milnes',
-          redName: 'Fordyce',
-          score: 'Halved',
-        },
-        {
-          id: 2,
-          blueName: 'Bale',
-          redName: 'Ray',
-          score: '1 up',
-        },
-        {
-          id: 3,
-          blueName: 'Milnes',
-          redName: 'Fordyce',
-          score: '2 & 1',
-        },
-        {
-          id: 4,
-          blueName: 'McInnes',
-          redName: 'MacAulay',
-          score: 'AS',
-        },
-      ],
     };
+  },
+
+  computed: {
+    ...mapState('matches', ['matches']),
+    ...mapGetters('matches', ['getMatches']),
+
+    matchDate() {
+      const matches = this.getMatches(this.matchFormat);
+
+      if (matches.length > 0) {
+        return matches[0].teeTime;
+      }
+
+      return '';
+    },
   },
 };
 </script>

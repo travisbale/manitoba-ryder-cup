@@ -19,8 +19,10 @@ const instance = axios.create({
 // Set an interceptor to retrieve a new access token if it has expired
 instance.interceptors.response.use(null, async (error) => {
   if (error.response && error.response.data.msg === 'Token has expired') {
-    // Retrieve a new access token and resend the request
+    // Attempt to retrieve a new access token
     await instance.post('refresh', null, { xsrfCookieName: 'csrf_refresh_token' });
+
+    // Resend the request
     return instance.request(error.config);
   }
 

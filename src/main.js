@@ -1,3 +1,4 @@
+import { Settings } from 'luxon';
 import Vue from 'vue';
 
 import App from './App';
@@ -8,6 +9,8 @@ import './assets/tailwind.css';
 import './registerServiceWorker';
 
 Vue.config.productionTip = false;
+
+Settings.defaultLocale = 'en';
 
 new Vue({
   router,

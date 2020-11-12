@@ -1,25 +1,25 @@
 <template>
   <router-link :to="{ name: 'player', params: { id }}" class="block">
     <base-card>
-      <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
-      <div class="p-4">
-        <div class="text-grey-600 uppercase font-semibold mt-2">
-          {{ record }} &bull; {{ cups }} {{ cupText }}
-        </div>
-        <div class="flex items-center">
-          <h4 class="font-semibold text-2xl mr-2">
-            {{ fullName }}
-          </h4>
-          <base-badge :class="badgeColor">
-            {{ level }}
-          </base-badge>
-        </div>
-        <div class="leading-snug mt-2">
-          {{ bio }}
-        </div>
-        <div class="flex items-center mt-4">
-          <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
-        </div>
+      <template v-slot:image>
+        <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
+      </template>
+      <div class="text-grey-600 uppercase font-semibold mt-2">
+        {{ record }} &bull; {{ cups }} {{ cupText }}
+      </div>
+      <div class="flex items-center">
+        <h4 class="font-semibold text-2xl mr-2">
+          {{ fullName }}
+        </h4>
+        <base-badge :class="badgeColor">
+          {{ level }}
+        </base-badge>
+      </div>
+      <div class="leading-snug mt-2">
+        {{ bio }}
+      </div>
+      <div class="flex items-center mt-4">
+        <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
       </div>
     </base-card>
   </router-link>

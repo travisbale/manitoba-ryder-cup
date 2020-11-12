@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import courses from '@/store/modules/courses';
 import currentUser from '@/store/modules/current-user';
+import matches from '@/store/modules/matches';
+import teeSet from '@/store/modules/tee-set';
+import tournaments from '@/store/modules/tournaments';
 
 Vue.use(Vuex);
 
@@ -18,6 +22,10 @@ export default new Vuex.Store({
   },
 
   modules: {
+    courses,
+    matches,
+    tournaments,
     currentUser,
+    teeSet,
   },
 });

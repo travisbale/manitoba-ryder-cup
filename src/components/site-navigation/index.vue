@@ -38,10 +38,6 @@
             <history-icon class="mr-4" />
             Past Results
           </menu-link>
-          <menu-link to="courses" @click.native="navOpen = false">
-            <golf-course-icon class="mr-4" />
-            Courses
-          </menu-link>
 
           <div v-if="isAdmin">
             <menu-header>

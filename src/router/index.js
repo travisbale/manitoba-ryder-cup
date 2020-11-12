@@ -89,12 +89,34 @@ const router = new VueRouter({
     props: true,
   },
   {
-    path: '/tournament-setup',
-    name: 'tournament-setup',
-    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/TournamentSetup.vue'),
+    path: '/admin',
+    name: 'admin',
+    component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: '/admin/tournaments',
+    name: 'tournament-setup',
+    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin//tournaments/TournamentSetup.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/admin/tournaments/:id',
+    name: 'tournament-form',
+    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/tournaments/TournamentForm.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
   }],
 
   scrollBehavior(to, from, savedPosition) {
@@ -108,10 +130,19 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const requiresAdmin = to.matched.some((record) => record.meta.requiresAdmin);
+
   // Check if the user is going to a page that requires authentication and they didn't just login
-  if (to.matched.some((record) => record.meta.requiresAuth) && from.name !== 'login') {
+  if ((requiresAuth || requiresAdmin) && from.name !== 'login') {
     // Try to get a new access token and redirect the user to the appropriate page
-    store.dispatch('currentUser/refresh').then(() => next()).catch(() => next({ name: 'login' }));
+    store.dispatch('currentUser/refresh').then(() => {
+      if (!requiresAdmin || store.getters.user.isAdmin) {
+        next();
+      } else {
+        next({ name: 'unauthorized' });
+      }
+    }).catch(() => next({ name: 'login' }));
   } else {
     next();
   }

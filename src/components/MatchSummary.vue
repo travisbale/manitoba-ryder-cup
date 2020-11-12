@@ -1,14 +1,14 @@
 <template>
-  <router-link :to="{ name: 'scorecard', params: { id }}" class="block">
-    <div class="flex items-center text-center py-1">
-      <div class="w-2/5 py-1 bg-gradient-to-l" :class="blueGradientClass">
-        {{ blueName }}
+  <router-link :to="{ name: 'scorecard', params: { id, courseId, teeColorId }}" class="block">
+    <div class="flex items-center text-center py-2">
+      <div class="w-2/5 p-2 shadow-md rounded-l border border-r-0 border-grey-300 bg-gradient-to-r truncate" :class="blueTeamClasses">
+        {{ blueTeam }}
       </div>
-      <div class="w-1/5 py-2 shadow-md rounded border border-grey-400 font-semibold bg-white capitalize tracking-tight">
+      <div class="w-1/5 py-3 shadow-lg rounded border border-grey-300 font-semibold bg-white uppercase tracking-wide">
         {{ score }}
       </div>
-      <div class="w-2/5 py-1 bg-gradient-to-r" :class="redGradientClass">
-        {{ redName }}
+      <div class="w-2/5 p-2 shadow-md rounded-r border border-l-0 border-grey-300 bg-gradient-to-l truncate" :class="redTeamClasses">
+        {{ redTeam }}
       </div>
     </div>
   </router-link>
@@ -22,38 +22,57 @@ export default {
       required: true,
     },
 
-    blueName: {
-      type: String,
+    courseId: {
+      type: Number,
       required: true,
     },
 
-    redName: {
-      type: String,
+    teeColorId: {
+      type: Number,
       required: true,
     },
 
-    score: {
-      type: String,
+    players: {
+      type: Array,
       required: true,
     },
   },
 
   data() {
-    return {};
+    return {
+      score: 'AS',
+      leadingTeam: null,
+    };
   },
 
   computed: {
-    redGradientClass() {
+    redTeam() {
+      if (this.players.length === 2) {
+        return this.players[0].lastName;
+      }
+
+      return `${this.players[0].lastName} / ${this.players[1].lastName}`;
+    },
+
+    blueTeam() {
+      if (this.players.length === 2) {
+        return this.players[1].lastName;
+      }
+
+      return `${this.players[2].lastName} / ${this.players[3].lastName}`;
+    },
+
+    redTeamClasses() {
       return {
-        'from-red-400': this.id > 1 && this.id !== 4,
-        'from-grey-200': this.id < 2 || this.id === 4,
+        'from-red-600 to-red-100': this.leadingTeam === 'Red',
+        'from-grey-200': this.leadingTeam !== 'Red',
       };
     },
 
-    blueGradientClass() {
+    blueTeamClasses() {
       return {
-        'from-blue-400': this.id === 0,
-        'from-grey-200': this.id > 0,
+        'from-blue-600 to-blue-100': this.leadingTeam === 'Blue',
+        'from-grey-200': this.leadingTeam !== 'Blue',
       };
     },
   },

@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+
 import PageHeader from '@/components/typography/PageHeader';
 
 export default {
@@ -17,5 +19,18 @@ export default {
   data() {
     return {};
   },
+
+  computed: {
+    ...mapState('courses', ['courses']),
+  },
+
+  created() {
+    this.getCourses();
+  },
+
+  methods: {
+    ...mapActions('courses', ['getCourses']),
+  },
+
 };
 </script>

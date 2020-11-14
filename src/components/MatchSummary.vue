@@ -5,7 +5,7 @@
         {{ blueTeam }}
       </div>
       <div class="w-1/5 py-3 shadow-lg rounded border border-grey-300 font-semibold bg-white uppercase tracking-wide">
-        {{ score }}
+        {{ score.status }}
       </div>
       <div class="w-2/5 p-2 shadow-md rounded-r border border-l-0 border-grey-300 bg-gradient-to-l truncate" :class="redTeamClasses">
         {{ redTeam }}
@@ -38,12 +38,7 @@ export default {
     },
 
     score: {
-      type: String,
-      required: true,
-    },
-
-    leader: {
-      type: String,
+      type: Object,
       required: true,
     },
   },
@@ -59,15 +54,15 @@ export default {
 
     redTeamClasses() {
       return {
-        'from-red-600 to-red-100': this.leader === 'Red',
-        'from-grey-200': this.leader !== 'Red',
+        'from-red-600 to-red-100': this.score.leader === 'Red',
+        'from-grey-200': this.score.leader !== 'Red',
       };
     },
 
     blueTeamClasses() {
       return {
-        'from-blue-600 to-blue-100': this.leader === 'Blue',
-        'from-grey-200': this.leader !== 'Blue',
+        'from-blue-600 to-blue-100': this.score.leader === 'Blue',
+        'from-grey-200': this.score.leader !== 'Blue',
       };
     },
   },

@@ -79,6 +79,7 @@ export default {
     },
 
     number(newNumber) {
+      this.fetchMatch(this.matchId);
       this.fetchHole(this.match.courseId, this.match.teeColorId, newNumber);
       this.fetchScores(this.matchId, newNumber);
     },
@@ -113,22 +114,23 @@ export default {
 
     fetchScores(matchId, number) {
       const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}/holes/${number}/scores`;
+      const vm = this;
 
       return axios.get(url).then((response) => {
-        this.scores = response.data;
+        vm.scores = response.data;
 
-        this.match.participants.forEach((player) => {
-          if (this.scores.find((score) => score.playerId === player.id) == null) {
-            this.scores.push({
-              playerId: player.id,
+        vm.match.participants.forEach((player) => {
+          if (vm.scores.find((score) => score.playerId === player.playerId) == null) {
+            vm.scores.push({
+              playerId: player.playerId,
               playerName: player.fullName,
-              strokes: this.hole.par,
+              strokes: vm.hole.par,
             });
           }
         });
       }).catch((error) => {
         if (error.response && error.response.status === 404) {
-          this.$$router.push({ name: 'not-found' });
+          vm.$$router.push({ name: 'not-found' });
         }
       });
     },
@@ -143,14 +145,14 @@ export default {
       this.saving = true;
 
       axios.post(url, scores).then(() => {
-        this.saving = false;
-
         if (this.number < 18) {
           this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
         } else {
           this.$router.push({ name: 'leaderboard' });
         }
-      });
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => { this.saving = false; });
     },
 
     saveRound() {

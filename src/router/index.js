@@ -12,17 +12,17 @@ const router = new VueRouter({
     redirect: { name: 'leaderboard' },
   },
   {
-    path: '/tournaments/3',
+    path: '/tournaments/1',
     name: 'leaderboard',
     component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Leaderboard.vue'),
-    props: { tournamentId: 3 },
+    props: { tournamentId: 1 },
   },
   {
-    path: '/tournaments/3/matches/:matchId',
+    path: '/tournaments/1/matches/:matchId',
     name: 'scorecard',
     component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
     props: (route) => ({
-      tournamentId: 3,
+      tournamentId: 1,
       matchId: parseInt(route.params.matchId),
     }),
     meta: {
@@ -30,11 +30,11 @@ const router = new VueRouter({
     },
   },
   {
-    path: '/tournaments/3/matches/:matchId/hole/:number',
+    path: '/tournaments/1/matches/:matchId/hole/:number',
     name: 'hole',
     component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
     props: (route) => ({
-      tournamentId: 3,
+      tournamentId: 1,
       matchId: parseInt(route.params.matchId),
       number: parseInt(route.params.number),
     }),

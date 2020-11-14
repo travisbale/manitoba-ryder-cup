@@ -14,7 +14,7 @@ export default {
   },
 
   actions: {
-    getTeeSet({ commit }, payload) {
+    fetchTeeSet({ commit }, payload) {
       const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/courses/${payload.courseId}/tees/${payload.teeColorId}`;
 
       return axios.get(url).then((response) => {

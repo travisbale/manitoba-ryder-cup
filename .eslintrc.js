@@ -16,6 +16,7 @@ module.exports = {
     'no-plusplus': ['off'],
     'max-len': ['off'],
     'object-curly-newline': ['off'],
+    radix: ['off'],
     'sort-imports': ['error', {
       allowSeparatedGroups: true,
     }],

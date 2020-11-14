@@ -9,8 +9,38 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes: [{
     path: '/',
+    redirect: { name: 'leaderboard' },
+  },
+  {
+    path: '/tournaments/3',
     name: 'leaderboard',
     component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Leaderboard.vue'),
+    props: { tournamentId: 3 },
+  },
+  {
+    path: '/tournaments/3/matches/:matchId',
+    name: 'scorecard',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
+    props: (route) => ({
+      tournamentId: 3,
+      matchId: parseInt(route.params.matchId),
+    }),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/tournaments/3/matches/:matchId/hole/:number',
+    name: 'hole',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
+    props: (route) => ({
+      tournamentId: 3,
+      matchId: parseInt(route.params.matchId),
+      number: parseInt(route.params.number),
+    }),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: '/login',
@@ -21,24 +51,6 @@ const router = new VueRouter({
     path: '/scorecards',
     name: 'scorecards',
     component: () => import(/* webpackChunkName: "scorecards" */ '../views/Scorecards.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/scorecard/:id/',
-    name: 'scorecard',
-    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
-    props: true,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/scorecard/:id/hole/:number',
-    name: 'hole',
-    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
-    props: true,
     meta: {
       requiresAuth: true,
     },
@@ -117,6 +129,15 @@ const router = new VueRouter({
     path: '/unauthorized',
     name: 'unauthorized',
     component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
+  },
+  {
+    path: '/404',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue'),
+  },
+  {
+    path: '*',
+    redirect: '/not-found',
   }],
 
   scrollBehavior(to, from, savedPosition) {

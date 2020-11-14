@@ -1,8 +1,8 @@
 <template>
   <div>
-    <score-bar />
+    <score-bar :tournament-id="tournamentId" />
     <div class="sticky p-4 border-b border-grey-400 bg-white shadow" style="top: 61px">
-      <match-summary :id="2" blue-name="Milnes" red-name="Fordyce" score="2 up" class="mb-4" />
+      <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">
         <div class="flex items-center mr-10">
           <svg class="h-8 w-8 fill-current" viewBox="0 0 24 24">
@@ -13,36 +13,23 @@
           </div>
         </div>
         <div class="mr-10">
-          Par {{ par }}
+          Par {{ hole.par }}
         </div>
         <div class="mr-10">
-          {{ yards }} Yards
+          {{ hole.yards }} Yards
         </div>
-        <div>HDCP {{ hdcp }}</div>
+        <div>HDCP {{ hole.hdcp }}</div>
       </div>
     </div>
     <div>
-      <score-slider :par="5" class="border-grey-400 mb-8">
-        Travis Bale
-      </score-slider>
-      <score-slider :par="5" class="border-grey-400 mb-8">
-        Jon Ray
-      </score-slider>
-      <score-slider :par="5" class="border-grey-400 mb-8">
-        Ian Fordyce
-      </score-slider>
-      <score-slider :par="5" class="mb-12">
-        Nigel Milnes
+      <score-slider v-for="score in scores" :key="score.playerId" v-model="score.strokes" :par="hole.par">
+        {{ score.playerName }}
       </score-slider>
     </div>
     <div class="p-4 bg-white">
-      <router-link v-if="number < 18" :to="{ name: 'hole', params: { id, number: parseInt(number) + 1 }}" class="block">
-        <base-button class="w-full py-4">
-          Next Hole
-        </base-button>
-      </router-link>
-      <base-button v-else :loading="saving" class="w-full py-4" @click="saveRound">
-        Save Round
+      <base-button :loading="saving" class="w-full py-4" @click="recordStrokes">
+        <span v-if="number < 18">Next Hole</span>
+        <span v-else>Complete Round</span>
       </base-button>
     </div>
   </div>
@@ -53,15 +40,22 @@ import BaseButton from '@/components/BaseButton';
 import MatchSummary from '@/components/MatchSummary';
 import ScoreBar from '@/components/ScoreBar';
 import ScoreSlider from '@/components/ScoreSlider';
+import axios from '@/lib/axios';
 
 export default {
   components: { BaseButton, MatchSummary, ScoreBar, ScoreSlider },
 
   props: {
-    id: {
+    tournamentId: {
       type: Number,
       required: true,
     },
+
+    matchId: {
+      type: Number,
+      required: true,
+    },
+
     number: {
       type: Number,
       required: true,
@@ -70,15 +64,95 @@ export default {
 
   data() {
     return {
-      par: 5,
-      yards: 512,
-      hdcp: 2,
-      score: '',
+      match: {},
+      hole: {
+        par: 0,
+      },
+      scores: [],
       saving: false,
     };
   },
 
+  watch: {
+    matchId(newMatchId) {
+      this.fetchMatch(newMatchId);
+    },
+
+    number(newNumber) {
+      this.fetchHole(this.match.courseId, this.match.teeColorId, newNumber);
+      this.fetchScores(this.matchId, newNumber);
+    },
+  },
+
+  mounted() {
+    this.fetchMatch(this.matchId);
+  },
+
   methods: {
+    fetchMatch(matchId) {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}`;
+
+      return axios.get(url).then((response) => {
+        this.match = response.data;
+        this.fetchHole(this.match.courseId, this.match.teeColorId, this.number);
+        this.fetchScores(this.matchId, this.number);
+      }).catch((error) => {
+        if (error.response && error.response.status === 404) {
+          this.$router.push({ name: 'not-found' });
+        }
+      });
+    },
+
+    fetchHole(courseId, teeColorId, number) {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/courses/${courseId}/tees/${teeColorId}/holes/${number}`;
+
+      return axios.get(url).then((response) => {
+        this.hole = response.data;
+      });
+    },
+
+    fetchScores(matchId, number) {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}/holes/${number}/scores`;
+
+      return axios.get(url).then((response) => {
+        this.scores = response.data;
+
+        this.match.participants.forEach((player) => {
+          if (this.scores.find((score) => score.playerId === player.id) == null) {
+            this.scores.push({
+              playerId: player.id,
+              playerName: player.fullName,
+              strokes: this.hole.par,
+            });
+          }
+        });
+      }).catch((error) => {
+        if (error.response && error.response.status === 404) {
+          this.$$router.push({ name: 'not-found' });
+        }
+      });
+    },
+
+    recordStrokes() {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${this.matchId}/holes/${this.number}/scores`;
+      const scores = this.scores.map((score) => ({
+        playerId: score.playerId,
+        strokes: score.strokes,
+      }));
+
+      this.saving = true;
+
+      axios.post(url, scores).then(() => {
+        this.saving = false;
+
+        if (this.number < 18) {
+          this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
+        } else {
+          this.$router.push({ name: 'leaderboard' });
+        }
+      });
+    },
+
     saveRound() {
       this.saving = true;
 

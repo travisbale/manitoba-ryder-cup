@@ -5,12 +5,12 @@
     </div>
     <div class="overflow-x-scroll overflow-y-hidden w-full py-3 h-24">
       <div style="width: 1400px">
-        <div v-for="i in 20" :key="i" class="inline-block text-center w-20" :class="i !== score ? 'text-grey-300' : ''" @click="setScore(i)">
+        <div v-for="strokes in 20" :key="strokes" class="inline-block text-center w-20" :class="strokes !== value ? 'text-grey-300' : ''" v-on="inputListeners(strokes)">
           <div class="font-bold text-5xl leading-none">
-            {{ i }}
+            {{ strokes }}
           </div>
           <div class="whitespace-no-wrap">
-            {{ getScoringTerm(i) }}
+            {{ getScoringTerm(strokes) }}
           </div>
         </div>
       </div>
@@ -25,32 +25,39 @@ export default {
       type: Number,
       required: true,
     },
-  },
 
-  data() {
-    return {
-      score: this.par,
-    };
+    value: {
+      type: Number,
+      required: true,
+    },
   },
 
   methods: {
-    getScoringTerm(score) {
-      if (score === 1) {
+    getScoringTerm(strokes) {
+      if (strokes === 1) {
         return 'Ace';
       }
 
-      switch (score - this.par) {
+      switch (strokes - this.par) {
         case -3: return 'Albatross';
         case -2: return 'Eagle';
         case -1: return 'Birdie';
         case 0: return 'Par';
         case 1: return 'Bogie';
-        default: return `${score - this.par} Bogie`;
+        default: return `${strokes - this.par} Bogie`;
       }
     },
 
-    setScore(score) {
-      this.score = score;
+    inputListeners(strokes) {
+      const vm = this;
+
+      return {
+        ...this.$listeners,
+
+        click() {
+          vm.$emit('input', strokes);
+        },
+      };
     },
   },
 };

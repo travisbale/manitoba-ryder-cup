@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'scorecard', params: { id, courseId, teeColorId }}" class="block">
+  <router-link :to="{ name: 'scorecard', params: { matchId: id }}" class="block">
     <div class="flex items-center text-center py-2">
       <div class="w-2/5 p-2 shadow-md rounded-l border border-r-0 border-grey-300 bg-gradient-to-r truncate" :class="blueTeamClasses">
         {{ blueTeam }}
@@ -32,48 +32,55 @@ export default {
       required: true,
     },
 
-    players: {
+    participants: {
       type: Array,
+      required: true,
+    },
+
+    score: {
+      type: String,
+      required: true,
+    },
+
+    leader: {
+      type: String,
       required: true,
     },
   },
 
-  data() {
-    return {
-      score: 'AS',
-      leadingTeam: null,
-    };
-  },
-
   computed: {
     redTeam() {
-      if (this.players.length === 2) {
-        return this.players[0].lastName;
-      }
-
-      return `${this.players[0].lastName} / ${this.players[1].lastName}`;
+      return this.getTeamName('Red');
     },
 
     blueTeam() {
-      if (this.players.length === 2) {
-        return this.players[1].lastName;
-      }
-
-      return `${this.players[2].lastName} / ${this.players[3].lastName}`;
+      return this.getTeamName('Blue');
     },
 
     redTeamClasses() {
       return {
-        'from-red-600 to-red-100': this.leadingTeam === 'Red',
-        'from-grey-200': this.leadingTeam !== 'Red',
+        'from-red-600 to-red-100': this.leader === 'Red',
+        'from-grey-200': this.leader !== 'Red',
       };
     },
 
     blueTeamClasses() {
       return {
-        'from-blue-600 to-blue-100': this.leadingTeam === 'Blue',
-        'from-grey-200': this.leadingTeam !== 'Blue',
+        'from-blue-600 to-blue-100': this.leader === 'Blue',
+        'from-grey-200': this.leader !== 'Blue',
       };
+    },
+  },
+
+  methods: {
+    getTeamName(team) {
+      const players = this.participants.filter((p) => p.team === team);
+
+      if (players.length === 1) {
+        return players[0].lastName;
+      }
+
+      return `${players[0].lastName} / ${players[1].lastName}`;
     },
   },
 };

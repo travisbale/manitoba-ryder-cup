@@ -1,8 +1,8 @@
 <template>
-  <router-link :to="{ name: 'hole', params: { id: 0, number }}" class="block">
+  <router-link :to="{ name: 'hole', params: { matchId, number }}" class="block">
     <base-card class="mb-4">
-      <div class="flex justify-between">
-        <div class="text-center">
+      <div class="flex">
+        <div class="text-center mr-8">
           <div class="font-bold text-6xl leading-none">
             {{ number }}
           </div>
@@ -10,28 +10,35 @@
             Par {{ par }}
           </div>
         </div>
-        <div class="text-center pt-2">
-          <div class="inline-block rounded mb-3 text-3xl px-3 border border-grey-300 shadow">
-            {{ "-" }}
+        <div class="flex-grow">
+          <div class="flex justify-between">
+            <div class="text-center pt-2">
+              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 border border-grey-300 shadow"
+                   :class="{'text-white bg-blue-700': blueTeamStrokes < redTeamStrokes}"
+              >
+                {{ blueTeamStrokes }}
+              </div>
+            </div>
+            <div class="text-center pt-2 w-28">
+              <div class="text-3xl font-bold uppercase rounded mb-3 border border-grey-300 shadow">
+                {{ "AS" }}
+              </div>
+            </div>
+            <div class="text-center pt-2">
+              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 border border-grey-300 shadow"
+                   :class="{'text-white bg-red-700': redTeamStrokes < blueTeamStrokes}"
+              >
+                {{ redTeamStrokes }}
+              </div>
+            </div>
           </div>
-          <div class="text-sm leading-none">
-            Fordyce / Milnes
-          </div>
-        </div>
-        <div class="text-center pt-2">
-          <div class="text-3xl font-bold uppercase rounded mb-3 border border-grey-300 shadow">
-            {{ "AS" }}
-          </div>
-          <div class="text-sm leading-none text-white">
-            Alignment issue
-          </div>
-        </div>
-        <div class="text-center pt-2">
-          <div class="inline-block rounded mb-3 text-3xl px-3 border border-grey-300 shadow">
-            {{ "-" }}
-          </div>
-          <div class="text-sm leading-none">
-            Bale / Ray
+          <div class="flex justify-between">
+            <div class="text-sm leading-none">
+              {{ blueTeamName }}
+            </div>
+            <div class="text-sm leading-none">
+              {{ redTeamName }}
+            </div>
           </div>
         </div>
       </div>
@@ -54,6 +61,65 @@ export default {
     par: {
       type: Number,
       required: true,
+    },
+
+    matchId: {
+      type: Number,
+      required: true,
+    },
+
+    participants: {
+      type: Array,
+      required: true,
+    },
+
+    scores: {
+      type: Array,
+      required: true,
+    },
+  },
+
+  computed: {
+    blueTeamName() {
+      return this.getTeamName('Blue');
+    },
+
+    redTeamName() {
+      return this.getTeamName('Red');
+    },
+
+    blueTeamStrokes() {
+      return this.getTeamStrokes('Blue');
+    },
+
+    redTeamStrokes() {
+      return this.getTeamStrokes('Red');
+    },
+  },
+
+  methods: {
+    getTeamName(team) {
+      // Reduce the list of players to only those on the given team
+      const players = this.participants.filter((p) => p.team === team);
+
+      if (players.length === 1) {
+        // Singles match team name is just the player's last name
+        return players[0].lastName;
+      }
+
+      // Team of two is both last names separated by "/"
+      return `${players[0].lastName} / ${players[1].lastName}`;
+    },
+
+    getTeamStrokes(team) {
+      if (this.scores.length === 0) return '-';
+
+      // Get the IDs of the players on the team
+      const ids = this.participants.filter((p) => p.team === team).map((p) => p.playerId);
+      // Reduce the list of scores to the team members' scores
+      const scores = this.scores.filter((s) => ids.includes(s.playerId));
+      // Return the minimum of the player's scores
+      return Math.min(...scores.map((s) => s.strokes));
     },
   },
 };

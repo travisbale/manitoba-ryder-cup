@@ -18,7 +18,7 @@
           <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-grey-800 uppercase">
             Manitoba Ryder Cup
           </div>
-          <menu-link to="leaderboard" @click.native="navOpen = false">
+          <menu-link to="leaderboard" :params="{ tournamentId: 3 }" @click.native="navOpen = false">
             <leaderboard-icon class="mr-4" />
             Leaderboard
           </menu-link>

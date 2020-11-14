@@ -16,9 +16,10 @@ const instance = axios.create({
   xsrfHeaderName: 'X-CSRF-TOKEN',
 });
 
-// Set an interceptor to retrieve a new access token if it has expired
+// Set an interceptor to handle generic errors
 instance.interceptors.response.use(null, async (error) => {
-  if (error.response && error.response.data.msg === 'Token has expired') {
+  // Check if the access token has expired
+  if (error.response && error.response.data.msg === 'The access token has expired.') {
     // Attempt to retrieve a new access token
     await instance.post('refresh', null, { xsrfCookieName: 'csrf_refresh_token' });
 
@@ -26,7 +27,13 @@ instance.interceptors.response.use(null, async (error) => {
     return instance.request(error.config);
   }
 
-  // Refresh token has expired, user will need to re-enter their credentials
+  // Check for server errors
+  if (error.response && error.response.status === 500) {
+    // TODO: Do something elegant here
+    console.log('Something went wrong.');
+  }
+
+  // Reject the error so it can be processed further
   return Promise.reject(error);
 });
 

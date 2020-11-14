@@ -1,6 +1,6 @@
 <template>
   <div>
-    <score-bar />
+    <score-bar :tournament-id="tournamentId" />
     <scoring-summary match-format="Fourball" />
     <scoring-summary match-format="Alternate Shot" />
     <scoring-summary match-format="Scramble" />
@@ -17,18 +17,19 @@ import ScoringSummary from '@/components/ScoringSummary';
 export default {
   components: { ScoreBar, ScoringSummary },
 
-  data() {
-    return {
-      tournamentId: 3,
-    };
+  props: {
+    tournamentId: {
+      type: Number,
+      required: true,
+    },
   },
 
   mounted() {
-    this.getMatches(this.tournamentId);
+    this.fetchMatches(this.tournamentId);
   },
 
   methods: {
-    ...mapActions('matches', ['getMatches']),
+    ...mapActions('matches', ['fetchMatches']),
   },
 };
 </script>

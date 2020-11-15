@@ -1,10 +1,12 @@
 <template>
   <div>
     <score-bar :tournament-id="tournamentId" />
-    <scoring-summary match-format="Fourball" />
-    <scoring-summary match-format="Alternate Shot" />
-    <scoring-summary match-format="Scramble" />
-    <scoring-summary match-format="Singles" />
+    <div class="px-2 py-4">
+      <scoring-summary match-format="Fourball" class="mb-8" />
+      <scoring-summary match-format="Alternate Shot" class="mb-8" />
+      <scoring-summary match-format="Scramble" class="mb-8" />
+      <scoring-summary match-format="Singles" class="mb-4" />
+    </div>
   </div>
 </template>
 

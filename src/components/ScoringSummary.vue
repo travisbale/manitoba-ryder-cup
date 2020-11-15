@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <div class="text-center mb-2">
       <div class="text-2xl font-semibold">
         {{ matchFormat }}

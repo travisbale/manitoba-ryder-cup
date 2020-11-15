@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="text-center mb-2">
-      <div class="text-xl font-semibold">
+      <div class="text-2xl font-semibold">
         {{ matchFormat }}
       </div>
       <div class="text-grey-600 text-sm">

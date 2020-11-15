@@ -4,7 +4,7 @@
       <div class="w-2/5 p-2 shadow-md rounded-l border border-r-0 border-grey-300 bg-gradient-to-r truncate" :class="blueTeamClasses">
         {{ blueTeam }}
       </div>
-      <div class="w-1/5 py-3 shadow-lg rounded border border-grey-300 font-semibold bg-white uppercase tracking-wide">
+      <div class="w-1/5 py-3 text-lg shadow-lg rounded border border-grey-300 font-bold bg-white uppercase tracking-wide">
         {{ score.status }}
       </div>
       <div class="w-2/5 p-2 shadow-md rounded-r border border-l-0 border-grey-300 bg-gradient-to-l truncate" :class="redTeamClasses">

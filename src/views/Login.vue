@@ -9,7 +9,7 @@
       </base-alert>
       <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />
       <base-input v-model="password" type="password" placeholder="Password" class="mb-12" @keyup.enter="login" />
-      <base-button class="w-full py-4" :loading="loggingIn" @click="login">
+      <base-button class="w-full" :loading="loggingIn" @click="login">
         {{ loginButtonText }}
       </base-button>
     </div>

@@ -21,13 +21,13 @@
         <div>HDCP {{ hole.hdcp }}</div>
       </div>
     </div>
-    <div>
+    <div class="pt-6">
       <score-slider v-for="score in scores" :key="score.playerId" v-model="score.strokes" :par="hole.par">
         {{ score.playerName }}
       </score-slider>
     </div>
-    <div class="p-4 bg-white">
-      <base-button :loading="saving" class="w-full py-4" @click="recordStrokes">
+    <div class="p-4 mb-8 bg-white">
+      <base-button :loading="saving" class="w-full" @click="recordStrokes">
         <span v-if="number < 18">Next Hole</span>
         <span v-else>Complete Round</span>
       </base-button>

@@ -1,8 +1,9 @@
 <template>
   <button type="button"
-          class="inline-flex items-center justify-center p-4 bg-blue-800
-          hover:bg-blue-900 rounded text-white font-semibold shadow-md"
+          class="inline-flex items-center justify-center px-6 py-4
+          rounded text-white font-semibold shadow-md"
           :disabled="loading"
+          :class="classes"
           v-on="$listeners"
   >
     <svg v-if="loading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
@@ -24,6 +25,20 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  computed: {
+    classes() {
+      return {
+        'transparent border-2 border-white': this.transparent,
+        'bg-blue-800 hover:bg-blue-900': !this.transparent,
+      };
     },
   },
 };

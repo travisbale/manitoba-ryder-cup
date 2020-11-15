@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'leaderboard' }" class="block sticky top-0">
+  <router-link :to="{ name: 'leaderboard', params: { tournamentId } }" class="block sticky top-0">
     <div class="flex align-center justify-between bg-blue-grey-900 text-grey-200">
       <div class="w-1/2 flex items-center px-4 py-2 bg-gradient-to-r from-blue-900">
         <div class="mr-4 text-4xl font-semibold">

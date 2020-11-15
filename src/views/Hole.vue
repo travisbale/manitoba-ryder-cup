@@ -148,7 +148,7 @@ export default {
         if (this.number < 18) {
           this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
         } else {
-          this.$router.push({ name: 'leaderboard' });
+          this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
         }
       }).catch((error) => {
         console.log(error);
@@ -160,7 +160,7 @@ export default {
 
       setTimeout(() => {
         this.saving = false;
-        this.$router.push({ name: 'leaderboard' });
+        this.$router.push({ name: 'leaderboard', parms: { tournamentId: this.tournamentId } });
       }, 2000);
     },
   },

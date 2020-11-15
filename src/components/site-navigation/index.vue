@@ -1,15 +1,15 @@
 <template>
   <div>
-    <nav class="flex items-center justify-between py-3 bg-grey-900">
+    <nav class="flex items-center justify-between py-3" :class="{ 'transparent': transparent, 'bg-grey-900': !transparent }">
       <div class="flex items-center">
-        <img class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
-        <router-link :to="{ name: 'leaderboard' }" class="block text-grey-200 text-xl font-semibold">
+        <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
+        <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
           Manitoba Ryder Cup
         </router-link>
       </div>
       <div>
         <button type="button" class="block text-grey-200 hover:text-white mr-3" @click="openNav">
-          <menu-icon class="h-8 w-8 focus:outline-none" />
+          <menu-icon class="focus:outline-none" :class="{ 'h-12 w-12': transparent }" />
         </button>
         <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
           <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
@@ -129,6 +129,13 @@ export default {
     PersonIcon,
     PublishIcon,
     TrophyIcon,
+  },
+
+  props: {
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {

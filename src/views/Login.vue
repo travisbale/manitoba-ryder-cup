@@ -69,7 +69,7 @@ export default {
           this.$router.push(this.$route.params.nextUrl);
         } else {
         // Otherwise take them to the dashboard page
-          this.$router.push({ name: 'leaderboard' });
+          this.$router.push({ name: 'leaderboard', params: { tournamentId: 1 } });
         }
       }).catch((error) => {
         this.password = '';

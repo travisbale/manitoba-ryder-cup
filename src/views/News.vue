@@ -1,18 +1,14 @@
 <template>
   <div class="lg:container lg:mx-auto">
-    <div class="p-4">
-      <page-header>
-        News
-      </page-header>
-    </div>
+    <image-header>News & Media</image-header>
   </div>
 </template>
 
 <script>
-import PageHeader from '@/components/typography/PageHeader';
+import ImageHeader from '@/components/typography/ImageHeader';
 
 export default {
-  components: { PageHeader },
+  components: { ImageHeader },
 
   data() {
     return {};

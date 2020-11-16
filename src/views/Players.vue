@@ -1,9 +1,9 @@
 <template>
   <div class="lg:container lg:mx-auto">
+    <image-header>
+      The Players
+    </image-header>
     <div class="p-4">
-      <page-header>
-        The Players
-      </page-header>
       <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <player-card v-for="player in players" :key="player.id" v-bind="player" class="mt-4" />
       </div>
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import PageHeader from '@/components/typography/PageHeader';
+import ImageHeader from '@/components/typography/ImageHeader';
 import PlayerCard from '@/components/cards/player-card';
 
 export default {
-  components: { PageHeader, PlayerCard },
+  components: { ImageHeader, PlayerCard },
 
   data() {
     return {

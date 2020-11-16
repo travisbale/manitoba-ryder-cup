@@ -45,7 +45,7 @@ export default {
 
     logout({ commit }) {
       return axios.delete('logout').then(() => {
-        commit('setCurrentUser', null);
+        commit('setCurrentUser', anonymousUser);
       });
     },
   },

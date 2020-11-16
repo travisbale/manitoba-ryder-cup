@@ -1,15 +1,14 @@
 <template>
-  <div>
+  <div class="">
     <score-bar :tournament-id="tournamentId" />
-    <div class="p-4">
-      <div class="mb-4">
-        <div class="font-semibold text-2xl">
-          {{ teeSet.course }}
-        </div>
-        <div class="text-grey-600">
+    <image-header>Scorecard</image-header>
+    <div class="p-4 pt-6">
+      <section-header class="mb-4">
+        {{ teeSet.course }}
+        <template v-slot:subheader>
           Par {{ teeSet.par }}, {{ teeSet.yards }} Yards
-        </div>
-      </div>
+        </template>
+      </section-header>
       <hole-card v-for="hole in teeSet.holes" :key="hole.number" v-bind="hole" :match-id="match.id"
                  :participants="match.participants" :scores="getScores(hole.number)"
       />
@@ -19,11 +18,13 @@
 
 <script>
 import HoleCard from '@/components/cards/hole-card';
+import ImageHeader from '@/components/typography/ImageHeader';
 import ScoreBar from '@/components/ScoreBar';
+import SectionHeader from '@/components/typography/SectionHeader';
 import axios from '@/lib/axios';
 
 export default {
-  components: { HoleCard, ScoreBar },
+  components: { HoleCard, ImageHeader, ScoreBar, SectionHeader },
 
   props: {
     tournamentId: {

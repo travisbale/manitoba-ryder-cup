@@ -1,13 +1,13 @@
 <template>
   <router-link :to="{ name: 'scorecard', params: { matchId: id }}" class="block">
     <div class="flex items-center text-center py-2">
-      <div class="w-2/5 p-2 shadow-md rounded-l border border-r-0 border-grey-300 bg-gradient-to-r truncate" :class="blueTeamClasses">
+      <div class="w-2/5 p-2 shadow rounded-l border border-r-0 border-grey-300 bg-gradient-to-r truncate" :class="blueTeamClasses">
         {{ blueTeam }}
       </div>
-      <div class="w-1/5 py-3 text-lg shadow-lg rounded border border-grey-300 font-bold bg-white uppercase tracking-wide">
+      <div class="w-1/5 py-3 text-lg shadow-md rounded border border-grey-300 font-bold bg-white uppercase tracking-wide">
         {{ score.status }}
       </div>
-      <div class="w-2/5 p-2 shadow-md rounded-r border border-l-0 border-grey-300 bg-gradient-to-l truncate" :class="redTeamClasses">
+      <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 bg-gradient-to-l truncate" :class="redTeamClasses">
         {{ redTeam }}
       </div>
     </div>
@@ -54,15 +54,15 @@ export default {
 
     redTeamClasses() {
       return {
-        'from-red-600 to-red-100': this.score.leader === 'Red',
-        'from-grey-200': this.score.leader !== 'Red',
+        'bg-red-300 font-semibold': this.score.leader === 'Red',
+        'bg-grey-200': this.score.leader !== 'Red',
       };
     },
 
     blueTeamClasses() {
       return {
-        'from-blue-600 to-blue-100': this.score.leader === 'Blue',
-        'from-grey-200': this.score.leader !== 'Blue',
+        'bg-blue-300 font-semibold': this.score.leader === 'Blue',
+        'bg-grey-200': this.score.leader !== 'Blue',
       };
     },
   },

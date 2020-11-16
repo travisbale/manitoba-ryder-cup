@@ -1,6 +1,5 @@
 <template>
   <div>
-    <score-bar />
     <div class="p-4">
       <page-header>
         Scorecards
@@ -34,10 +33,9 @@
 <script>
 import BaseCard from '@/components/cards/base-card';
 import PageHeader from '@/components/typography/PageHeader';
-import ScoreBar from '@/components/ScoreBar';
 
 export default {
-  components: { BaseCard, PageHeader, ScoreBar },
+  components: { BaseCard, PageHeader },
 
   data() {
     return {

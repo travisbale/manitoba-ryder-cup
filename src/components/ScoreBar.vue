@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: 'leaderboard', params: { tournamentId } }" class="block sticky top-0">
-    <div class="flex align-center justify-between bg-blue-grey-900 text-grey-200">
-      <div class="w-1/2 flex items-center px-4 py-2 bg-gradient-to-r from-blue-900">
+    <div class="flex align-center justify-between bg-blue-grey-900">
+      <div class="w-1/2 flex items-center px-4 py-2 text-blue-200">
         <div class="mr-4 text-4xl font-semibold">
           {{ getScore('Blue') }}
         </div>
@@ -9,7 +9,7 @@
           {{ getCaptain('Blue').lastName }}
         </div>
       </div>
-      <div class="w-1/2 flex items-center justify-end px-4 py-2 bg-gradient-to-l from-red-900">
+      <div class="w-1/2 flex items-center justify-end px-4 py-2 text-red-200">
         <div class="mr-4 pt-1 text-lg">
           {{ getCaptain('Red').lastName }}
         </div>

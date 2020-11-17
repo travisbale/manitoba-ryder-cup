@@ -1,6 +1,6 @@
 <template>
   <div class="lg:container lg:mx-auto">
-    <image-header>
+    <image-header image-url="/img/mountain-green.jpg">
       The Players
     </image-header>
     <div class="p-4">

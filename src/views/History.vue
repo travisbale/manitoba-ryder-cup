@@ -1,6 +1,8 @@
 <template>
   <div class="lg:container lg:mx-auto">
-    <image-header>History</image-header>
+    <image-header image-url="/img/sunset-green.jpg">
+      History
+    </image-header>
   </div>
 </template>
 

@@ -1,6 +1,8 @@
 <template>
   <div class="lg:container lg:mx-auto">
-    <image-header>Tournament Info</image-header>
+    <image-header image-url="/img/mountain-course.jpg">
+      Tournament Info
+    </image-header>
   </div>
 </template>
 

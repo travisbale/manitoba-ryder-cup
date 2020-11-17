@@ -1,7 +1,9 @@
 <template>
-  <div class="">
+  <div>
     <score-bar :tournament-id="tournamentId" />
-    <image-header>Scorecard</image-header>
+    <image-header image-url="/img/ocean-green.jpg">
+      Scorecard
+    </image-header>
     <div class="p-4 pt-6">
       <section-header class="mb-4">
         {{ teeSet.course }}

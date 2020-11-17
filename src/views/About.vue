@@ -1,16 +1,16 @@
 <template>
-  <div class="lg:container lg:mx-auto">
-    <image-header image-url="/img/mountain-course.jpg">
+  <base-page image-url="/img/mountain-course.jpg">
+    <template v-slot:header>
       Tournament Info
-    </image-header>
-  </div>
+    </template>
+  </base-page>
 </template>
 
 <script>
-import ImageHeader from '@/components/typography/ImageHeader';
+import BasePage from '@/components/layout/BasePage';
 
 export default {
-  components: { ImageHeader },
+  components: { BasePage },
 
   data() {
     return {};

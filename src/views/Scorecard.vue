@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <score-bar :tournament-id="tournamentId" />
-    <image-header image-url="/img/ocean-green.jpg">
+  <base-page :tournament-id="tournamentId" image-url="/img/ocean-green.jpg">
+    <template v-slot:header>
       Scorecard
-    </image-header>
+    </template>
     <div class="p-4 pt-6">
       <section-header class="mb-4">
         {{ teeSet.course }}
@@ -15,18 +14,17 @@
                  :participants="match.participants" :scores="getScores(hole.number)"
       />
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
+import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
-import ImageHeader from '@/components/typography/ImageHeader';
-import ScoreBar from '@/components/ScoreBar';
 import SectionHeader from '@/components/typography/SectionHeader';
 import axios from '@/lib/axios';
 
 export default {
-  components: { HoleCard, ImageHeader, ScoreBar, SectionHeader },
+  components: { BasePage, HoleCard, SectionHeader },
 
   props: {
     tournamentId: {

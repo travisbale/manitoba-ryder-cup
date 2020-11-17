@@ -1,22 +1,22 @@
 <template>
-  <div class="lg:container lg:mx-auto">
-    <image-header image-url="/img/mountain-green.jpg">
+  <base-page image-url="/img/mountain-green.jpg">
+    <template v-slot:header>
       The Players
-    </image-header>
+    </template>
     <div class="p-4">
       <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         <player-card v-for="player in players" :key="player.id" v-bind="player" class="mt-4" />
       </div>
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
-import ImageHeader from '@/components/typography/ImageHeader';
+import BasePage from '@/components/layout/BasePage';
 import PlayerCard from '@/components/cards/player-card';
 
 export default {
-  components: { ImageHeader, PlayerCard },
+  components: { BasePage, PlayerCard },
 
   data() {
     return {

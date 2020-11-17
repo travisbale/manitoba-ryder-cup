@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <score-bar :tournament-id="tournamentId" />
-    <image-header>Match Results</image-header>
-    <div class="px-2 py-6">
+  <base-page :tournament-id="tournamentId">
+    <template v-slot:header>
+      Match Results
+    </template>
+    <div class="px-2 py-4">
       <scoring-summary match-format="Fourball" class="mb-8" />
       <scoring-summary match-format="Alternate Shot" class="mb-8" />
       <scoring-summary match-format="Scramble" class="mb-8" />
       <scoring-summary match-format="Singles" />
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
-import ImageHeader from '@/components/typography/ImageHeader';
-import ScoreBar from '@/components/ScoreBar';
+import BasePage from '@/components/layout/BasePage';
 import ScoringSummary from '@/components/ScoringSummary';
 
 export default {
-  components: { ImageHeader, ScoreBar, ScoringSummary },
+  components: { BasePage, ScoringSummary },
 
   props: {
     tournamentId: {

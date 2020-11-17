@@ -1,57 +1,82 @@
 <template>
-  <div>
-    <div class="p-4">
-      <page-header>
-        Scorecards
-      </page-header>
-      <router-link v-for="scorecard in scorecards" :key="scorecard.id" :to="{ name: 'scorecard', params: { id: scorecard.id, hole: 1 }}">
-        <base-card class="mb-4">
-          <template v-slot:content>
-            <div class="mb-3">
-              <div class="font-semibold text-xl">
-                Rossmere Golf & Country Club
-              </div>
-              <div class="text-sm text-grey-600">
-                10:43 Saturday, August 15th, 2020
-              </div>
-            </div>
-            <div class="flex items-end justify-between">
-              <div class="text-blue-900">
-                Fordyce / Milnes
-              </div>
-              <div class="text-red-900">
-                Bale / Ray
-              </div>
-            </div>
+  <base-page>
+    <template v-slot:header>
+      Scorecards
+    </template>
+    <div class="p-4 mt-2">
+      <div v-for="tournament in tournaments" :key="tournament.id">
+        <section-header class="mb-3">
+          {{ tournament.name }}
+          <template v-slot:subheader>
+            {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}
           </template>
-        </base-card>
-      </router-link>
+        </section-header>
+        <match-card v-for="match in getMatches(tournament.id)" :key="match.id" v-bind="match" />
+      </div>
     </div>
-  </div>
+  </base-page>
 </template>
 
 <script>
-import BaseCard from '@/components/cards/base-card';
-import PageHeader from '@/components/typography/PageHeader';
+import { DateTime } from 'luxon';
+import { mapState } from 'vuex';
+
+import BasePage from '@/components/layout/BasePage';
+import MatchCard from '@/components/cards/match-card';
+import SectionHeader from '@/components/typography/SectionHeader';
+import axios from '@/lib/axios';
+// import datetimeFilters from '@/mixins/filters/datetime';
 
 export default {
-  components: { BaseCard, PageHeader },
+  components: { BasePage, MatchCard, SectionHeader },
+
+  filters: {
+    printDate(date) {
+      return date.toLocaleString({ weekday: 'long', month: 'long', day: 'numeric' });
+    },
+  },
 
   data() {
     return {
-      scorecards: [{
-        id: 0,
-      },
-      {
-        id: 1,
-      },
-      {
-        id: 2,
-      },
-      {
-        id: 3,
-      }],
+      tournaments: [],
+      matches: [],
     };
+  },
+
+  computed: {
+    ...mapState('currentUser', ['currentUser']),
+  },
+
+  mounted() {
+    this.fecthTournaments(this.currentUser.id);
+    this.fetchMatches(this.currentUser.id);
+  },
+
+  methods: {
+    fecthTournaments(playerId) {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/players/${playerId}/tournaments`;
+
+      return axios.get(url).then((response) => {
+        this.tournaments = response.data;
+
+        for (let i = 0; i < this.tournaments.length; i++) {
+          this.tournaments[i].startDate = DateTime.fromISO(this.tournaments[i].startDate);
+          this.tournaments[i].endDate = DateTime.fromISO(this.tournaments[i].endDate);
+        }
+      });
+    },
+
+    fetchMatches(playerId) {
+      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/players/${playerId}/matches`;
+
+      return axios.get(url).then((response) => {
+        this.matches = response.data;
+      });
+    },
+
+    getMatches(tournamentId) {
+      return this.matches.filter((match) => match.tournamentId === tournamentId);
+    },
   },
 };
 </script>

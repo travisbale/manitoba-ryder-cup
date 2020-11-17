@@ -1,21 +1,22 @@
 <template>
-  <base-container>
-    <page-header>
-      Tournaments
-    </page-header>
-    <tournament-card v-for="tournament in tournaments" :key="tournament.id" v-bind="tournament" />
-  </base-container>
+  <base-page>
+    <template v-slot:header>
+      Tournament Setup
+    </template>
+    <div class="p-4">
+      <tournament-card v-for="tournament in tournaments" :key="tournament.id" v-bind="tournament" />
+    </div>
+  </base-page>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 
-import BaseContainer from '@/components/layout/BaseContainer';
-import PageHeader from '@/components/typography/PageHeader';
+import BasePage from '@/components/layout/BasePage';
 import TournamentCard from '@/components/cards/tournament-card';
 
 export default {
-  components: { BaseContainer, PageHeader, TournamentCard },
+  components: { BasePage, TournamentCard },
 
   data() {
     return {};

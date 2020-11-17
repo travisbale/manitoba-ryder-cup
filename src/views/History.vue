@@ -1,16 +1,16 @@
 <template>
-  <div class="lg:container lg:mx-auto">
-    <image-header image-url="/img/sunset-green.jpg">
+  <base-page image-url="/img/sunset-green.jpg">
+    <template v-slot:header>
       History
-    </image-header>
-  </div>
+    </template>
+  </base-page>
 </template>
 
 <script>
-import ImageHeader from '@/components/typography/ImageHeader';
+import BasePage from '@/components/layout/BasePage';
 
 export default {
-  components: { ImageHeader },
+  components: { BasePage },
 
   data() {
     return {};

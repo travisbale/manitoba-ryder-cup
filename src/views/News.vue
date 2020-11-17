@@ -1,16 +1,16 @@
 <template>
-  <div class="lg:container lg:mx-auto">
-    <image-header image-url="/img/glen-abbey.jpg">
+  <base-page image-url="/img/glen-abbey.jpg">
+    <template v-slot:header>
       News & Media
-    </image-header>
-  </div>
+    </template>
+  </base-page>
 </template>
 
 <script>
-import ImageHeader from '@/components/typography/ImageHeader';
+import BasePage from '@/components/layout/BasePage';
 
 export default {
-  components: { ImageHeader },
+  components: { BasePage },
 
   data() {
     return {};

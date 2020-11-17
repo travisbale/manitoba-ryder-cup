@@ -1,90 +1,92 @@
 <template>
   <div>
-    <nav class="flex items-center justify-between py-3" :class="{ 'transparent': transparent, 'bg-blue-grey-900-dark': !transparent }">
-      <div class="flex items-center">
-        <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
-        <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
-          Manitoba Ryder Cup
-        </router-link>
-      </div>
-      <div>
-        <button type="button" class="block text-grey-200 hover:text-white mr-3" @click="openNav">
-          <menu-icon class="focus:outline-none" :class="{ 'h-12 w-12': transparent }" />
-        </button>
-        <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
-          <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
-        </div>
-        <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-300" :class="translationClass">
-          <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-blue-grey-900 uppercase">
+    <nav class="py-3" :class="{ 'transparent': transparent, 'bg-blue-grey-900-dark': !transparent }">
+      <div class="flex items-center justify-between lg:container lg:mx-auto">
+        <div class="flex items-center">
+          <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
+          <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
             Manitoba Ryder Cup
+          </router-link>
+        </div>
+        <div>
+          <button type="button" class="block text-grey-200 hover:text-white mr-3" @click="openNav">
+            <menu-icon class="focus:outline-none" :class="{ 'h-12 w-12': transparent }" />
+          </button>
+          <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
+            <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
           </div>
-          <menu-link to="leaderboard" :params="{ tournamentId: 3 }" @click.native="navOpen = false">
-            <leaderboard-icon class="mr-4" />
-            Leaderboard
-          </menu-link>
-          <menu-link to="players" @click.native="navOpen = false">
-            <groups-icon class="mr-4" />
-            Players
-          </menu-link>
-          <menu-link to="news" @click.native="navOpen = false">
-            <newspaper-icon class="mr-4" />
-            News
-          </menu-link>
-          <menu-link to="about" @click.native="navOpen = false">
-            <trophy-icon class="mr-4" />
-            Tournament Info
-          </menu-link>
-          <menu-link to="history" @click.native="navOpen = false">
-            <history-icon class="mr-4" />
-            Past Results
-          </menu-link>
+          <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-300" :class="translationClass">
+            <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-blue-grey-900 uppercase">
+              Manitoba Ryder Cup
+            </div>
+            <menu-link to="leaderboard" :params="{ tournamentId: 1 }" @click.native="navOpen = false">
+              <leaderboard-icon class="mr-4" />
+              Leaderboard
+            </menu-link>
+            <menu-link to="players" @click.native="navOpen = false">
+              <groups-icon class="mr-4" />
+              Players
+            </menu-link>
+            <menu-link to="news" @click.native="navOpen = false">
+              <newspaper-icon class="mr-4" />
+              News
+            </menu-link>
+            <menu-link to="about" @click.native="navOpen = false">
+              <trophy-icon class="mr-4" />
+              Tournament Info
+            </menu-link>
+            <menu-link to="history" @click.native="navOpen = false">
+              <history-icon class="mr-4" />
+              Past Results
+            </menu-link>
 
-          <div v-if="isAdmin">
+            <div v-if="isAdmin">
+              <menu-header>
+                Admin
+              </menu-header>
+              <menu-link to="tournament-setup" @click.native="navOpen = false">
+                <bracket-icon class="mr-4" />
+                Tournament Setup
+              </menu-link>
+              <menu-link to="courses" @click.native="navOpen = false">
+                <add-users-icon class="mr-4" />
+                Player Management
+              </menu-link>
+              <menu-link to="courses" @click.native="navOpen = false">
+                <publish-icon class="mr-4" />
+                Press Releases
+              </menu-link>
+              <menu-link to="courses" @click.native="navOpen = false">
+                <golf-course-icon class="mr-4" />
+                Course Management
+              </menu-link>
+            </div>
+
             <menu-header>
-              Admin
+              Account
             </menu-header>
-            <menu-link to="tournament-setup" @click.native="navOpen = false">
-              <bracket-icon class="mr-4" />
-              Tournament Setup
-            </menu-link>
-            <menu-link to="courses" @click.native="navOpen = false">
-              <add-users-icon class="mr-4" />
-              Player Management
-            </menu-link>
-            <menu-link to="courses" @click.native="navOpen = false">
-              <publish-icon class="mr-4" />
-              Press Releases
-            </menu-link>
-            <menu-link to="courses" @click.native="navOpen = false">
-              <golf-course-icon class="mr-4" />
-              Course Management
-            </menu-link>
-          </div>
-
-          <menu-header>
-            Account
-          </menu-header>
-          <div v-if="isLoggedIn">
-            <menu-link to="profile" :params="{ name: 'name' }" @click.native="navOpen = false">
-              <person-icon class="mr-4" />
-              Profile
-            </menu-link>
-            <menu-link to="scorecards" @click.native="navOpen = false">
-              <golf-ball-icon class="mr-4" />
-              Scorecards
-            </menu-link>
-            <menu-link to="login" @click.native="logUserOut">
-              <login-icon class="mr-4" />
-              Logout
-            </menu-link>
-          </div>
-          <div v-else>
-            <menu-link to="login" @click.native="navOpen = false">
-              <login-icon class="mr-4" />
-              Sign in
-            </menu-link>
-          </div>
-        </aside>
+            <div v-if="isLoggedIn">
+              <menu-link to="profile" :params="{ name: 'name' }" @click.native="navOpen = false">
+                <person-icon class="mr-4" />
+                Profile
+              </menu-link>
+              <menu-link to="scorecards" @click.native="navOpen = false">
+                <golf-ball-icon class="mr-4" />
+                Scorecards
+              </menu-link>
+              <menu-link to="login" @click.native="logUserOut">
+                <login-icon class="mr-4" />
+                Logout
+              </menu-link>
+            </div>
+            <div v-else>
+              <menu-link to="login" @click.native="navOpen = false">
+                <login-icon class="mr-4" />
+                Sign in
+              </menu-link>
+            </div>
+          </aside>
+        </div>
       </div>
     </nav>
   </div>

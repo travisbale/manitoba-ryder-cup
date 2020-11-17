@@ -13,135 +13,131 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "splash" */ '../views/Splash.vue'),
   },
   {
-    path: '/tournaments',
-    component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Main.vue'),
-    children: [{
-      path: '/tournaments/:tournamentId',
-      name: 'leaderboard',
-      component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Leaderboard.vue'),
-      props: (route) => ({
-        tournamentId: parseInt(route.params.tournamentId),
-      }),
+    path: '/tournaments/:tournamentId',
+    name: 'leaderboard',
+    component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Leaderboard.vue'),
+    props: (route) => ({
+      tournamentId: parseInt(route.params.tournamentId),
+    }),
+  },
+  {
+    path: '/tournaments/:tournamentId/matches/:matchId',
+    name: 'scorecard',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
+    props: (route) => ({
+      tournamentId: parseInt(route.params.tournamentId),
+      matchId: parseInt(route.params.matchId),
+    }),
+  },
+  {
+    path: '/tournaments/:tournamentId/matches/:matchId/hole/:number',
+    name: 'hole',
+    component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
+    props: (route) => ({
+      tournamentId: parseInt(route.params.tournamentId),
+      matchId: parseInt(route.params.matchId),
+      number: parseInt(route.params.number),
+    }),
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/tournaments/:tournamentId/matches/:matchId',
-      name: 'scorecard',
-      component: () => import(/* webpackChunkName: "scorecard" */ '../views/Scorecard.vue'),
-      props: (route) => ({
-        tournamentId: parseInt(route.params.tournamentId),
-        matchId: parseInt(route.params.matchId),
-      }),
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+  },
+  {
+    path: '/scorecards',
+    name: 'scorecards',
+    component: () => import(/* webpackChunkName: "scorecards" */ '../views/Scorecards.vue'),
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/tournaments/:tournamentId/matches/:matchId/hole/:number',
-      name: 'hole',
-      component: () => import(/* webpackChunkName: "scorecard" */ '../views/Hole.vue'),
-      props: (route) => ({
-        tournamentId: parseInt(route.params.tournamentId),
-        matchId: parseInt(route.params.matchId),
-        number: parseInt(route.params.number),
-      }),
-      meta: {
-        requiresAuth: true,
-      },
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
+  },
+  {
+    path: '/courses',
+    name: 'courses',
+    component: () => import(/* webpackChunkName: "courses" */ '../views/Courses.vue'),
+  },
+  {
+    path: '/players',
+    name: 'players',
+    component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
+  },
+  {
+    path: '/profile/:name',
+    name: 'profile',
+    component: () => import(/* webpackChunkName: "players" */ '../views/Profile.vue'),
+    props: true,
+  },
+  {
+    path: '/players/:id',
+    name: 'player',
+    component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
+    props: true,
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/scorecards',
-      name: 'scorecards',
-      component: () => import(/* webpackChunkName: "scorecards" */ '../views/Scorecards.vue'),
-      meta: {
-        requiresAuth: true,
-      },
+  },
+  {
+    path: '/admin/tournaments',
+    name: 'tournament-setup',
+    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin//tournaments/TournamentSetup.vue'),
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/account',
-      name: 'account',
-      component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
-      meta: {
-        requiresAuth: true,
-      },
+  },
+  {
+    path: '/admin/tournaments/:id',
+    name: 'tournament-form',
+    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/tournaments/TournamentForm.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true,
     },
-    {
-      path: '/news',
-      name: 'news',
-      component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    },
-    {
-      path: '/history',
-      name: 'history',
-      component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
-    },
-    {
-      path: '/courses',
-      name: 'courses',
-      component: () => import(/* webpackChunkName: "courses" */ '../views/Courses.vue'),
-    },
-    {
-      path: '/players',
-      name: 'players',
-      component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
-    },
-    {
-      path: '/profile/:name',
-      name: 'profile',
-      component: () => import(/* webpackChunkName: "players" */ '../views/Profile.vue'),
-      props: true,
-    },
-    {
-      path: '/players/:id',
-      name: 'player',
-      component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
-      props: true,
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/admin/tournaments',
-      name: 'tournament-setup',
-      component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin//tournaments/TournamentSetup.vue'),
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/admin/tournaments/:id',
-      name: 'tournament-form',
-      component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/tournaments/TournamentForm.vue'),
-      props: true,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/unauthorized',
-      name: 'unauthorized',
-      component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
-    },
-    {
-      path: '/404',
-      name: 'not-found',
-      component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue'),
-    },
-    {
-      path: '*',
-      redirect: '/not-found',
-    }],
+  },
+  {
+    path: '/unauthorized',
+    name: 'unauthorized',
+    component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
+  },
+  {
+    path: '/404',
+    name: 'not-found',
+    component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue'),
+  },
+  {
+    path: '*',
+    redirect: '/not-found',
   }],
 
   scrollBehavior(to, from, savedPosition) {

@@ -37,7 +37,7 @@ export default {
     classes() {
       return {
         'transparent border-2 border-white': this.transparent,
-        'bg-blue-grey-600 hover:bg-blue-grey-800': !this.transparent,
+        'bg-indigo-800 hover:bg-indigo-900': !this.transparent,
       };
     },
   },

@@ -4,7 +4,7 @@
       <div class="w-2/5 p-2 shadow rounded-l border border-r-0 border-grey-300 truncate" :class="blueTeamClasses">
         {{ blueTeam }}
       </div>
-      <div class="w-1/5 py-3 text-lg shadow-md rounded border border-grey-300 font-bold bg-white uppercase tracking-wide">
+      <div class="w-1/5 py-3 text-lg shadow-md rounded border font-bold uppercase tracking-wide" :class="scoreClasses">
         {{ score.status }}
       </div>
       <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 truncate" :class="redTeamClasses">
@@ -54,14 +54,22 @@ export default {
 
     redTeamClasses() {
       return {
-        'bg-red-700 font-semibold text-white': this.score.leader === 'Red',
+        'bg-red-800 font-semibold text-white': this.score.leader === 'Red',
         'bg-grey-200': this.score.leader !== 'Red',
+      };
+    },
+
+    scoreClasses() {
+      return {
+        'bg-red-50 border-red-100': this.score.leader === 'Red',
+        'bg-blue-50 border-blue-100': this.score.leader === 'Blue',
+        'bg-white border-grey-300': this.score.leader === 'Tied',
       };
     },
 
     blueTeamClasses() {
       return {
-        'bg-blue-700 font-semibold text-white': this.score.leader === 'Blue',
+        'bg-blue-800 font-semibold text-white': this.score.leader === 'Blue',
         'bg-grey-200': this.score.leader !== 'Blue',
       };
     },

@@ -1,5 +1,5 @@
 <template>
-  <base-page :tournament-id="tournamentId">
+  <base-page :tournament-id="tournamentId" image-url="/img/fox-harbr.jpg">
     <template v-slot:header>
       Match Results
     </template>

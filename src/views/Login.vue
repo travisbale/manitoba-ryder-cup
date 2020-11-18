@@ -1,17 +1,20 @@
 <template>
-  <div class="flex justify-center flex-grow bg-cover" :style="style">
-    <div class="w-4/5">
-      <page-header class="text-white mt-16 mb-8">
-        Welcome Back
-      </page-header>
-      <base-alert v-if="errorMessage" variant="danger" class="mb-6">
-        {{ errorMessage }}
-      </base-alert>
-      <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />
-      <base-input v-model="password" type="password" placeholder="Password" class="mb-12" @keyup.enter="login" />
-      <base-button class="w-full" :loading="loggingIn" @click="login">
-        {{ loginButtonText }}
-      </base-button>
+  <div class="h-screen flex flex-col">
+    <site-navigation />
+    <div class="flex justify-center flex-grow bg-cover" :style="style">
+      <div class="w-4/5 md:w-3/4 lg:w-2/5 lg:container lg:mx-auto">
+        <page-header class="text-white mt-16 mb-8">
+          Welcome Back
+        </page-header>
+        <base-alert v-if="errorMessage" variant="danger" class="mb-6">
+          {{ errorMessage }}
+        </base-alert>
+        <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />
+        <base-input v-model="password" type="password" placeholder="Password" class="mb-12" @keyup.enter="login" />
+        <base-button class="w-full py-4" :loading="loggingIn" @click="login">
+          {{ loginButtonText }}
+        </base-button>
+      </div>
     </div>
   </div>
 </template>
@@ -24,9 +27,10 @@ import BaseAlert from '@/components/BaseAlert';
 import BaseButton from '@/components/BaseButton';
 import BaseInput from '@/components/forms/BaseInput';
 import PageHeader from '@/components/typography/PageHeader';
+import SiteNavigation from '@/components/site-navigation';
 
 export default {
-  components: { BaseAlert, BaseButton, BaseInput, PageHeader },
+  components: { BaseAlert, BaseButton, BaseInput, PageHeader, SiteNavigation },
 
   data() {
     return {
@@ -69,7 +73,7 @@ export default {
           this.$router.push(this.$route.params.nextUrl);
         } else {
         // Otherwise take them to the dashboard page
-          this.$router.push({ name: 'leaderboard', params: { tournamentId: 1 } });
+          this.$router.push({ name: 'leaderboard', params: { tournamentId: 3 } });
         }
       }).catch((error) => {
         this.password = '';

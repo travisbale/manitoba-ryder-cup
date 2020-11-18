@@ -12,7 +12,7 @@
       </div>
       <div class="text-center absolute w-full" style="bottom: 100px">
         <router-link :to="{ name: 'leaderboard', params: { tournamentId }}" class="block">
-          <base-button class="text-xl font-raleway-semibold" transparent>
+          <base-button class="text-xl font-raleway-semibold py-4" type="transparent">
             Current Standings
           </base-button>
         </router-link>

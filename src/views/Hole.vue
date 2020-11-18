@@ -26,7 +26,7 @@
       </score-slider>
     </div>
     <div class="p-4 mb-8 bg-white">
-      <base-button :loading="saving" class="w-full" @click="recordStrokes">
+      <base-button :loading="saving" class="w-full py-4" @click="recordStrokes">
         <span v-if="number < 18">Next Hole</span>
         <span v-else>Complete Round</span>
       </base-button>

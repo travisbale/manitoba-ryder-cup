@@ -1,6 +1,6 @@
 <template>
   <button type="button"
-          class="inline-flex items-center justify-center px-6 py-4
+          class="inline-flex items-center justify-center px-6 py-2
           rounded text-white font-semibold shadow-md"
           :disabled="loading"
           :class="classes"
@@ -22,12 +22,15 @@ export default {
   name: 'BaseButton',
 
   props: {
-    loading: {
-      type: Boolean,
-      default: false,
+    type: {
+      type: String,
+      default: 'primary',
+      validator(type) {
+        return ['primary', 'secondary', 'transparent'].indexOf(type) !== -1;
+      },
     },
 
-    transparent: {
+    loading: {
       type: Boolean,
       default: false,
     },
@@ -36,8 +39,9 @@ export default {
   computed: {
     classes() {
       return {
-        'transparent border-2 border-white': this.transparent,
-        'bg-indigo-800 hover:bg-indigo-900': !this.transparent,
+        'transparent border-2 border-white': this.type === 'transparent',
+        'bg-indigo-800 hover:bg-indigo-900': this.type === 'primary',
+        'bg-blue-grey-700 hover:bg-blue-grey-800': this.type === 'secondary',
       };
     },
   },

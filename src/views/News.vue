@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/glen-abbey.jpg">
+  <base-page image-url="/img/glen-abbey.webp">
     <template v-slot:header>
       News & Media
     </template>

@@ -38,7 +38,7 @@ export default {
       password: '',
       loggingIn: false,
       errorMessage: '',
-      imageUrl: 'img/empty-course.jpg',
+      imageUrl: 'img/empty-course.webp',
     };
   },
 

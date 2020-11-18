@@ -1,5 +1,5 @@
 <template>
-  <base-page :tournament-id="tournamentId" image-url="/img/ocean-green.jpg">
+  <base-page :tournament-id="tournamentId" image-url="/img/ocean-green.webp">
     <template v-slot:header>
       Scorecard
     </template>

@@ -13,7 +13,7 @@ export default {
   props: {
     imageUrl: {
       type: String,
-      default: '/img/ocean-flag.jpg',
+      default: '/img/ocean-flag.webp',
     },
   },
 };

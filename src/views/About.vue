@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/mountain-course.jpg">
+  <base-page image-url="/img/mountain-course.webp">
     <template v-slot:header>
       Tournament Info
     </template>

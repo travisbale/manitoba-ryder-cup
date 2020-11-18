@@ -1,5 +1,5 @@
 <template>
-  <base-page>
+  <base-page image-url="/img/oceanside.webp">
     <template v-slot:header>
       Tournament Setup
     </template>

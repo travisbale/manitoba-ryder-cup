@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/sunset-green.jpg">
+  <base-page image-url="/img/sunset-green.webp">
     <template v-slot:header>
       History
     </template>

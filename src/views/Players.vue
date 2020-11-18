@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/mountain-green.jpg">
+  <base-page image-url="/img/mountain-green.webp">
     <template v-slot:header>
       The Players
     </template>

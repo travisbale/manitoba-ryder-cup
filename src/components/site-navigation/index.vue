@@ -3,7 +3,7 @@
     <nav class="py-3" :class="{ 'transparent': transparent, 'bg-blue-grey-900-dark': !transparent }">
       <div class="flex items-center justify-between lg:container lg:mx-auto">
         <div class="flex items-center">
-          <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.png" alt="Manitoba Ryder Cup" />
+          <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
           <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
             Manitoba Ryder Cup
           </router-link>

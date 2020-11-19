@@ -3,9 +3,9 @@
     <site-navigation />
     <div class="flex justify-center flex-grow bg-cover" :style="style">
       <div class="w-4/5 md:w-3/4 lg:w-2/5 lg:container lg:mx-auto">
-        <page-header class="text-white mt-16 mb-8">
+        <h1 class="font-bold text-3xl text-center text-white mt-16 mb-12">
           Welcome Back
-        </page-header>
+        </h1>
         <base-alert v-if="errorMessage" variant="danger" class="mb-6">
           {{ errorMessage }}
         </base-alert>
@@ -26,11 +26,10 @@ import { mapActions } from 'vuex';
 import BaseAlert from '@/components/BaseAlert';
 import BaseButton from '@/components/BaseButton';
 import BaseInput from '@/components/forms/BaseInput';
-import PageHeader from '@/components/typography/PageHeader';
 import SiteNavigation from '@/components/site-navigation';
 
 export default {
-  components: { BaseAlert, BaseButton, BaseInput, PageHeader, SiteNavigation },
+  components: { BaseAlert, BaseButton, BaseInput, SiteNavigation },
 
   data() {
     return {

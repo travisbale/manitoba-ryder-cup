@@ -1,7 +1,5 @@
 <template>
-  <base-container>
-    <page-header>Tournament Form</page-header>
-
+  <base-page>
     <base-label>Tournament Name</base-label>
     <base-input class="mb-0" :value="name" />
 
@@ -15,20 +13,19 @@
         <date-picker :value="endDate" />
       </div>
     </div>
-  </base-container>
+  </base-page>
 </template>
 
 <script>
 import { DateTime } from 'luxon';
 
-import BaseContainer from '@/components/layout/BaseContainer';
 import BaseInput from '@/components/forms/BaseInput';
 import BaseLabel from '@/components/forms/BaseLabel';
+import BasePage from '@/components/layout/BasePage';
 import DatePicker from '@/components/forms/DatePicker';
-import PageHeader from '@/components/typography/PageHeader';
 
 export default {
-  components: { BaseContainer, BaseLabel, BaseInput, DatePicker, PageHeader },
+  components: { BasePage, BaseLabel, BaseInput, DatePicker },
 
   props: {
     id: {

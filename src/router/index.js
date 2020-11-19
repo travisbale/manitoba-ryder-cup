@@ -56,14 +56,6 @@ const router = new VueRouter({
     },
   },
   {
-    path: '/account',
-    name: 'account',
-    component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: '/news',
     name: 'news',
     component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
@@ -79,20 +71,9 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
   },
   {
-    path: '/courses',
-    name: 'courses',
-    component: () => import(/* webpackChunkName: "courses" */ '../views/Courses.vue'),
-  },
-  {
     path: '/players',
     name: 'players',
     component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
-  },
-  {
-    path: '/profile/:name',
-    name: 'profile',
-    component: () => import(/* webpackChunkName: "players" */ '../views/Profile.vue'),
-    props: true,
   },
   {
     path: '/players/:id',
@@ -101,26 +82,9 @@ const router = new VueRouter({
     props: true,
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: () => import(/* webpackChunkName: "admin" */ '../views/admin/Admin.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: '/admin/tournaments',
     name: 'tournament-setup',
     component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin//tournaments/TournamentSetup.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/admin/tournaments/:id',
-    name: 'tournament-form',
-    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin/tournaments/TournamentForm.vue'),
-    props: true,
     meta: {
       requiresAuth: true,
     },

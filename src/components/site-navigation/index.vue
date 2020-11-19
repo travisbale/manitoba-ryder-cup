@@ -48,28 +48,12 @@
                 <bracket-icon class="mr-4" />
                 Tournament Setup
               </menu-link>
-              <menu-link to="courses" @click.native="navOpen = false">
-                <add-users-icon class="mr-4" />
-                Player Management
-              </menu-link>
-              <menu-link to="courses" @click.native="navOpen = false">
-                <publish-icon class="mr-4" />
-                Press Releases
-              </menu-link>
-              <menu-link to="courses" @click.native="navOpen = false">
-                <golf-course-icon class="mr-4" />
-                Course Management
-              </menu-link>
             </div>
 
             <menu-header>
               Account
             </menu-header>
             <div v-if="isLoggedIn">
-              <menu-link to="profile" :params="{ name: 'name' }" @click.native="navOpen = false">
-                <person-icon class="mr-4" />
-                Profile
-              </menu-link>
               <menu-link to="scorecards" @click.native="navOpen = false">
                 <golf-ball-icon class="mr-4" />
                 Scorecards
@@ -95,19 +79,14 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 
-import AddUsersIcon from '@/components/icons/AddUsersIcon';
 import BracketIcon from '@/components/icons/BracketIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
-import GolfCourseIcon from '@/components/icons/GolfCourseIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
-// import InfoIcon from '@/components/icons/InfoIcon';
 import HistoryIcon from '@/components/icons/HistoryIcon';
 import LeaderboardIcon from '@/components/icons/LeaderboardIcon';
 import LoginIcon from '@/components/icons/LoginIcon';
 import MenuIcon from '@/components/icons/MenuIcon';
 import NewspaperIcon from '@/components/icons/NewspaperIcon';
-import PersonIcon from '@/components/icons/PersonIcon';
-import PublishIcon from '@/components/icons/PublishIcon';
 import TrophyIcon from '@/components/icons/TrophyIcon';
 
 import MenuHeader from './MenuHeader';
@@ -115,21 +94,16 @@ import MenuLink from './MenuLink';
 
 export default {
   components: {
-    AddUsersIcon,
     NewspaperIcon,
     BracketIcon,
-    GolfCourseIcon,
     GolfBallIcon,
     GroupsIcon,
     HistoryIcon,
-    // InfoIcon,
     LeaderboardIcon,
     LoginIcon,
     MenuIcon,
     MenuLink,
     MenuHeader,
-    PersonIcon,
-    PublishIcon,
     TrophyIcon,
   },
 

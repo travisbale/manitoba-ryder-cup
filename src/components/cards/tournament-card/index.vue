@@ -1,14 +1,12 @@
 <template>
-  <router-link :to="{ name: 'tournament-form', params: { id, name, startDate, endDate }}" class="block">
-    <base-card>
-      <h2 class="font-semibold text-xl mb-1">
-        {{ startDate.year + ' ' + name }}
-      </h2>
-      <div class="text-sm text-grey-600">
-        {{ startDate | printDate }} &ndash; {{ endDate | printDate }}
-      </div>
-    </base-card>
-  </router-link>
+  <base-card v-on="$listeners">
+    <h2 class="font-semibold text-xl mb-1">
+      {{ startDate.year + ' ' + name }}
+    </h2>
+    <div class="text-sm text-grey-600">
+      {{ startDate | printDate }} &ndash; {{ endDate | printDate }}
+    </div>
+  </base-card>
 </template>
 
 <script>

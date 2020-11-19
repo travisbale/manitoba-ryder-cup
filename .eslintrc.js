@@ -21,6 +21,7 @@ module.exports = {
       allowSeparatedGroups: true,
     }],
     'import/extensions': ['error', 'never'],
+    'arrow-body-style': ['off'],
   },
   overrides: [
     {

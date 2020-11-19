@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import axios from '@/lib/axios';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default {
   props: {
@@ -34,34 +34,17 @@ export default {
     },
   },
 
-  data() {
-    return {
-      teams: [],
-    };
+  computed: {
+    ...mapState('teams', ['teams']),
+    ...mapGetters('teams', ['getScore', 'getCaptain']),
   },
 
   created() {
-    this.getTeams(this.tournamentId);
+    this.fetchTeams(this.tournamentId);
   },
 
   methods: {
-    getTeams() {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${this.tournamentId}/teams`;
-
-      axios.get(url).then((response) => {
-        this.teams = response.data;
-      });
-    },
-
-    getScore(name) {
-      const team = this.teams.find((t) => t.name === name);
-      return team == null ? 0 : team.points;
-    },
-
-    getCaptain(name) {
-      const team = this.teams.find((t) => t.name === name);
-      return team == null ? {} : team.captain;
-    },
+    ...mapActions('teams', ['fetchTeams']),
   },
 };
 </script>

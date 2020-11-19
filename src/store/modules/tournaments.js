@@ -9,6 +9,12 @@ export default {
     tournaments: [],
   },
 
+  getters: {
+    currentTournament(state) {
+      return state.tournaments.length > 0 ? state.tournaments[0] : { id: 0 };
+    },
+  },
+
   mutations: {
     setTournaments(state, tournaments) {
       state.tournaments = tournaments;
@@ -28,10 +34,13 @@ export default {
   },
 
   actions: {
-    getTournaments({ commit }) {
-      return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments`).then((response) => {
-        commit('setTournaments', response.data);
-      });
+    fetchTournaments({ state, commit }) {
+      if (state.tournaments.length === 0) {
+        return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments`).then((response) => {
+          commit('setTournaments', response.data);
+        });
+      }
+      return Promise.resolve({});
     },
 
     saveTournament({ commit }, tournament) {

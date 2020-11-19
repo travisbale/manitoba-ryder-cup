@@ -19,7 +19,7 @@
             <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-blue-grey-900 uppercase">
               Manitoba Ryder Cup
             </div>
-            <menu-link to="leaderboard" :params="{ tournamentId: 1 }" @click.native="navOpen = false">
+            <menu-link to="leaderboard" :params="{ tournamentId: currentTournament.id }" @click.native="navOpen = false">
               <leaderboard-icon class="mr-4" />
               Leaderboard
             </menu-link>
@@ -124,6 +124,7 @@ export default {
   computed: {
     ...mapState('currentUser', ['currentUser']),
     ...mapGetters('currentUser', ['isLoggedIn', 'isAdmin']),
+    ...mapGetters('tournaments', ['currentTournament']),
 
     translationClass() {
       return {
@@ -136,10 +137,12 @@ export default {
   created() {
     // Check to see if the user is currently logged in
     this.refresh();
+    this.fetchTournaments();
   },
 
   methods: {
     ...mapActions('currentUser', ['refresh', 'logout']),
+    ...mapActions('tournaments', ['fetchTournaments']),
 
     openNav() {
       this.navOpen = true;

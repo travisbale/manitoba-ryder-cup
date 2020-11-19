@@ -95,7 +95,7 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
   },
   {
-    path: '/404',
+    path: '/not-found',
     name: 'not-found',
     component: () => import(/* webpackChunkName: "not-found" */ '../views/NotFound.vue'),
   },

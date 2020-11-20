@@ -56,7 +56,7 @@
             <div v-if="isLoggedIn">
               <menu-link to="scorecards" @click.native="navOpen = false">
                 <golf-ball-icon class="mr-4" />
-                Scorecards
+                My Rounds
               </menu-link>
               <menu-link to="login" @click.native="logUserOut">
                 <login-icon class="mr-4" />

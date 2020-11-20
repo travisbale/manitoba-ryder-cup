@@ -3,7 +3,7 @@
     <template v-slot:header>
       Scorecard
     </template>
-    <div class="p-4 pt-6">
+    <div class="p-4">
       <section-header class="mb-4">
         {{ teeSet.course }}
         <template v-slot:subheader>

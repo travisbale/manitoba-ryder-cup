@@ -33,10 +33,10 @@
             </div>
           </div>
           <div class="flex justify-between">
-            <div class="text-sm leading-none">
+            <div class="text-sm leading-none text-grey-700">
               {{ blueTeamName }}
             </div>
-            <div class="text-sm leading-none">
+            <div class="text-sm leading-none text-grey-700">
               {{ redTeamName }}
             </div>
           </div>

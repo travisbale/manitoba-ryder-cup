@@ -6,12 +6,12 @@
           <div class="mr-4 text-5xl font-semibold">
             {{ getScore('Blue') }}
           </div>
-          <div class="text-lg pt-1">
+          <div class="text-xl pt-1">
             {{ getCaptain('Blue').lastName }}
           </div>
         </div>
         <div class="w-1/2 flex items-center justify-end text-red-300">
-          <div class="mr-4 pt-1 text-lg">
+          <div class="mr-4 pt-1 text-xl">
             {{ getCaptain('Red').lastName }}
           </div>
           <div class="text-5xl font-semibold">

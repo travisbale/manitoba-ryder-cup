@@ -30,7 +30,6 @@ export default {
 
   methods: {
     close() {
-      console.log('close clicked');
       this.$emit('close');
     },
   },

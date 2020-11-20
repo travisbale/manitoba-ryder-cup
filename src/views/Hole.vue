@@ -149,18 +149,7 @@ export default {
         } else {
           this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
         }
-      }).catch((error) => {
-        console.log(error);
       }).finally(() => { this.saving = false; });
-    },
-
-    saveRound() {
-      this.saving = true;
-
-      setTimeout(() => {
-        this.saving = false;
-        this.$router.push({ name: 'leaderboard', parms: { tournamentId: this.tournamentId } });
-      }, 2000);
     },
   },
 };

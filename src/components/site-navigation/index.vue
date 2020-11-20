@@ -157,11 +157,7 @@ export default {
     },
 
     logUserOut() {
-      this.logout().then(() => {
-        console.log('logged out');
-      }).catch((error) => {
-        console.log(error);
-      }).finally(() => { this.closeNav(); });
+      this.logout().finally(() => { this.closeNav(); });
     },
   },
 };

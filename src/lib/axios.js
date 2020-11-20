@@ -30,7 +30,6 @@ instance.interceptors.response.use(null, async (error) => {
   // Check for server errors
   if (error.response && error.response.status === 500) {
     // TODO: Do something elegant here
-    console.log('Something went wrong.');
   }
 
   // Reject the error so it can be processed further

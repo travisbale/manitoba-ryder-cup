@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen flex flex-col">
+  <div class="flex flex-col">
     <site-navigation />
     <score-bar v-if="tournamentId > 0" :tournament-id="tournamentId" />
     <div class="lg:container lg:mx-auto">

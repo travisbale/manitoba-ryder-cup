@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: 'leaderboard', params: { tournamentId } }" class="block sticky top-0">
     <div class="bg-blue-grey-900">
-      <div class="flex align-center justify-between px-4 py-4">
+      <div class="flex align-center justify-between p-4 pb-3 pt-2">
         <div class="w-1/2 flex items-center text-blue-300">
           <div class="mr-4 text-9/2xl font-semibold">
             {{ getScore('Blue') }}

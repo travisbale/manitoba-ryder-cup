@@ -316,7 +316,8 @@ module.exports = {
         'raleway-bold': ['RalewayBold'],
       },
       fontSize: {
-        '9/2xl': '2.75rem',
+        '9/2xl': ['2.75rem', 1],
+        '13/2xl': ['4rem', 1],
       },
       height: {
         72: '18rem',

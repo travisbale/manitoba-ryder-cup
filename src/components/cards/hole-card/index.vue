@@ -3,7 +3,7 @@
     <base-card class="mb-4">
       <div class="flex">
         <div class="text-center mr-8">
-          <div class="font-bold text-6xl leading-none">
+          <div class="font-bold text-13/2xl">
             {{ number }}
           </div>
           <div class="text-sm text-grey-700">
@@ -13,19 +13,19 @@
         <div class="flex-grow">
           <div class="flex justify-between">
             <div class="text-center pt-2">
-              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 border border-grey-300"
+              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 leading-normal border border-grey-300"
                    :class="{'text-white bg-blue-700': blueTeamStrokes < redTeamStrokes}"
               >
                 {{ blueTeamStrokes }}
               </div>
             </div>
             <div class="text-center pt-2 w-28">
-              <div class="text-3xl font-bold uppercase rounded mb-3 border border-grey-300">
+              <div class="text-3xl font-bold uppercase rounded mb-3 leading-normal border border-grey-300">
                 {{ "AS" }}
               </div>
             </div>
             <div class="text-center pt-2">
-              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 border border-grey-300"
+              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 leading-normal border border-grey-300"
                    :class="{'text-white bg-red-700': redTeamStrokes < blueTeamStrokes}"
               >
                 {{ redTeamStrokes }}

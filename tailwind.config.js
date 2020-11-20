@@ -315,6 +315,9 @@ module.exports = {
         'raleway-semibold': ['RalewaySemibold'],
         'raleway-bold': ['RalewayBold'],
       },
+      fontSize: {
+        '9/2xl': '2.75rem',
+      },
       height: {
         72: '18rem',
         84: '20rem',

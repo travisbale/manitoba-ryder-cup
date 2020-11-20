@@ -1,6 +1,6 @@
 <template>
   <base-page :tournament-id="tournamentId">
-    <div class="sticky px-2 py-4 border-b border-grey-400 bg-white shadow" style="top: 61px">
+    <div class="sticky px-2 py-4 border-b border-grey-400 bg-white shadow" style="top: 66.5px">
       <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">
         <div class="flex items-center mr-10">

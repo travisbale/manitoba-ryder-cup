@@ -41,7 +41,7 @@ export default {
       return {
         'transparent border-2 border-white': this.type === 'transparent',
         'bg-indigo-800 hover:bg-indigo-900': this.type === 'primary',
-        'bg-blue-grey-700 hover:bg-blue-grey-800': this.type === 'secondary',
+        'bg-blue-grey-400 hover:bg-blue-grey-800': this.type === 'secondary',
       };
     },
   },

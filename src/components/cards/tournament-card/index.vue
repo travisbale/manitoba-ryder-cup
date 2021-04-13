@@ -1,7 +1,7 @@
 <template>
   <base-card v-on="$listeners">
     <h2 class="font-semibold text-xl mb-1">
-      {{ startDate.year + ' ' + name }}
+      {{ name }}
     </h2>
     <div class="text-sm text-grey-600">
       {{ startDate | printDate }} &ndash; {{ endDate | printDate }}

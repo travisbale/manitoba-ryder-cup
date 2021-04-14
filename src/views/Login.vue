@@ -71,8 +71,8 @@ export default {
         // Redirect the user to whatever page theyi were trying to access
           this.$router.push(this.$route.params.nextUrl);
         } else {
-        // Otherwise take them to the dashboard page
-          this.$router.push({ name: 'leaderboard', params: { tournamentId: 3 } });
+        // Otherwise take them to the schedule page
+          this.$router.push({ name: 'schedule' });
         }
       }).catch((error) => {
         this.password = '';

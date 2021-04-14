@@ -13,6 +13,11 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "splash" */ '../views/Splash.vue'),
   },
   {
+    path: '/schedule',
+    name: 'schedule',
+    component: () => import(/* webpackChunkName: "schedule" */ '../views/Schedule.vue'),
+  },
+  {
     path: '/tournaments/:tournamentId',
     name: 'leaderboard',
     component: () => import(/* webpackChunkName: "leaderboard" */ '../views/Leaderboard.vue'),

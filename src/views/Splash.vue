@@ -11,9 +11,9 @@
         </div>
       </div>
       <div class="text-center absolute w-full" style="bottom: 100px">
-        <router-link :to="{ name: 'leaderboard', params: { tournamentId: currentTournament.id }}" class="block">
-          <base-button :loading="loading" class="text-xl font-raleway-semibold py-4" type="transparent">
-            Current Standings
+        <router-link :to="{ name: 'schedule' }" class="block">
+          <base-button class="text-xl font-raleway-semibold py-4" type="transparent">
+            Tournament Schedule
           </base-button>
         </router-link>
       </div>
@@ -22,20 +22,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 import BaseButton from '@/components/buttons/BaseButton';
 import SiteNav from '@/components/site-navigation';
 
 export default {
   components: { BaseButton, SiteNav },
-
-  computed: {
-    ...mapGetters('tournaments', ['currentTournament']),
-
-    loading() {
-      return this.currentTournament.id === 0;
-    },
-  },
 };
 </script>

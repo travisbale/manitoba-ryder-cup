@@ -5,7 +5,7 @@
         <div class="flex items-center">
           <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
           <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
-            Manitoba Ryder Cup
+            Manitoba Pro Tour
           </router-link>
         </div>
         <div>
@@ -17,11 +17,11 @@
           </div>
           <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-300" :class="translationClass">
             <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-blue-grey-900 uppercase">
-              Manitoba Ryder Cup
+              Manitoba Pro Tour
             </div>
-            <menu-link to="leaderboard" :params="{ tournamentId: currentTournament.id }" @click.native="navOpen = false">
-              <leaderboard-icon class="mr-4" />
-              Leaderboard
+            <menu-link to="schedule" @click.native="navOpen = false">
+              <calendar-icon class="mr-4" />
+              Schedule
             </menu-link>
             <menu-link to="players" @click.native="navOpen = false">
               <groups-icon class="mr-4" />
@@ -69,10 +69,10 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 
+import CalendarIcon from '@/components/icons/CalendarIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
 import HistoryIcon from '@/components/icons/HistoryIcon';
-import LeaderboardIcon from '@/components/icons/LeaderboardIcon';
 import LoginIcon from '@/components/icons/LoginIcon';
 import MenuIcon from '@/components/icons/MenuIcon';
 import NewspaperIcon from '@/components/icons/NewspaperIcon';
@@ -83,11 +83,11 @@ import MenuLink from './MenuLink';
 
 export default {
   components: {
+    CalendarIcon,
     NewspaperIcon,
     GolfBallIcon,
     GroupsIcon,
     HistoryIcon,
-    LeaderboardIcon,
     LoginIcon,
     MenuIcon,
     MenuLink,

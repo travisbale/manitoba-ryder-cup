@@ -24,7 +24,7 @@ import HttpStatus from 'http-status-codes';
 import { mapActions } from 'vuex';
 
 import BaseAlert from '@/components/BaseAlert';
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/buttons/BaseButton';
 import BaseInput from '@/components/forms/BaseInput';
 import SiteNavigation from '@/components/site-navigation';
 

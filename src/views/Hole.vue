@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
 import ScoreSlider from '@/components/ScoreSlider';

@@ -24,7 +24,7 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import BaseButton from '@/components/BaseButton';
+import BaseButton from '@/components/buttons/BaseButton';
 import SiteNav from '@/components/site-navigation';
 
 export default {

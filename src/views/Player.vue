@@ -6,6 +6,9 @@
     <div class="p-4">
       player details
     </div>
+    <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: playerId }}">
+      <floating-action-button action="edit" />
+    </router-link>
   </base-page>
 </template>
 
@@ -13,9 +16,10 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
+import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 
 export default {
-  components: { BasePage },
+  components: { BasePage, FloatingActionButton },
 
   props: {
     playerId: {
@@ -30,6 +34,7 @@ export default {
 
   computed: {
     ...mapGetters('players', ['getPlayer']),
+    ...mapGetters('currentUser', ['isAdmin']),
 
     player() {
       return this.getPlayer(this.playerId) || {

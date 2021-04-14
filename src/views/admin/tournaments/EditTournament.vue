@@ -30,7 +30,7 @@
       </tabs>
 
       <div class="flex justify-end mt-6">
-        <router-link :to="{ name: 'schedule' }" class="block">
+        <router-link :to="getPreviousPage()" class="block">
           <base-button type="secondary" class="mr-2">
             Cancel
           </base-button>
@@ -99,8 +99,15 @@ export default {
       this.saving = true;
 
       this.saveTournament(this.tournament)
-        .then(() => this.$router.push({ name: 'tournament-setup' }))
+        .then(() => this.$router.push(this.getPreviousPage()))
         .finally(() => { this.saving = false; });
+    },
+
+    getPreviousPage() {
+      if (this.tournamentId > 0) {
+        return { name: 'leaderboard', params: { tournamentId: this.tournamentId } };
+      }
+      return { name: 'schedule' };
     },
   },
 };

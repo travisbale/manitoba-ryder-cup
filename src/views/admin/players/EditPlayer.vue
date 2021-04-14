@@ -12,7 +12,7 @@
       <base-input v-model="player.lastName" label="Last Name" />
 
       <div class="flex justify-end mt-8">
-        <router-link :to="{ name: 'players' }" class="block">
+        <router-link :to="getPreviousPage()" class="block">
           <base-button type="secondary" class="mr-2">
             Cancel
           </base-button>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import BaseButton from '@/components/buttons/BaseButton';
 import BaseInput from '@/components/forms/BaseInput';
@@ -37,7 +37,7 @@ export default {
   components: { BaseButton, BaseInput, BasePage, SectionHeader },
 
   props: {
-    id: {
+    playerId: {
       type: Number,
       default: 0,
     },
@@ -55,6 +55,10 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters('players', ['getPlayer']),
+  },
+
   methods: {
     ...mapActions('players', ['savePlayer']),
 
@@ -62,8 +66,15 @@ export default {
       this.saving = true;
 
       this.savePlayer(this.player)
-        .then(() => { this.$router.push({ name: 'players' }); })
+        .then(() => { this.$router.push(this.getPreviousPage()); })
         .finally(() => { this.saving = false; });
+    },
+
+    getPreviousPage() {
+      if (this.playerId > 0) {
+        return { name: 'player', param: { playerId: this.playerId } };
+      }
+      return { name: 'players' };
     },
   },
 };

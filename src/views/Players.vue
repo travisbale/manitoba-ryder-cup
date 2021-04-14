@@ -9,7 +9,7 @@
       </div>
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: 0 }}">
-      <add-button />
+      <floating-action-button action="add" />
     </router-link>
   </base-page>
 </template>
@@ -17,12 +17,12 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 
-import AddButton from '@/components/buttons/AddButton';
 import BasePage from '@/components/layout/BasePage';
+import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import PlayerCard from '@/components/cards/player-card';
 
 export default {
-  components: { AddButton, BasePage, PlayerCard },
+  components: { FloatingActionButton, BasePage, PlayerCard },
 
   computed: {
     ...mapState('players', ['players']),

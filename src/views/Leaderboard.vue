@@ -9,23 +9,31 @@
       <scoring-summary match-format="Scramble" class="mb-8" />
       <scoring-summary match-format="Singles" />
     </div>
+    <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">
+      <floating-action-button action="edit" />
+    </router-link>
   </base-page>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
+import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import ScoringSummary from '@/components/ScoringSummary';
 
 export default {
-  components: { BasePage, ScoringSummary },
+  components: { BasePage, FloatingActionButton, ScoringSummary },
 
   props: {
     tournamentId: {
       type: Number,
       required: true,
     },
+  },
+
+  computed: {
+    ...mapGetters('currentUser', ['isAdmin']),
   },
 
   mounted() {

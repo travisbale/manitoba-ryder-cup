@@ -71,11 +71,6 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
-    path: '/history',
-    name: 'history',
-    component: () => import(/* webpackChunkName: "history" */ '../views/History.vue'),
-  },
-  {
     path: '/players',
     name: 'players',
     component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),

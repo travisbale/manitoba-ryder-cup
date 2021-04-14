@@ -33,11 +33,7 @@
             </menu-link>
             <menu-link to="about" @click.native="navOpen = false">
               <trophy-icon class="mr-4" />
-              Tournament Info
-            </menu-link>
-            <menu-link to="history" @click.native="navOpen = false">
-              <history-icon class="mr-4" />
-              Past Results
+              Tour History
             </menu-link>
 
             <menu-header>
@@ -72,7 +68,6 @@ import { mapActions, mapGetters, mapState } from 'vuex';
 import CalendarIcon from '@/components/icons/CalendarIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
-import HistoryIcon from '@/components/icons/HistoryIcon';
 import LoginIcon from '@/components/icons/LoginIcon';
 import MenuIcon from '@/components/icons/MenuIcon';
 import NewspaperIcon from '@/components/icons/NewspaperIcon';
@@ -87,7 +82,6 @@ export default {
     NewspaperIcon,
     GolfBallIcon,
     GroupsIcon,
-    HistoryIcon,
     LoginIcon,
     MenuIcon,
     MenuLink,

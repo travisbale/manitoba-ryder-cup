@@ -12,16 +12,7 @@ import tournaments from '@/store/modules/tournaments';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: true,
-
-  state: {
-  },
-
-  mutations: {
-  },
-
-  actions: {
-  },
+  strict: process.env.NODE_ENV !== 'production',
 
   modules: {
     courses,

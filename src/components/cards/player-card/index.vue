@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'player', params: { id }}" class="block">
+  <router-link :to="{ name: 'player', params: { playerId: id }}" class="block">
     <base-card>
       <template v-slot:image>
         <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
@@ -105,7 +105,7 @@ export default {
     },
 
     cupText() {
-      return this.cups > 1 ? 'cups' : 'cup';
+      return this.cups !== 1 ? 'cups' : 'cup';
     },
 
     badgeColor() {

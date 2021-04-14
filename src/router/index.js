@@ -81,10 +81,12 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "players" */ '../views/Players.vue'),
   },
   {
-    path: '/players/:id',
+    path: '/players/:playerId',
     name: 'player',
     component: () => import(/* webpackChunkName: "player" */ '../views/Player.vue'),
-    props: true,
+    props: (route) => ({
+      playerId: parseInt(route.params.playerId),
+    }),
   },
   {
     path: '/unauthorized',

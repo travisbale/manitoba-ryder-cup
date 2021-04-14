@@ -7,6 +7,12 @@ export default {
     players: [],
   },
 
+  getters: {
+    getPlayer: (state) => (id) => {
+      return state.players.find((p) => p.id === id);
+    },
+  },
+
   mutations: {
     setPlayers(state, players) {
       state.players = players;
@@ -21,57 +27,22 @@ export default {
   },
 
   actions: {
-    getPlayers({ commit }) {
-      commit('setPlayers', [{
-        id: 0,
-        pictureUrl: 'img/milnes.png',
-        firstName: 'Travis',
-        lastName: 'Bale',
-        bio: 'stuff',
-        wins: 1,
-        losses: 1,
-        halves: 1,
-        cups: 1,
-        level: 'white',
-        confidence: 4,
-      },
-      {
-        id: 0,
-        pictureUrl: 'img/milnes.png',
-        firstName: 'Travis',
-        lastName: 'Bale',
-        bio: 'stuff',
-        wins: 1,
-        losses: 1,
-        halves: 1,
-        cups: 1,
-        level: 'white',
-        confidence: 4,
-      },
-      {
-        id: 0,
-        pictureUrl: 'img/milnes.png',
-        firstName: 'Travis',
-        lastName: 'Bale',
-        bio: 'stuff',
-        wins: 1,
-        losses: 1,
-        halves: 1,
-        cups: 1,
-        level: 'white',
-        confidence: 4,
-      }]);
-
-      return Promise.resolve();
+    fetchPlayers({ state, commit }) {
+      if (state.players.length === 0) {
+        return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/players`).then((response) => {
+          commit('setPlayers', response.data);
+        });
+      }
+      return Promise.resolve({});
     },
 
     savePlayer({ commit }, player) {
       let saving;
 
       if (player.id == null) {
-        saving = axios.post('tournament/players');
+        saving = axios.post(`${process.env.VUE_APP_SCORECARD_URL}/v1/players`, player);
       } else {
-        saving = axios.put('tournament/players');
+        saving = axios.put(`${process.env.VUE_APP_SCORECARD_URL}/v1/players/${player.id}`, player);
       }
 
       return saving.then((response) => commit('savePlayer', response.data));

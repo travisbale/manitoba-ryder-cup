@@ -1,22 +1,24 @@
 <template>
   <base-page image-url="/img/ocean-hills.webp">
     <template v-slot:header>
-      Player Profile
+      {{ player.firstName }} {{ player.lastName }}
     </template>
     <div class="p-4">
-      {{ id }}
+      player details
     </div>
   </base-page>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 import BasePage from '@/components/layout/BasePage';
 
 export default {
   components: { BasePage },
 
   props: {
-    id: {
+    playerId: {
       type: Number,
       required: true,
     },
@@ -24,6 +26,25 @@ export default {
 
   data() {
     return {};
+  },
+
+  computed: {
+    ...mapGetters('players', ['getPlayer']),
+
+    player() {
+      return this.getPlayer(this.playerId) || {
+        firstName: '',
+        lastName: '',
+      };
+    },
+  },
+
+  mounted() {
+    this.fetchPlayers();
+  },
+
+  methods: {
+    ...mapActions('players', ['fetchPlayers', 'savePlayer']),
   },
 };
 </script>

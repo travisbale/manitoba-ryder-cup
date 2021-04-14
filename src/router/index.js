@@ -82,14 +82,6 @@ const router = new VueRouter({
     props: true,
   },
   {
-    path: '/admin/tournaments',
-    name: 'tournament-setup',
-    component: () => import(/* webpackChunkName: "tournamentSetup" */ '../views/admin//tournaments/TournamentSetup.vue'),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: '/unauthorized',
     name: 'unauthorized',
     component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),

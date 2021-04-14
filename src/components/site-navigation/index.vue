@@ -40,16 +40,6 @@
               Past Results
             </menu-link>
 
-            <div v-if="isAdmin">
-              <menu-header>
-                Admin
-              </menu-header>
-              <menu-link to="tournament-setup" @click.native="navOpen = false">
-                <bracket-icon class="mr-4" />
-                Tournament Setup
-              </menu-link>
-            </div>
-
             <menu-header>
               Account
             </menu-header>
@@ -79,7 +69,6 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 
-import BracketIcon from '@/components/icons/BracketIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
 import HistoryIcon from '@/components/icons/HistoryIcon';
@@ -95,7 +84,6 @@ import MenuLink from './MenuLink';
 export default {
   components: {
     NewspaperIcon,
-    BracketIcon,
     GolfBallIcon,
     GroupsIcon,
     HistoryIcon,

@@ -84,6 +84,17 @@ const router = new VueRouter({
     }),
   },
   {
+    path: '/admin/tournament/:tournamentId',
+    name: 'edit-tournament',
+    component: () => import(/* webpackChunkName: "editTournament" */ '../views/admin/tournaments/EditTournament.vue'),
+    props: (route) => ({
+      tournamentId: parseInt(route.params.tournamentId),
+    }),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/unauthorized',
     name: 'unauthorized',
     component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),
@@ -116,7 +127,7 @@ router.beforeEach((to, from, next) => {
   if ((requiresAuth || requiresAdmin) && from.name !== 'login') {
     // Try to get a new access token and redirect the user to the appropriate page
     store.dispatch('currentUser/refresh').then(() => {
-      if (!requiresAdmin || store.getters.user.isAdmin) {
+      if (!requiresAdmin || store.getters.currentUser.isAdmin) {
         next();
       } else {
         next({ name: 'unauthorized' });

@@ -11,22 +11,27 @@
         <tournament-card v-bind="t" />
       </router-link>
     </div>
+    <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">
+      <add-button />
+    </router-link>
   </base-page>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import { DateTime } from 'luxon';
 
+import AddButton from '@/components/buttons/AddButton';
 import BasePage from '@/components/layout/BasePage';
 import SectionHeader from '@/components/typography/SectionHeader';
 import TournamentCard from '@/components/cards/tournament-card';
 
 export default {
-  components: { BasePage, SectionHeader, TournamentCard },
+  components: { AddButton, BasePage, SectionHeader, TournamentCard },
 
   computed: {
     ...mapState('tournaments', ['tournaments']),
+    ...mapGetters('currentUser', ['isAdmin']),
 
     year() {
       return DateTime.local().year;

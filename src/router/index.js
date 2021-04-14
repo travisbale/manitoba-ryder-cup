@@ -84,7 +84,18 @@ const router = new VueRouter({
     }),
   },
   {
-    path: '/admin/tournament/:tournamentId',
+    path: '/admin/players/:playerId',
+    name: 'edit-player',
+    component: () => import(/* webpackChunkName: "editPlayer" */ '../views/admin/players/EditPlayer.vue'),
+    props: (route) => ({
+      playerId: parseInt(route.params.playerId),
+    }),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/admin/tournaments/:tournamentId',
     name: 'edit-tournament',
     component: () => import(/* webpackChunkName: "editTournament" */ '../views/admin/tournaments/EditTournament.vue'),
     props: (route) => ({

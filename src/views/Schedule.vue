@@ -8,7 +8,7 @@
         <span class="font-raleway">{{ year }}</span> Schedule
       </section-header>
       <router-link v-for="t in tournaments" :key="t.id" :to="{ name: 'leaderboard', params: { tournamentId: t.id }}" v-bind="t" class="block">
-        <tournament-card v-bind="t" />
+        <tournament-card v-bind="t" class="mb-4" />
       </router-link>
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">

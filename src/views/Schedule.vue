@@ -3,7 +3,7 @@
     <template v-slot:header>
       Tournament Schedule
     </template>
-    <div class="p-4">
+    <div class="p-4 pt-6">
       <section-header class="mb-4">
         <span class="font-raleway">{{ year }}</span> Schedule
       </section-header>

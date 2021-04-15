@@ -1,9 +1,10 @@
 <template>
-  <base-page :tournament-id="tournamentId" image-url="/img/ocean-green.webp">
+  <base-page image-url="/img/ocean-green.webp">
     <template v-slot:header>
       Scorecard
     </template>
-    <div class="p-4">
+    <score-bar :tournament-id="tournamentId" />
+    <div class="p-4 pt-6">
       <section-header class="mb-4">
         {{ teeSet.course }}
         <template v-slot:subheader>
@@ -20,11 +21,12 @@
 <script>
 import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
+import ScoreBar from '@/components/ScoreBar';
 import SectionHeader from '@/components/typography/SectionHeader';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, HoleCard, SectionHeader },
+  components: { BasePage, HoleCard, ScoreBar, SectionHeader },
 
   props: {
     tournamentId: {

@@ -3,9 +3,9 @@
     <template v-slot:header>
       Tour Players
     </template>
-    <div class="p-4">
+    <div class="p-4 pt-6">
       <div class="md:grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <player-card v-for="player in players" :key="player.id" v-bind="player" class="mt-4" />
+        <player-card v-for="player in players" :key="player.id" v-bind="player" class="mb-4" />
       </div>
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: 0 }}">

@@ -2,7 +2,7 @@
   <div>
     <ul class="flex shadow-md text-grey-500">
       <li v-for="(tab, index) in $children" :key="tab.title" class="flex-grow" @click="selectTab(index)">
-        <div class="font-raleway-bold uppercase tracking-wide py-2 text-center"
+        <div class="font-raleway-bold uppercase tracking-wide pt-5 pb-3 text-center"
              :class="{ 'border-indigo-700 border-b-4 text-grey-1000': tab.isActive }"
         >
           {{ tab.title }}

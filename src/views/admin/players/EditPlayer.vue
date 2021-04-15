@@ -59,8 +59,16 @@ export default {
     ...mapGetters('players', ['getPlayer']),
   },
 
+  mounted() {
+    this.fetchPlayers().then(() => {
+      this.player = {
+        ...this.getPlayer(this.playerId),
+      };
+    });
+  },
+
   methods: {
-    ...mapActions('players', ['savePlayer']),
+    ...mapActions('players', ['fetchPlayers', 'savePlayer']),
 
     clickSavePlayer() {
       this.saving = true;

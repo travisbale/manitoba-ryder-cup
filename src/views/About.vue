@@ -1,8 +1,13 @@
 <template>
   <base-page image-url="/img/mountain-course.webp">
     <template v-slot:header>
-      Tournament Info
+      Tour History
     </template>
+    <div class="p-4 pt-6">
+      <p class="text-center">
+        There is no tour history
+      </p>
+    </div>
   </base-page>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center h-48 md:h-72 text-center bg-cover bg-bottom"
+  <div class="flex justify-center items-center h-40 md:h-72 text-center bg-cover bg-bottom"
        :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.30)), url('${imageUrl}')`"
   >
     <h1 class="font-raleway-bold text-white text-4xl">

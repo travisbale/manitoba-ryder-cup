@@ -7,7 +7,7 @@
           Welcome to
         </div>
         <div class="font-raleway-bold text-6xl leading-tight tracking-tight mb-48">
-          The Manitoba Ryder Cup
+          The Manitoba Pro Tour
         </div>
       </div>
       <div class="text-center absolute w-full" style="bottom: 100px">

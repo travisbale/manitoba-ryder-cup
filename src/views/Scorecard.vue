@@ -3,7 +3,6 @@
     <template v-slot:header>
       Scorecard
     </template>
-    <score-bar :tournament-id="tournamentId" />
     <div class="p-4 pt-6">
       <section-header class="mb-4">
         {{ teeSet.course }}
@@ -21,12 +20,11 @@
 <script>
 import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
-import ScoreBar from '@/components/ScoreBar';
 import SectionHeader from '@/components/typography/SectionHeader';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, HoleCard, ScoreBar, SectionHeader },
+  components: { BasePage, HoleCard, SectionHeader },
 
   props: {
     tournamentId: {

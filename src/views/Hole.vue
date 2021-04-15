@@ -1,7 +1,6 @@
 <template>
   <base-page>
-    <score-bar :tournament-id="tournamentId" />
-    <div class="sticky px-2 py-4 border-b border-grey-400 bg-white shadow" style="top: 66.5px">
+    <div class="sticky top-0 px-2 py-4 border-b border-grey-400 bg-white shadow">
       <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">
         <div class="flex items-center mr-10">
@@ -39,12 +38,11 @@
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
-import ScoreBar from '@/components/ScoreBar';
 import ScoreSlider from '@/components/ScoreSlider';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, BaseButton, MatchSummary, ScoreBar, ScoreSlider },
+  components: { BasePage, BaseButton, MatchSummary, ScoreSlider },
 
   props: {
     tournamentId: {

@@ -66,6 +66,14 @@ const router = new VueRouter({
     component: () => import(/* webpackChunkName: "news" */ '../views/News.vue'),
   },
   {
+    path: '/news/article/:articleId',
+    name: 'article',
+    component: () => import(/* webpackChunkName: "article" */ '../views/Article.vue'),
+    props: (route) => ({
+      articleId: parseInt(route.params.articleId),
+    }),
+  },
+  {
     path: '/about',
     name: 'about',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),

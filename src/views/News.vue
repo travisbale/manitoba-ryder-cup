@@ -5,7 +5,7 @@
     </template>
     <div class="p-4 pt-6">
       <p v-if="articles.length === 0" class="text-center">
-        There are no currently published articles.
+        There are currently no published articles.
       </p>
       <router-link v-for="article in articles" :key="article.id"
                    :to="{ name: 'article', params: { articleId: article.id }}"

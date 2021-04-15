@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/fox-harbr.webp">
+  <base-page breadcrumb-text="Tournament Schedule" :breadcrumb-route="{ name: 'schedule' }" image-url="/img/fox-harbr.webp">
     <template v-slot:header>
       {{ tournament.name }}
     </template>

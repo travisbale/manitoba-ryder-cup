@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/ocean-hills.webp">
+  <base-page breadcrumb-text="Tour Players" :breadcrumb-route="{ name: 'players' }" image-url="/img/ocean-hills.webp">
     <template v-slot:header>
       {{ player.firstName }} {{ player.lastName }}
     </template>

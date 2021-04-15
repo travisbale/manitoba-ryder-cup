@@ -1,8 +1,10 @@
 <template>
   <div>
-    <ul class="flex mb-3 border-b border-grey-300">
-      <li v-for="(tab, index) in $children" :key="tab.title" @click="selectTab(index)">
-        <div class="border border-grey-300 px-4 py-2 rounded-md">
+    <ul class="flex shadow-md text-grey-500">
+      <li v-for="(tab, index) in $children" :key="tab.title" class="flex-grow" @click="selectTab(index)">
+        <div class="font-raleway-bold uppercase tracking-wide py-2 text-center"
+             :class="{ 'border-indigo-700 border-b-4 text-grey-1000': tab.isActive }"
+        >
           {{ tab.title }}
         </div>
       </li>

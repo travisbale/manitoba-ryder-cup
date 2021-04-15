@@ -1,8 +1,5 @@
 <template>
   <div>
-    <section-header underline class="my-4">
-      Rounds
-    </section-header>
     <div v-for="(round, index) in rounds" :key="index" class="flex justify-between mb-2">
       <div>
         Round {{ round.number }}
@@ -19,10 +16,9 @@
 
 <script>
 import BaseButton from '@/components/buttons/BaseButton';
-import SectionHeader from '@/components/typography/SectionHeader';
 
 export default {
-  components: { BaseButton, SectionHeader },
+  components: { BaseButton },
 
   data() {
     return {

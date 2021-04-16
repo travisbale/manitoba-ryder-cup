@@ -3,8 +3,11 @@
     <div class="shadow border-b border-grey-400 bg-white">
       <div class="flex align-center justify-between px-2 pb-1">
         <div class="w-1/2 flex items-center">
-          <div class="mr-3 text-6xl leading-none tracking-tighter font-semibold text-blue-800">
-            {{ getScore('Blue') }}
+          <div class="flex items-center mr-3 leading-none tracking-tighter font-semibold text-blue-800">
+            <span class="text-6xl">
+              {{ Math.trunc(getScore('Blue')) }}
+            </span>
+            <span v-if="getScore('Blue') % 1 !== 0" class="text-5xl pt-1">&#189;</span>
           </div>
           <div class="text-xl pt-2">
             <div class="uppercase text-grey-600 text-sm -mb-1 font-raleway">
@@ -24,8 +27,11 @@
               {{ getCaptain('Red').lastName || 'Red' }}
             </div>
           </div>
-          <div class="text-6xl leading-tight tracking-tighter font-semibold text-red-800">
-            {{ getScore('Red') }}
+          <div class="flex items-center leading-tight tracking-tighter font-semibold text-red-800">
+            <span class="text-6xl">
+              {{ Math.trunc(getScore('Red')) }}
+            </span>
+            <span v-if="getScore('Red') % 1 !== 0" class="text-5xl pt-1">&#189;</span>
           </div>
         </div>
       </div>

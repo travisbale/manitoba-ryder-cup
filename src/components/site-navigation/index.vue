@@ -1,22 +1,22 @@
 <template>
   <div>
-    <nav class="py-2" :class="{ 'transparent': transparent, 'bg-blue-grey-dark-900': !transparent }">
+    <nav class="py-2" :class="{ 'transparent': transparent, 'bg-grey-900': !transparent }">
       <div class="flex items-center justify-between lg:container lg:mx-auto">
         <div class="flex items-center">
           <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
-          <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-grey-200 text-xl font-semibold">
+          <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-white text-xl font-semibold">
             Manitoba Pro Tour
           </router-link>
         </div>
         <div>
-          <button type="button" class="block text-grey-200 hover:text-white mr-3" @click="openNav">
+          <button type="button" class="block text-white hover:text-white mr-3" @click="openNav">
             <menu-icon class="focus:outline-none" :class="{ 'h-12 w-12': transparent }" />
           </button>
           <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
             <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
           </div>
-          <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-grey-300" :class="translationClass">
-            <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-blue-grey-900 uppercase">
+          <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-white" :class="translationClass">
+            <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-deep-purple-800 bg-opacity-75 uppercase">
               Manitoba Pro Tour
             </div>
             <menu-link to="schedule" @click.native="navOpen = false">

@@ -1,7 +1,7 @@
 <template>
   <button type="button"
           class="inline-flex items-center justify-center px-6 py-2
-          rounded text-white font-semibold shadow-md"
+          rounded font-semibold shadow-md"
           :disabled="loading"
           :class="classes"
           v-on="$listeners"
@@ -39,9 +39,9 @@ export default {
   computed: {
     classes() {
       return {
-        'transparent border-2 border-white': this.type === 'transparent',
-        'bg-deep-purple-800 hover:bg-deep-purple-900': this.type === 'primary',
-        'bg-blue-grey-400 hover:bg-blue-grey-800': this.type === 'secondary',
+        'transparent text-white border-2 border-white': this.type === 'transparent',
+        'bg-deep-purple-800 text-white hover:bg-deep-purple-900': this.type === 'primary',
+        'bg-grey-400 hover:bg-grey-500': this.type === 'secondary',
       };
     },
   },

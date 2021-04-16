@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <site-navigation />
     <div class="lg:container lg:mx-auto">
-      <div v-if="breadcrumbText != null" class="bg-blue-grey-900 text-blue-grey-400 text-sm px-1 py-1">
+      <div v-if="breadcrumbText != null" class="bg-grey-800 text-grey-300 text-sm p-1">
         <router-link :to="breadcrumbRoute" class="flex items-center">
           <left-chevron-icon />
           {{ breadcrumbText }}

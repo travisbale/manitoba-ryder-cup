@@ -20,7 +20,7 @@ export default {
   computed: {
     linkClasses() {
       return {
-        'bg-blue-grey-800 bg-opacity-25': this.$route.name === this.to,
+        'bg-deep-purple-800 bg-opacity-25': this.$route.name === this.to,
       };
     },
   },

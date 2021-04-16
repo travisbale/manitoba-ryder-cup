@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="py-2" :class="{ 'transparent': transparent, 'bg-blue-grey-900-dark': !transparent }">
+    <nav class="py-2" :class="{ 'transparent': transparent, 'bg-blue-grey-dark-900': !transparent }">
       <div class="flex items-center justify-between lg:container lg:mx-auto">
         <div class="flex items-center">
           <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />

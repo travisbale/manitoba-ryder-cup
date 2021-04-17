@@ -1,5 +1,5 @@
 <template>
-  <base-page>
+  <base-page back-link-text="Manitoba Ryder Cup" :back-link-route="{ name: 'leaderboard', params: { touranamentId: tournamentId }}">
     <div class="sticky top-0 px-2 py-4 border-b border-grey-400 bg-white shadow">
       <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">

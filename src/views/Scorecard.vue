@@ -1,7 +1,10 @@
 <template>
-  <base-page image-url="/img/ocean-green.webp">
+  <base-page back-link-text="Manitoba Ryder Cup"
+             :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
+             image-url="/img/ocean-green.webp"
+  >
     <template v-slot:header>
-      Scorecard
+      {{ match.format }}
     </template>
     <div class="p-4 pt-6">
       <section-header class="mb-4">

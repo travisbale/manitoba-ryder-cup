@@ -2,10 +2,16 @@
   <div>
     <nav class="py-2" :class="{ 'transparent': transparent, 'bg-grey-900': !transparent }">
       <div class="flex items-center justify-between lg:container lg:mx-auto">
-        <div class="flex items-center">
-          <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
-          <router-link v-if="!transparent" :to="{ name: 'splash' }" class="block text-white text-xl font-semibold">
-            Manitoba Pro Tour
+        <div class="flex items-center h-12">
+          <router-link v-if="!transparent" :to="homeLink" class="text-white text-xl font-semibold">
+            <div v-if="backLinkText === ''" class="flex items-center">
+              <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
+              Manitoba Pro Tour
+            </div>
+            <div v-else class="flex items-center">
+              <arrow-left-icon class="ml-2 mr-4" />
+              <span>Manitoba Ryder Cup</span>
+            </div>
           </router-link>
         </div>
         <div>
@@ -65,6 +71,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 
+import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon';
 import CalendarIcon from '@/components/icons/CalendarIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
@@ -78,6 +85,7 @@ import MenuLink from './MenuLink';
 
 export default {
   components: {
+    ArrowLeftIcon,
     CalendarIcon,
     NewspaperIcon,
     GolfBallIcon,
@@ -93,6 +101,16 @@ export default {
     transparent: {
       type: Boolean,
       default: false,
+    },
+
+    backLinkText: {
+      type: String,
+      default: '',
+    },
+
+    backLinkRoute: {
+      type: Object,
+      default: null,
     },
   },
 
@@ -113,6 +131,10 @@ export default {
         'translate-x-0': this.navOpen,
         'translate-x-full': !this.navOpen,
       };
+    },
+
+    homeLink() {
+      return this.backLinkRoute || { name: 'schedule' };
     },
   },
 

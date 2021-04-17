@@ -1,13 +1,7 @@
 <template>
   <div class="flex flex-col">
-    <site-navigation />
+    <site-navigation :back-link-text="backLinkText" :back-link-route="backLinkRoute" />
     <div class="lg:container lg:mx-auto">
-      <div v-if="breadcrumbText != null" class="bg-grey-800 text-grey-300 text-sm p-1">
-        <router-link :to="breadcrumbRoute" class="flex items-center">
-          <left-chevron-icon />
-          {{ breadcrumbText }}
-        </router-link>
-      </div>
       <image-header v-if="$slots.header" :image-url="imageUrl">
         <slot name="header" />
       </image-header>
@@ -18,11 +12,10 @@
 
 <script>
 import ImageHeader from '@/components/typography/ImageHeader';
-import LeftChevronIcon from '@/components/icons/LeftChevronIcon';
 import SiteNavigation from '@/components/site-navigation';
 
 export default {
-  components: { ImageHeader, LeftChevronIcon, SiteNavigation },
+  components: { ImageHeader, SiteNavigation },
 
   props: {
     imageUrl: {
@@ -30,12 +23,12 @@ export default {
       default: '/img/ocean-flag.webp',
     },
 
-    breadcrumbText: {
+    backLinkText: {
       type: String,
-      default: null,
+      default: '',
     },
 
-    breadcrumbRoute: {
+    backLinkRoute: {
       type: Object,
       default: null,
     },

@@ -1,10 +1,10 @@
 <template>
   <router-link :to="{ name: 'player', params: { playerId: id }}" class="block">
-    <base-card>
+    <base-card class="flex items-center">
       <template v-slot:image>
-        <img class="h-72 w-full object-cover object-top" :src="pictureUrl" :alt="fullName" />
+        <img class="h-32 object-cover object-top" :src="pictureUrl" :alt="fullName" />
       </template>
-      <div class="text-grey-600 uppercase font-semibold mt-2">
+      <div class="text-grey-600 uppercase font-semibold">
         {{ record }} &bull; {{ cups }} {{ cupText }}
       </div>
       <div class="flex items-center">
@@ -15,10 +15,7 @@
           {{ level }}
         </base-badge>
       </div>
-      <div class="leading-snug mt-2">
-        {{ bio }}
-      </div>
-      <div class="flex items-center mt-4">
+      <div class="flex items-center">
         <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
       </div>
     </base-card>

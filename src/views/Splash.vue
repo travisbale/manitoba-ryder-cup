@@ -6,8 +6,8 @@
         <div class="font-raleway-light tracking-widest text-3xl my-4">
           Welcome to
         </div>
-        <div class="font-raleway-bold text-6xl leading-tight tracking-tight mb-48">
-          The Manitoba Pro Tour
+        <div class="font-raleway-bold text-8xl leading-tight tracking-tight mb-48">
+          The DGA Tour
         </div>
       </div>
       <div class="text-center absolute w-full" style="bottom: 100px">

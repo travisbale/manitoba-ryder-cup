@@ -6,11 +6,11 @@
           <router-link v-if="!transparent" :to="homeLink" class="text-white text-xl font-semibold">
             <div v-if="backLinkText === ''" class="flex items-center">
               <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
-              Manitoba Pro Tour
+              DGA Tour
             </div>
             <div v-else class="flex items-center">
               <arrow-left-icon class="ml-2 mr-4" />
-              <span>Manitoba Ryder Cup</span>
+              <span>{{ backLinkText }}</span>
             </div>
           </router-link>
         </div>

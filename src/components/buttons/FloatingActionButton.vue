@@ -2,9 +2,12 @@
   <div>
     <!-- Add some padding to the bottom of the page so the button doesn't completely osbscure the content -->
     <div class="mb-8" />
-    <button type="button" class="p-4 rounded-full bg-deep-purple-800 hover:bg-deep-purple-900 shadow-lg fixed bottom-0 right-0 m-4 text-white" v-on="$listeners">
-      <add-icon v-if="action === 'add'" class="overflow-hidden text-white" />
-      <edit-icon v-if="action === 'edit'" class="overflow-hidden text-white" />
+    <button type="button"
+            class="flex items-center p-4 rounded-full bg-deep-purple-800 shadow-lg fixed bottom-0 right-0 m-4 text-white"
+            v-on="$listeners"
+    >
+      <add-icon v-if="action === 'add'" />
+      <edit-icon v-if="action === 'edit'" />
     </button>
   </div>
 </template>

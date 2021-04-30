@@ -331,18 +331,6 @@ module.exports = {
         '5xl': '3rem',
         '6xl': '4rem',
       },
-      height: {
-        72: '18rem',
-        84: '20rem',
-      },
-      margin: {
-        28: '7rem',
-      },
-      width: {
-        28: '7rem',
-        72: '18rem',
-        84: '20rem',
-      },
       letterSpacing: {
         widest: '0.25em',
       },

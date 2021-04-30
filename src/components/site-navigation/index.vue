@@ -21,7 +21,7 @@
           <div v-show="navOpen" class="z-10 fixed inset-0 transition-opacity" @keydown.esc="closeNav">
             <div class="absolute inset-0 bg-black opacity-50" tabindex="0" @click="closeNav" />
           </div>
-          <aside class="transform fixed w-84 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-white" :class="translationClass">
+          <aside class="transform fixed w-80 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-white" :class="translationClass">
             <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-deep-purple-800 bg-opacity-75 uppercase">
               Manitoba Pro Tour
             </div>

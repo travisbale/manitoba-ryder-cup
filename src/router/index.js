@@ -43,9 +43,6 @@ const router = new VueRouter({
       matchId: parseInt(route.params.matchId),
       number: parseInt(route.params.number),
     }),
-    meta: {
-      requiresAuth: true,
-    },
   },
   {
     path: '/login',

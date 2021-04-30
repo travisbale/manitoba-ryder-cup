@@ -1,5 +1,5 @@
 <template>
-  <base-page back-link-text="Manitoba Ryder Cup" :back-link-route="{ name: 'leaderboard', params: { touranamentId: tournamentId }}">
+  <base-page back-link-text="Scorecard" :back-link-route="{ name: 'scorecard', params: { touranamentId: tournamentId, matchId: matchId }}">
     <div class="sticky top-0 px-2 py-4 border-b border-grey-400 bg-white shadow">
       <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">
@@ -21,13 +21,18 @@
       </div>
     </div>
     <div class="pt-6">
-      <score-slider v-for="score in scores" :key="score.playerId" v-model="score.strokes" :par="hole.par">
+      <score-slider v-for="score in scores" ref="sliders" :key="score.playerId"
+                    v-model="score.strokes" :number="number" :par="hole.par" :readonly="readonly"
+      >
         {{ score.playerName }}
       </score-slider>
     </div>
     <div class="p-4 mb-8 bg-white">
-      <base-button :loading="saving" class="w-full py-4" @click="recordStrokes">
-        <span v-if="number < 18">Next Hole</span>
+      <base-button :loading="saving" class="w-full py-4" @click="goToNextHole">
+        <span v-if="!readonly" class="whitespace-pre">Save & </span>
+        <span v-if="number < 18">
+          Next Hole
+        </span>
         <span v-else>Complete Round</span>
       </base-button>
     </div>
@@ -35,6 +40,8 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
+
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
@@ -63,7 +70,9 @@ export default {
 
   data() {
     return {
-      match: {},
+      match: {
+        participants: [],
+      },
       hole: {
         par: 0,
       },
@@ -72,15 +81,34 @@ export default {
     };
   },
 
+  computed: {
+    ...mapState('currentUser', ['currentUser']),
+    ...mapGetters('currentUser', ['isAdmin']),
+
+    readonly() {
+      // Admins can edit any match
+      if (this.isAdmin) {
+        return false;
+      }
+
+      // If the current user is participating in the match the page is editable
+      for (let i = 0; i < this.match.participants.length; i++) {
+        if (this.match.participants[i].email === this.currentUser.email) {
+          return false;
+        }
+      }
+
+      return true;
+    },
+  },
+
   watch: {
     matchId(newMatchId) {
       this.fetchMatch(newMatchId);
     },
 
-    number(newNumber) {
+    number() {
       this.fetchMatch(this.matchId);
-      this.fetchHole(this.match.courseId, this.match.teeColorId, newNumber);
-      this.fetchScores(this.matchId, newNumber);
     },
   },
 
@@ -119,19 +147,29 @@ export default {
         vm.scores = response.data;
 
         vm.match.participants.forEach((player) => {
+          // Check if each player has already recorded a score on the hole
           if (vm.scores.find((score) => score.playerId === player.playerId) == null) {
+            // Assign a default score of par or 0 if the hole is readonly
             vm.scores.push({
               playerId: player.playerId,
               playerName: player.fullName,
-              strokes: vm.hole.par,
+              strokes: this.readonly ? 0 : this.hole.par,
             });
           }
         });
       }).catch((error) => {
         if (error.response && error.response.status === 404) {
-          vm.$$router.push({ name: 'not-found' });
+          vm.$router.push({ name: 'not-found' });
         }
       });
+    },
+
+    goToNextHole() {
+      if (this.readonly) {
+        this.pushNextRoute();
+      } else {
+        this.recordStrokes().then(this.pushNextRoute);
+      }
     },
 
     recordStrokes() {
@@ -143,13 +181,17 @@ export default {
 
       this.saving = true;
 
-      axios.post(url, scores).then(() => {
-        if (this.number < 18) {
-          this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
-        } else {
-          this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
-        }
-      }).finally(() => { this.saving = false; });
+      const recording = axios.post(url, scores);
+      recording.finally(() => { this.saving = false; });
+      return recording;
+    },
+
+    pushNextRoute() {
+      if (this.number < 18) {
+        this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
+      } else {
+        this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
+      }
     },
   },
 };

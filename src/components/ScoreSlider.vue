@@ -8,7 +8,7 @@
     >
       <div class="flex-shrink-0 w-2/5 scroll-snap-center" />
       <stroke-index v-for="strokes in 20" :key="strokes" :selected="value == strokes"
-                    :strokes="strokes" :par="par" :observer="observer" :data-strokes="strokes"
+                    :strokes="strokes" :par="par" :observer="observer" :data-strokes="strokes" @click="selectScore(strokes)"
       />
       <div class="flex-shrink-0 w-2/5 scroll-snap-center" />
     </div>
@@ -102,8 +102,15 @@ export default {
       }
     },
 
-    update() {
-      const score = this.value || this.par;
+    selectScore(strokes) {
+      if (!this.readonly) {
+        this.$emit('input', strokes);
+        this.update(strokes);
+      }
+    },
+
+    update(strokes) {
+      const score = strokes || this.value || this.par;
 
       // Scroll to the selected score
       this.$refs.slider.scrollLeft = ((window.screen.width * 2) / 5) + (98 * score) - 49 - (window.screen.width / 2);

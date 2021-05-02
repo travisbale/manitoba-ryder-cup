@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-shrink-0 w-28 text-center scroll-snap-center" :class="{ 'text-grey-300': !selected }">
+  <div class="flex-shrink-0 w-28 text-center scroll-snap-center" :class="{ 'text-grey-300': !selected }" v-on="$listeners">
     <div class="font-bold text-7xl leading-none min-w-full">
       {{ strokes }}
     </div>

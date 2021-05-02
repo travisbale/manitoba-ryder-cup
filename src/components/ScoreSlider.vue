@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="font-semibold text-xl px-4 pt-2">
+    <div class="font-semibold text-2xl px-4 pt-2">
       <slot />
     </div>
     <div ref="slider" class="flex items-center py-4 scroll-snap-x-man"

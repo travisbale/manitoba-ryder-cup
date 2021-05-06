@@ -5,7 +5,7 @@
         {{ player }}
       </div>
       <div>
-        {{ score }}
+        {{ currentScore }}
       </div>
     </div>
     <div ref="slider" class="flex items-center py-4 scroll-snap-x-man"
@@ -40,7 +40,7 @@ export default {
 
     score: {
       type: Number,
-      required: true,
+      default: 0,
     },
 
     player: {
@@ -64,6 +64,12 @@ export default {
       observer: null,
       newHole: true,
     };
+  },
+
+  computed: {
+    currentScore() {
+      return this.score + this.value;
+    },
   },
 
   watch: {

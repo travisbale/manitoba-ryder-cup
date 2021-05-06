@@ -5,7 +5,7 @@
         {{ player }}
       </div>
       <div>
-        {{ currentScore }}
+        {{ newScore }} ({{ scoreUnderPar }})
       </div>
     </div>
     <div ref="slider" class="flex items-center py-4 scroll-snap-x-man"
@@ -38,7 +38,12 @@ export default {
       required: true,
     },
 
-    score: {
+    currentPar: {
+      type: Number,
+      required: true,
+    },
+
+    currentScore: {
       type: Number,
       default: 0,
     },
@@ -67,8 +72,16 @@ export default {
   },
 
   computed: {
-    currentScore() {
-      return this.score + this.value;
+    newScore() {
+      return this.currentScore + this.value;
+    },
+
+    scoreUnderPar() {
+      const score = this.newScore - this.currentPar;
+
+      if (score > 0) return `+${score}`;
+      if (score < 0) return score;
+      return 'E';
     },
   },
 

@@ -21,8 +21,9 @@
       </div>
     </div>
     <div class="pt-6">
-      <score-slider v-for="score in scores" ref="sliders" :key="score.playerId" v-model="score.strokes" :number="number"
-                    :score="score.total" :player="score.playerName" :par="hole.par" :readonly="readonly"
+      <score-slider v-for="score in currentScores" ref="sliders" :key="score.playerId" v-model="score.strokes"
+                    :number="number" :current-score="getCurrentStrokes(score.playerId)" :player="score.playerName"
+                    :par="hole.par" :current-par="getCurrentPar()" :readonly="readonly"
       />
     </div>
     <div class="p-4 mb-8 bg-white">
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
@@ -71,9 +72,6 @@ export default {
       match: {
         participants: [],
       },
-      hole: {
-        par: 0,
-      },
       scores: [],
       saving: false,
     };
@@ -81,6 +79,7 @@ export default {
 
   computed: {
     ...mapState('currentUser', ['currentUser']),
+    ...mapState('teeSets', ['teeSet']),
     ...mapGetters('currentUser', ['isAdmin']),
 
     readonly() {
@@ -98,66 +97,61 @@ export default {
 
       return true;
     },
+
+    hole() {
+      if (this.teeSet.holes.length > 0) {
+        return this.teeSet.holes[this.number - 1];
+      }
+      return { par: 0 };
+    },
+
+    currentScores() {
+      return this.scores.filter((s) => s.holeNumber === this.number);
+    },
   },
 
   watch: {
     matchId(newMatchId) {
-      this.fetchMatch(newMatchId);
+      this.fetchHoleDetails(newMatchId);
     },
 
     number() {
-      this.fetchMatch(this.matchId);
+      this.fetchHoleDetails(this.matchId);
     },
   },
 
   mounted() {
-    this.fetchMatch(this.matchId);
+    this.fetchHoleDetails(this.matchId);
   },
 
   methods: {
-    fetchMatch(matchId) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}`;
+    ...mapActions('teeSets', ['fetchTeeSet']),
+    ...mapActions('matches', ['fetchMatch']),
+    ...mapActions('scores', ['fetchScores']),
 
-      return axios.get(url).then((response) => {
-        this.match = response.data;
-        this.fetchHole(this.match.courseId, this.match.teeColorId, this.number);
-        this.fetchScores(this.matchId, this.number);
-      }).catch((error) => {
-        if (error.response && error.response.status === 404) {
-          this.$router.push({ name: 'not-found' });
-        }
-      });
-    },
+    fetchHoleDetails(matchId) {
+      this.fetchMatch(matchId).then((match) => {
+        this.match = match;
+        this.fetchTeeSet({ courseId: this.match.courseId, teeColorId: this.match.teeColorId });
+        this.fetchScores(this.matchId, this.number).then((scores) => {
+          this.scores = scores;
 
-    fetchHole(courseId, teeColorId, number) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/courses/${courseId}/tees/${teeColorId}/holes/${number}`;
-
-      return axios.get(url).then((response) => {
-        this.hole = response.data;
-      });
-    },
-
-    fetchScores(matchId, number) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}/holes/${number}/scores`;
-      const vm = this;
-
-      return axios.get(url).then((response) => {
-        vm.scores = response.data;
-
-        vm.match.participants.forEach((player) => {
-          // Check if each player has already recorded a score on the hole
-          if (vm.scores.find((score) => score.playerId === player.playerId) == null) {
-            // Assign a default score of par or 0 if the hole is readonly
-            vm.scores.push({
-              playerId: player.playerId,
-              playerName: player.fullName,
-              strokes: this.readonly ? 0 : this.hole.par,
-            });
-          }
+          this.match.participants.forEach((player) => {
+            // Check if each player has already recorded a score on the hole
+            if (this.scores.find((score) => score.playerId === player.playerId && score.holeNumber === this.number) == null) {
+              // Assign a default score of par or 0 if the hole is readonly
+              this.scores.push({
+                holeNumber: this.number,
+                playerId: player.playerId,
+                playerName: player.fullName,
+                strokes: this.readonly ? 0 : this.hole.par,
+              });
+            }
+          });
         });
       }).catch((error) => {
         if (error.response && error.response.status === 404) {
-          vm.$router.push({ name: 'not-found' });
+          this.$router.push({ name: 'not-found' });
         }
       });
     },
@@ -172,7 +166,7 @@ export default {
 
     recordStrokes() {
       const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${this.matchId}/holes/${this.number}/scores`;
-      const scores = this.scores.map((score) => ({
+      const scores = this.currentScores.map((score) => ({
         playerId: score.playerId,
         strokes: score.strokes,
       }));
@@ -190,6 +184,30 @@ export default {
       } else {
         this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
       }
+    },
+
+    getCurrentStrokes(playerId) {
+      let currentStrokes = 0;
+
+      this.scores.forEach((score) => {
+        if (score.playerId === playerId && score.holeNumber < this.number) {
+          currentStrokes += score.strokes;
+        }
+      });
+
+      return currentStrokes;
+    },
+
+    getCurrentPar() {
+      let currentPar = 0;
+
+      this.teeSet.holes.forEach((hole) => {
+        if (hole.number <= this.number) {
+          currentPar += hole.par;
+        }
+      });
+
+      return currentPar;
     },
   },
 };

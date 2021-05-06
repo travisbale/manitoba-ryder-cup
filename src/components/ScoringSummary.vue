@@ -6,13 +6,11 @@
         {{ matchDate | printDate }}
       </template>
     </section-header>
-    <match-summary v-for="match in getMatches(matchFormat)" :key="match.id" v-bind="match" />
+    <match-summary v-for="match in matches" :key="match.id" v-bind="match" />
   </div>
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex';
-
 import SectionHeader from '@/components/typography/SectionHeader';
 import datetimeFilters from '@/mixins/filters/datetime';
 
@@ -28,6 +26,11 @@ export default {
       type: String,
       required: true,
     },
+
+    matches: {
+      type: Array,
+      required: true,
+    },
   },
 
   data() {
@@ -36,14 +39,9 @@ export default {
   },
 
   computed: {
-    ...mapState('matches', ['matches']),
-    ...mapGetters('matches', ['getMatches']),
-
     matchDate() {
-      const matches = this.getMatches(this.matchFormat);
-
-      if (matches.length > 0) {
-        return matches[0].teeTime;
+      if (this.matches.length > 0) {
+        return this.matches[0].teeTime;
       }
 
       return '';

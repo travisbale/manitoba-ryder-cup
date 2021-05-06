@@ -21,11 +21,9 @@
       </div>
     </div>
     <div class="pt-6">
-      <score-slider v-for="score in scores" ref="sliders" :key="score.playerId"
-                    v-model="score.strokes" :number="number" :par="hole.par" :readonly="readonly"
-      >
-        {{ score.playerName }}
-      </score-slider>
+      <score-slider v-for="score in scores" ref="sliders" :key="score.playerId" v-model="score.strokes" :number="number"
+                    :score="score.total" :player="score.playerName" :par="hole.par" :readonly="readonly"
+      />
     </div>
     <div class="p-4 mb-8 bg-white">
       <base-button :loading="saving" class="w-full py-4" @click="goToNextHole">

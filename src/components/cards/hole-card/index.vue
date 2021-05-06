@@ -13,22 +13,24 @@
         <div class="flex-grow">
           <div class="flex justify-between">
             <div class="text-center pt-2">
-              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 leading-normal border border-grey-300"
-                   :class="{'text-white bg-blue-700': blueTeamStrokes < redTeamStrokes}"
+              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 leading-normal border border-grey-300 whitespace-pre"
+                   :class="{'text-white bg-blue-800': blueTeamScore < redTeamScore}"
               >
-                {{ blueTeamStrokes }}
+                {{ blueTeamScore }}
               </div>
             </div>
             <div class="text-center pt-2 w-28">
-              <div class="text-3xl font-bold uppercase rounded mb-3 leading-normal border border-grey-300">
-                {{ "AS" }}
+              <div class="text-3xl font-bold uppercase rounded mb-3 leading-normal border border-grey-300 whitespace-pre"
+                   :class="{'text-white bg-red-800': matchStatus > 0, 'text-white bg-blue-800': matchStatus < 0 }"
+              >
+                {{ statusText }}
               </div>
             </div>
             <div class="text-center pt-2">
-              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 leading-normal border border-grey-300"
-                   :class="{'text-white bg-red-700': redTeamStrokes < blueTeamStrokes}"
+              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 leading-normal border border-grey-300 whitespace-pre"
+                   :class="{'text-white bg-red-800': redTeamScore < blueTeamScore}"
               >
-                {{ redTeamStrokes }}
+                {{ redTeamScore }}
               </div>
             </div>
           </div>
@@ -73,9 +75,24 @@ export default {
       required: true,
     },
 
-    scores: {
-      type: Array,
-      required: true,
+    blueTeamScore: {
+      type: Number,
+      default: null,
+    },
+
+    redTeamScore: {
+      type: Number,
+      default: null,
+    },
+
+    matchStatus: {
+      type: Number,
+      default: null,
+    },
+
+    statusText: {
+      type: String,
+      default: ' ',
     },
   },
 
@@ -86,14 +103,6 @@ export default {
 
     redTeamName() {
       return this.getTeamName('Red');
-    },
-
-    blueTeamStrokes() {
-      return this.getTeamStrokes('Blue');
-    },
-
-    redTeamStrokes() {
-      return this.getTeamStrokes('Red');
     },
   },
 
@@ -109,17 +118,6 @@ export default {
 
       // Team of two is both last names separated by "/"
       return `${players[0].lastName} / ${players[1].lastName}`;
-    },
-
-    getTeamStrokes(team) {
-      if (this.scores.length === 0) return '-';
-
-      // Get the IDs of the players on the team
-      const ids = this.participants.filter((p) => p.team === team).map((p) => p.playerId);
-      // Reduce the list of scores to the team members' scores
-      const scores = this.scores.filter((s) => ids.includes(s.playerId));
-      // Return the minimum of the player's scores
-      return Math.min(...scores.map((s) => s.strokes));
     },
   },
 };

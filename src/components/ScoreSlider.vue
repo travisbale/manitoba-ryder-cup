@@ -1,7 +1,12 @@
 <template>
   <div>
-    <div class="font-semibold text-2xl px-4 pt-2">
-      <slot />
+    <div class="flex justify-between font-semibold text-2xl px-4 pt-2">
+      <div>
+        {{ player }}
+      </div>
+      <div>
+        {{ score }}
+      </div>
     </div>
     <div ref="slider" class="flex items-center py-4 scroll-snap-x-man"
          :class="{ 'overflow-x-scroll': !readonly, 'overflow-x-hidden': readonly }"
@@ -30,6 +35,16 @@ export default {
 
     value: {
       type: Number,
+      required: true,
+    },
+
+    score: {
+      type: Number,
+      required: true,
+    },
+
+    player: {
+      type: String,
       required: true,
     },
 

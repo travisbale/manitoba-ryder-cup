@@ -44,6 +44,7 @@ export default {
 
       return axios.get(url).then((response) => {
         commit('setMatch', response.data);
+        return response.data;
       });
     },
 

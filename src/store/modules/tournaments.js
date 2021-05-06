@@ -33,7 +33,7 @@ export default {
       }
     },
 
-    saveTournament(state, tournament) {
+    setTournament(state, tournament) {
       const index = state.tournaments.findIndex(({ id }) => id === tournament.id);
 
       /* eslint-disable */
@@ -47,13 +47,23 @@ export default {
   },
 
   actions: {
-    fetchTournaments({ state, commit }) {
-      if (state.tournaments.length === 0) {
-        return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments`).then((response) => {
-          commit('setTournaments', response.data);
+    fetchTournaments({ commit }) {
+      return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments`).then((response) => {
+        commit('setTournaments', response.data);
+      });
+    },
+
+    fetchTournament({ state, commit }, tournamentId) {
+      const tournament = state.tournaments.find((t) => t.id === tournamentId);
+
+      if (tournament == null) {
+        return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournamentId}`).then((response) => {
+          commit('setTournament', response.data);
+          return response.data;
         });
       }
-      return Promise.resolve({});
+
+      return Promise.resolve(tournament);
     },
 
     saveTournament({ commit }, tournament) {
@@ -70,7 +80,7 @@ export default {
         saving = axios.put(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournament.id}`, newTournament);
       }
 
-      return saving.then((response) => commit('saveTournament', response.data));
+      return saving.then((response) => commit('setTournament', response.data));
     },
   },
 };

@@ -30,15 +30,11 @@ export default {
   },
 
   actions: {
-    fetchTeams({ state, commit }, tournamentId) {
-      if (state.teams.length === 0) {
-        const fetching = axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournamentId}/teams`);
-
-        fetching.then((response) => { commit('setTeams', response.data); });
-
-        return fetching;
-      }
-      return Promise.resolve({});
+    fetchTeams({ commit }, tournamentId) {
+      return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournamentId}/teams`).then((response) => {
+        commit('setTeams', response.data);
+        return response.data;
+      });
     },
   },
 };

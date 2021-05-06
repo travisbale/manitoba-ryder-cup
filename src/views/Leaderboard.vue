@@ -5,10 +5,10 @@
     </template>
     <score-bar :tournament-id="tournamentId" />
     <div class="px-2 pb-4 pt-6">
-      <scoring-summary match-format="Fourball" class="mb-8" />
-      <scoring-summary match-format="Alternate Shot" class="mb-8" />
-      <scoring-summary match-format="Scramble" class="mb-8" />
-      <scoring-summary match-format="Singles" />
+      <scoring-summary match-format="Fourball" class="mb-8" :matches="getMatches('Fourball')" />
+      <scoring-summary match-format="Alternate Shot" class="mb-8" :matches="getMatches('Alternate Shot')" />
+      <scoring-summary match-format="Scramble" class="mb-8" :matches="getMatches('Scramble')" />
+      <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">
       <floating-action-button action="edit" />
@@ -42,21 +42,20 @@ export default {
 
   computed: {
     ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('matches', ['getMatches']),
     ...mapGetters('tournaments', ['getTournament']),
   },
 
   mounted() {
     this.fetchMatches(this.tournamentId);
-    this.fetchTournaments().then(() => {
-      this.tournament = {
-        ...this.getTournament(this.tournamentId),
-      };
+    this.fetchTournament(this.tournamentId).then((tournament) => {
+      this.tournament = tournament;
     });
   },
 
   methods: {
     ...mapActions('matches', ['fetchMatches']),
-    ...mapActions('tournaments', ['fetchTournaments']),
+    ...mapActions('tournaments', ['fetchTournament']),
   },
 };
 </script>

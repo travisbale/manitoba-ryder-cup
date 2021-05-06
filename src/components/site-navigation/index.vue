@@ -141,12 +141,10 @@ export default {
   created() {
     // Check to see if the user is currently logged in
     this.refresh();
-    this.fetchTournaments();
   },
 
   methods: {
     ...mapActions('currentUser', ['refresh', 'logout']),
-    ...mapActions('tournaments', ['fetchTournaments']),
 
     openNav() {
       this.navOpen = true;

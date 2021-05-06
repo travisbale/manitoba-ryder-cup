@@ -13,18 +13,19 @@
           Par {{ teeSet.par }}, {{ teeSet.yards }} Yards
         </template>
       </section-header>
-      <hole-card v-for="hole in teeSet.holes" :key="hole.number" v-bind="hole" :match-id="match.id"
-                 :participants="match.participants" :scores="getScores(hole.number)"
+      <hole-card v-for="hole in teeSet.holes" :key="hole.number" :number="hole.number" :par="hole.par" :match-id="match.id"
+                 :participants="match.participants" v-bind="match.scores[hole.number - 1]"
       />
     </div>
   </base-page>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
 import SectionHeader from '@/components/typography/SectionHeader';
-import axios from '@/lib/axios';
 
 export default {
   components: { BasePage, HoleCard, SectionHeader },
@@ -52,43 +53,24 @@ export default {
   },
 
   mounted() {
-    this.fetchMatch(this.matchId);
+    this.fetchMatch(this.matchId).then((match) => {
+      this.match = match;
+      this.fetchTeeSet({ courseId: this.match.courseId, teeColorId: this.match.teeColorId }).then((teeSet) => {
+        this.teeSet = teeSet;
+      });
+      this.fetchScores(this.matchId).then((scores) => { this.scores = scores; });
+    }).catch((error) => {
+      if (error.response && error.response.status === 404) {
+        this.$router.push({ name: 'not-found' });
+      }
+    });
   },
 
   methods: {
-    fetchMatch(matchId) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}`;
-
-      return axios.get(url).then((response) => {
-        this.match = response.data;
-        this.fetchTeeSet(this.match.courseId, this.match.teeColorId);
-        this.fetchScores(this.matchId);
-      }).catch((error) => {
-        if (error.response && error.response.status === 404) {
-          this.$router.push({ name: 'not-found' });
-        }
-      });
-    },
-
-    fetchTeeSet(courseId, teeColorId) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/courses/${courseId}/tees/${teeColorId}`;
-
-      return axios.get(url).then((response) => {
-        this.teeSet = response.data;
-      });
-    },
-
-    fetchScores(matchId) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}/scores`;
-
-      return axios.get(url).then((response) => {
-        this.scores = response.data;
-      });
-    },
-
-    getScores(holeNumber) {
-      return this.scores.filter((score) => score.holeNumber === holeNumber);
-    },
+    ...mapActions('matches', ['fetchMatch']),
+    ...mapActions('teeSets', ['fetchTeeSet']),
+    ...mapActions('scores', ['fetchScores']),
   },
 };
+
 </script>

@@ -5,7 +5,7 @@
         {{ blueTeam }}
       </div>
       <div class="w-1/5 py-3 text-lg shadow-md rounded border font-bold uppercase tracking-wide" :class="scoreClasses">
-        {{ score.status }}
+        {{ currentScore.statusText }}
       </div>
       <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 truncate" :class="redTeamClasses">
         {{ redTeam }}
@@ -37,8 +37,8 @@ export default {
       required: true,
     },
 
-    score: {
-      type: Object,
+    scores: {
+      type: Array,
       required: true,
     },
   },
@@ -52,25 +52,32 @@ export default {
       return this.getTeamName('Blue');
     },
 
+    currentScore() {
+      return this.scores[this.scores.length - 1] || {
+        matchStatus: 0,
+        statusText: 'AS',
+      };
+    },
+
     redTeamClasses() {
       return {
-        'bg-red-800 font-semibold text-white': this.score.leader === 'Red',
-        'bg-grey-200': this.score.leader !== 'Red',
+        'bg-red-800 font-semibold text-white': this.currentScore.matchStatus > 0,
+        'bg-grey-200': this.currentScore.matchStatus <= 0,
       };
     },
 
     scoreClasses() {
       return {
-        'bg-red-50 border-red-100': this.score.leader === 'Red',
-        'bg-blue-50 border-blue-100': this.score.leader === 'Blue',
-        'bg-white border-grey-300': this.score.leader === 'Tied',
+        'bg-red-50 border-red-100': this.currentScore.matchStatus > 0,
+        'bg-blue-50 border-blue-100': this.currentScore.matchStatus < 0,
+        'bg-white border-grey-300': this.currentScore.matchStatus === 0,
       };
     },
 
     blueTeamClasses() {
       return {
-        'bg-blue-800 font-semibold text-white': this.score.leader === 'Blue',
-        'bg-grey-200': this.score.leader !== 'Blue',
+        'bg-blue-800 font-semibold text-white': this.currentScore.matchStatus < 0,
+        'bg-grey-200': this.currentScore.matchStatus >= 0,
       };
     },
   },

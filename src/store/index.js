@@ -5,8 +5,9 @@ import courses from '@/store/modules/courses';
 import currentUser from '@/store/modules/current-user';
 import matches from '@/store/modules/matches';
 import players from '@/store/modules/players';
+import scores from '@/store/modules/scores';
 import teams from '@/store/modules/teams';
-import teeSet from '@/store/modules/tee-set';
+import teeSets from '@/store/modules/tee-sets';
 import tournaments from '@/store/modules/tournaments';
 
 Vue.use(Vuex);
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     tournaments,
     currentUser,
     players,
+    scores,
     teams,
-    teeSet,
+    teeSets,
   },
 });

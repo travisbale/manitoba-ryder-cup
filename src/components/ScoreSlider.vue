@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex justify-between font-semibold text-2xl px-4 pt-2">
-      <div>
+    <div class="flex justify-between text-2xl px-4 pt-2">
+      <div class="font-raleway-semibold">
         {{ player }}
       </div>
       <div>
@@ -147,7 +147,7 @@ export default {
       const score = strokes || this.value || this.par;
 
       // Scroll to the selected score
-      this.$refs.slider.scrollLeft = ((window.screen.width * 2) / 5) + (98 * score) - 49 - (window.screen.width / 2);
+      this.$refs.slider.scrollLeft = ((window.screen.width * 2) / 5) + (84 * score) - 42 - (window.screen.width / 2);
     },
   },
 };

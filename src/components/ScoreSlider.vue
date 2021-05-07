@@ -12,8 +12,8 @@
          :class="{ 'overflow-x-scroll': !readonly, 'overflow-x-hidden': readonly }"
     >
       <div class="flex-shrink-0 w-2/5 scroll-snap-center" />
-      <stroke-index v-for="strokes in 20" :key="strokes" :selected="value == strokes"
-                    :strokes="strokes" :par="par" :observer="observer" :data-strokes="strokes" @click="selectScore(strokes)"
+      <stroke-index v-for="strokes in 20" :key="strokes" :selected="value == strokes" :strokes="strokes"
+                    :par="par" :observer="observer" :data-strokes="strokes" @click="selectScore(strokes)"
       />
       <div class="flex-shrink-0 w-2/5 scroll-snap-center" />
     </div>

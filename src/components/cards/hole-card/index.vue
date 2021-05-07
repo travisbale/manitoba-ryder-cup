@@ -11,23 +11,27 @@
           </div>
         </div>
         <div class="flex-grow">
-          <div class="flex justify-between">
+          <div class="flex justify-between text-3xl">
             <div class="text-center pt-2">
-              <div class="inline-block rounded ml-3 mb-3 text-3xl px-3 leading-normal border border-grey-300 whitespace-pre"
+              <div class="inline-block rounded ml-2 mb-3 px-3 leading-normal border border-grey-300 whitespace-pre"
                    :class="{'text-white bg-blue-800': blueTeamScore < redTeamScore}"
               >
                 {{ blueTeamScore }}
               </div>
             </div>
             <div class="text-center pt-2 w-28">
-              <div class="text-3xl font-bold uppercase rounded mb-3 leading-normal border border-grey-300 whitespace-pre"
-                   :class="{'text-white bg-red-800': matchStatus > 0, 'text-white bg-blue-800': matchStatus < 0 }"
+              <div class="font-semibold uppercase rounded mb-3 leading-normal border whitespace-pre"
+                   :class="{
+                     'bg-red-50 border-red-100': matchStatus > 0,
+                     'bg-blue-50 border-blue-100': matchStatus < 0,
+                     'border-grey-300': matchStatus == 0 || matchStatus == null
+                   }"
               >
-                {{ statusText }}
+                <match-status :status-text="statusText" font-size="text-2xl" shrink-words />
               </div>
             </div>
             <div class="text-center pt-2">
-              <div class="inline-block rounded mr-3 mb-3 text-3xl px-3 leading-normal border border-grey-300 whitespace-pre"
+              <div class="inline-block rounded mr-2 mb-3 px-3 leading-normal border border-grey-300 whitespace-pre"
                    :class="{'text-white bg-red-800': redTeamScore < blueTeamScore}"
               >
                 {{ redTeamScore }}
@@ -50,9 +54,10 @@
 
 <script>
 import BaseCard from '@/components/cards/base-card';
+import MatchStatus from '@/components/MatchStatus';
 
 export default {
-  components: { BaseCard },
+  components: { BaseCard, MatchStatus },
 
   props: {
     number: {

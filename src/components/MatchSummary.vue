@@ -5,7 +5,7 @@
         {{ blueTeam }}
       </div>
       <div class="w-1/5 py-3 text-lg shadow-md rounded border font-bold uppercase tracking-wide" :class="scoreClasses">
-        {{ currentScore.statusText }}
+        <match-status :status-text="currentScore.statusText" />
       </div>
       <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 truncate" :class="redTeamClasses">
         {{ redTeam }}
@@ -15,7 +15,11 @@
 </template>
 
 <script>
+import MatchStatus from '@/components/MatchStatus';
+
 export default {
+  components: { MatchStatus },
+
   props: {
     id: {
       type: Number,

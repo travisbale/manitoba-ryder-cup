@@ -4,17 +4,12 @@
       <template v-slot:image>
         <img class="h-32 object-cover object-top" :src="pictureUrl" :alt="fullName" />
       </template>
-      <div class="text-grey-600 uppercase font-semibold">
+      <div class="text-grey-600 uppercase font-semibold mr-2">
         {{ record }} &bull; {{ cups }} {{ cupText }}
       </div>
-      <div class="flex items-center">
-        <h4 class="font-semibold text-2xl mr-2">
-          {{ fullName }}
-        </h4>
-        <base-badge :class="badgeColor">
-          {{ level }}
-        </base-badge>
-      </div>
+      <h4 class="font-semibold text-2xl">
+        {{ fullName }}
+      </h4>
       <div class="flex items-center">
         <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
       </div>
@@ -23,12 +18,11 @@
 </template>
 
 <script>
-import BaseBadge from '@/components/BaseBadge';
 import BaseCard from '@/components/cards/base-card';
 import StarIcon from '@/components/icons/StarIcon';
 
 export default {
-  components: { BaseBadge, BaseCard, StarIcon },
+  components: { BaseCard, StarIcon },
 
   props: {
     id: {

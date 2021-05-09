@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="matches.length > 0">
     <section-header class="text-center mb-2">
       {{ matchFormat }}
       <template v-slot:subheader>

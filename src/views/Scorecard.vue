@@ -1,5 +1,5 @@
 <template>
-  <base-page back-link-text="Manitoba Ryder Cup"
+  <base-page :back-link-text="tournament.name"
              :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
              image-url="/img/ocean-green.webp"
   >
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
@@ -52,7 +52,16 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters('tournaments', ['getTournament']),
+
+    tournament() {
+      return this.getTournament(this.tournamentId);
+    },
+  },
+
   mounted() {
+    this.fetchTournament(this.tournamentId);
     this.fetchMatch(this.matchId).then((match) => {
       this.match = match;
       this.fetchTeeSet({ courseId: this.match.courseId, teeColorId: this.match.teeColorId }).then((teeSet) => {
@@ -70,6 +79,7 @@ export default {
     ...mapActions('matches', ['fetchMatch']),
     ...mapActions('teeSets', ['fetchTeeSet']),
     ...mapActions('scores', ['fetchScores']),
+    ...mapActions('tournaments', ['fetchTournament']),
   },
 };
 

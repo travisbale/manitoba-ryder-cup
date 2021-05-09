@@ -19,6 +19,7 @@ export default {
         name: '',
         startDate: DateTime.local(),
         endDate: DateTime.local(),
+        teams: [],
       };
     },
   },

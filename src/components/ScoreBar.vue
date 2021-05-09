@@ -51,16 +51,31 @@ export default {
   },
 
   computed: {
-    ...mapState('teams', ['teams']),
-    ...mapGetters('teams', ['getScore', 'getCaptain']),
-  },
+    ...mapState('tournaments', ['tournaments']),
+    ...mapGetters('tournaments', ['getTournament']),
 
-  created() {
-    this.fetchTeams(this.tournamentId);
+    tournament() {
+      return this.getTournament(this.tournamentId);
+    },
   },
 
   methods: {
-    ...mapActions('teams', ['fetchTeams']),
+    ...mapActions('tournaments', ['fetchTournament']),
+
+    getTeam(teamName) {
+      return this.tournament.teams.find((t) => t.name === teamName) || {
+        captain: {},
+        points: 0,
+      };
+    },
+
+    getCaptain(teamName) {
+      return this.getTeam(teamName).captain || {};
+    },
+
+    getScore(teamName) {
+      return this.getTeam(teamName).points || 0;
+    },
   },
 };
 </script>

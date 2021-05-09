@@ -19,7 +19,7 @@
           </div>
         </div>
         <div class="w-1/2 flex items-center justify-end">
-          <div class="mr-3 pt-2 text-xl">
+          <div class="mr-3 pt-2 text-xl text-right">
             <div class="uppercase text-grey-600 text-sm -mb-1 font-raleway">
               Team
             </div>

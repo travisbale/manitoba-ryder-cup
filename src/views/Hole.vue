@@ -83,12 +83,13 @@ export default {
     ...mapGetters('currentUser', ['isAdmin']),
 
     readonly() {
-      // Admins can edit any match
-      if (this.isAdmin) {
-        return false;
-      }
+      // Once a match is complete it cannot be edited
+      if (this.match.finished) { return true; }
 
-      // If the current user is participating in the match the page is editable
+      // Admins can edit any incomplete match
+      if (this.isAdmin) { return false; }
+
+      // Anyone participating in an incomplete match can edit it
       for (let i = 0; i < this.match.participants.length; i++) {
         if (this.match.participants[i].email === this.currentUser.email) {
           return false;

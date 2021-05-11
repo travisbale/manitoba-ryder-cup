@@ -89,6 +89,12 @@ const router = new VueRouter({
     }),
   },
   {
+    path: '/register/:token',
+    name: 'register',
+    component: () => import(/* webpackChunkName: "register" */ '../views/RegisterUser.vue'),
+    props: true,
+  },
+  {
     path: '/admin/players/:playerId',
     name: 'edit-player',
     component: () => import(/* webpackChunkName: "editPlayer" */ '../views/admin/players/EditPlayer.vue'),

@@ -56,5 +56,11 @@ export default {
         commit('setCurrentUser', anonymousUser);
       });
     },
+
+    register({ commit }, credentials) {
+      return axios.post('register', credentials).then((response) => {
+        commit('setCurrentUser', response.data);
+      });
+    },
   },
 };

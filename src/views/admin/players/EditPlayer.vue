@@ -7,9 +7,9 @@
       <section-header class="mb-4">
         Player Details
       </section-header>
-      <base-input v-model="player.email" label="Email" />
-      <base-input v-model="player.firstName" label="First Name" />
-      <base-input v-model="player.lastName" label="Last Name" />
+      <base-input v-model="email" label="Email" />
+      <base-input v-model="firstName" label="First Name" />
+      <base-input v-model="lastName" label="Last Name" />
 
       <div class="flex justify-end mt-8">
         <router-link :to="getPreviousPage()" class="block">
@@ -46,12 +46,10 @@ export default {
   data() {
     return {
       saving: false,
-      player: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        hdcp: 0,
-      },
+      firstName: '',
+      lastName: '',
+      email: '',
+      hdcp: 0,
     };
   },
 
@@ -72,8 +70,13 @@ export default {
 
     clickSavePlayer() {
       this.saving = true;
+      const player = {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName,
+      };
 
-      this.savePlayer(this.player)
+      this.savePlayer(player)
         .then(() => { this.$router.push(this.getPreviousPage()); })
         .finally(() => { this.saving = false; });
     },

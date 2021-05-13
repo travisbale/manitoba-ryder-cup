@@ -3,7 +3,7 @@
     <base-label v-if="label.length > 0">
       {{ label }}
     </base-label>
-    <input ref="input" type="file" class="block mb-4" :accept="accept"
+    <input ref="input" type="file" class="block mb-6" :accept="accept"
            :multiple="multiple" v-on="inputListeners"
     />
   </div>

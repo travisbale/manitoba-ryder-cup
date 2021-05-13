@@ -1,15 +1,17 @@
 <template>
   <div>
-    <base-label v-if="label.length > 0">
+    <base-label v-if="label.length > 0" :valid="valid" :required="required">
       {{ label }}
     </base-label>
     <input ref="input"
            :type="type"
-           class="block mb-4 border border-grey-400 rounded-sm px-3 py-2 w-full shadow-sm"
+           class="block mb-4 border rounded-sm px-3 py-2 w-full shadow-sm"
+           :class="{ 'border-grey-400': valid, 'border-red-400': !valid }"
            :value="value"
            :placeholder="placeholder"
            v-on="inputListeners"
     />
+    <label v-if="!valid" class="block -mt-3.5 mb-4 text-red-800 text-xs">Required</label>
   </div>
 </template>
 
@@ -26,6 +28,7 @@ export default {
       type: String,
       default: '',
     },
+
     type: {
       type: String,
       default: 'text',
@@ -40,19 +43,32 @@ export default {
       type: String,
       default: '',
     },
+
+    valid: {
+      type: Boolean,
+      default: true,
+    },
+
+    required: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     inputListeners() {
-      const vm = this;
-
       return {
         ...this.$listeners,
 
-        input(event) {
-          vm.$emit('input', event.target.value);
-        },
+        input: (event) => this.$emit('input', event.target.value),
+        change: () => this.validate(),
       };
+    },
+  },
+
+  methods: {
+    validate() {
+      this.$emit('update:valid', !this.required || (this.value != null && this.value !== ''));
     },
   },
 };

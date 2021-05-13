@@ -4,12 +4,15 @@
       Tournament Schedule
     </template>
     <div class="p-4 pt-6">
-      <section-header class="mb-4">
-        <span class="font-raleway">{{ year }}</span> Schedule
-      </section-header>
-      <router-link v-for="t in tournaments" :key="t.id" :to="{ name: 'leaderboard', params: { tournamentId: t.id }}" v-bind="t" class="block">
-        <tournament-card v-bind="t" class="mb-4" />
-      </router-link>
+      <div v-for="season in seasons" :key="season.year">
+        <section-header class="mb-4">
+          {{ season.year }} Season
+        </section-header>
+        <router-link v-for="t in season.tournaments" :key="t.id" :to="{ name: 'leaderboard', params: { tournamentId: t.id }}" v-bind="t" class="block">
+          <tournament-card v-bind="t" class="mb-4" />
+        </router-link>
+        <div class="pb-8" />
+      </div>
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">
       <floating-action-button action="add" />
@@ -35,6 +38,25 @@ export default {
 
     year() {
       return DateTime.local().year;
+    },
+
+    seasons() {
+      const seasons = [];
+
+      this.tournaments.forEach((tournament) => {
+        const { year } = tournament.startDate;
+        const season = seasons.find((s) => s.year === year);
+
+        if (season != null) {
+          // Display tournaments in chronological order within a season
+          season.tournaments.push(tournament);
+        } else {
+          // Display the most recent season first
+          seasons.unshift({ year, tournaments: [tournament] });
+        }
+      });
+
+      return seasons;
     },
   },
 

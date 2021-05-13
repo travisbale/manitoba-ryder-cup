@@ -5,13 +5,13 @@
     </template>
     <tabs>
       <tab title="Details" class="p-4">
-        <base-input v-model="tournament.name" label="Tournament Name" />
+        <base-input v-model="tournament.name" label="Tournament Name" required />
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <date-picker v-model="tournament.startDate" label="Start Date" />
+            <date-picker v-model="tournament.startDate" label="Start Date" required />
           </div>
           <div>
-            <date-picker v-model="tournament.endDate" label="End Date" />
+            <date-picker v-model="tournament.endDate" label="End Date" required />
           </div>
         </div>
         <base-input v-model="tournament.location" label="Tournament Location" />

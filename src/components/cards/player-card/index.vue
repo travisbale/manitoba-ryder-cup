@@ -2,27 +2,27 @@
   <router-link :to="{ name: 'player', params: { playerId: id }}" class="block">
     <base-card class="flex items-center">
       <template v-slot:image>
-        <img class="h-32 object-cover object-top" :src="pictureUrl" :alt="fullName" />
+        <img class="h-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
-      <div class="text-grey-600 uppercase font-semibold mr-2">
-        {{ record }} &bull; {{ cups }} {{ cupText }}
-      </div>
-      <h4 class="font-semibold text-2xl">
+      <base-badge :class="badgeColor">
+        {{ level }}
+      </base-badge>
+      <h4 class="text-2xl font-semibold whitespace-nowrap">
         {{ fullName }}
       </h4>
-      <div class="flex items-center">
-        <star-icon v-for="i in 5" :key="i" class="text-orange-800" :class="i <= confidence ? 'text-orange-800': 'text-grey-400'" />
+      <div class="font-semibold text-grey-600 mr-2">
+        {{ record }} &bull; {{ cups }} {{ cupText }}
       </div>
     </base-card>
   </router-link>
 </template>
 
 <script>
+import BaseBadge from '@/components/BaseBadge';
 import BaseCard from '@/components/cards/base-card';
-import StarIcon from '@/components/icons/StarIcon';
 
 export default {
-  components: { BaseCard, StarIcon },
+  components: { BaseCard, BaseBadge },
 
   props: {
     id: {
@@ -37,11 +37,6 @@ export default {
 
     lastName: {
       type: String,
-      required: true,
-    },
-
-    confidence: {
-      type: Number,
       required: true,
     },
 
@@ -65,14 +60,9 @@ export default {
       required: true,
     },
 
-    bio: {
+    photoPath: {
       type: String,
-      required: true,
-    },
-
-    pictureUrl: {
-      type: String,
-      required: true,
+      default: '/img/default-avatar.webp',
     },
 
     level: {
@@ -96,7 +86,7 @@ export default {
     },
 
     cupText() {
-      return this.cups !== 1 ? 'cups' : 'cup';
+      return this.cups !== 1 ? 'CUPS' : 'CUP';
     },
 
     badgeColor() {

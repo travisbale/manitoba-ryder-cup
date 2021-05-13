@@ -1,10 +1,34 @@
 <template>
-  <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }" image-url="/img/ocean-hills.webp">
-    <template v-slot:header>
-      {{ player.firstName }} {{ player.lastName }}
-    </template>
+  <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }">
     <div class="p-4">
-      player details
+      <div class="flex items-center">
+        <img class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200" :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()" />
+        <div class="mb-1">
+          <base-badge :class="badgeColor()">
+            {{ player.level }}
+          </base-badge>
+          <h1 class="text-3xl font-raleway-semibold">
+            {{ player.firstName }} {{ player.lastName }}
+          </h1>
+          <div class="font-semibold text-grey-600 mr-2">
+            {{ record }} &bull; {{ player.cups }} {{ cupText }}
+          </div>
+        </div>
+      </div>
+      <section-header class="mt-8">
+        Scouting Report
+      </section-header>
+      <p class="mt-2">
+        {{ player.biography || `${player.firstName} ${player.lastName} has no biography.` }}
+      </p>
+      <div class="flex items-center mt-10">
+        <div class="mr-3 font-raleway-semibold text-lg mt-1">
+          Pre Ryder Confidence
+        </div>
+        <div class="flex items-center">
+          <star-icon v-for="i in 5" :key="i" :class="i >= 0 ? 'text-cyan-800': 'text-grey-400'" />
+        </div>
+      </div>
     </div>
     <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: playerId }}">
       <floating-action-button action="edit" />
@@ -15,21 +39,20 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
+import BaseBadge from '@/components/BaseBadge';
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
+import SectionHeader from '@/components/typography/SectionHeader';
+import StarIcon from '@/components/icons/StarIcon';
 
 export default {
-  components: { BasePage, FloatingActionButton },
+  components: { BaseBadge, BasePage, FloatingActionButton, SectionHeader, StarIcon },
 
   props: {
     playerId: {
       type: Number,
       required: true,
     },
-  },
-
-  data() {
-    return {};
   },
 
   computed: {
@@ -40,16 +63,38 @@ export default {
       return this.getPlayer(this.playerId) || {
         firstName: '',
         lastName: '',
+        biography: '',
+        photoPath: '/img/default-avatar.webp',
       };
+    },
+
+    record() {
+      return `${this.player.wins}-${this.player.losses}-${this.player.ties}`;
+    },
+
+    cupText() {
+      return this.cups !== 1 ? 'CUPS' : 'CUP';
     },
   },
 
   mounted() {
-    this.fetchPlayers();
+    this.fetchPlayer(this.playerId);
   },
 
   methods: {
-    ...mapActions('players', ['fetchPlayers', 'savePlayer']),
+    ...mapActions('players', ['fetchPlayer', 'savePlayer']),
+
+    changePhoto() {
+      console.log('click');
+    },
+
+    badgeColor() {
+      return {
+        'bg-white border border-grey-400': this.player.level === 'white',
+        'bg-blue-600 text-white': this.player.level === 'blue',
+        'bg-amber-800 text-white': this.player.level === 'gold',
+      };
+    },
   },
 };
 </script>

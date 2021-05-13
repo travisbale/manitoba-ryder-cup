@@ -60,6 +60,7 @@ export default {
         firstName: player.firstName,
         lastName: player.lastName,
         biography: player.biography,
+        tier: player.tier,
       };
 
       if (player.id == null) {

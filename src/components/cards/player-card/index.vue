@@ -5,7 +5,7 @@
         <img class="h-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
       <base-badge :class="badgeColor">
-        {{ level }}
+        {{ tier }}
       </base-badge>
       <h4 class="text-2xl font-semibold whitespace-nowrap">
         {{ fullName }}
@@ -65,10 +65,10 @@ export default {
       default: '/img/default-avatar.webp',
     },
 
-    level: {
+    tier: {
       type: String,
       required: true,
-      validator: (level) => ['white', 'blue', 'gold'].indexOf(level) !== -1,
+      validator: (tier) => ['white', 'blue', 'gold'].indexOf(tier) !== -1,
     },
   },
 
@@ -91,9 +91,9 @@ export default {
 
     badgeColor() {
       return {
-        'bg-white border border-grey-400': this.level === 'white',
-        'bg-blue-600 text-white': this.level === 'blue',
-        'bg-amber-800 text-white': this.level === 'gold',
+        'bg-white border border-grey-400': this.tier === 'white',
+        'bg-blue-800 border border-blue-800 text-white': this.tier === 'blue',
+        'bg-amber-800 border border-amber-800 text-white': this.tier === 'gold',
       };
     },
   },

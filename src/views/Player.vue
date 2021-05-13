@@ -5,7 +5,7 @@
         <img class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200" :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()" />
         <div class="mb-1">
           <base-badge :class="badgeColor()">
-            {{ player.level }}
+            {{ player.tier }}
           </base-badge>
           <h1 class="text-3xl font-raleway-semibold">
             {{ player.firstName }} {{ player.lastName }}
@@ -90,9 +90,9 @@ export default {
 
     badgeColor() {
       return {
-        'bg-white border border-grey-400': this.player.level === 'white',
-        'bg-blue-600 text-white': this.player.level === 'blue',
-        'bg-amber-800 text-white': this.player.level === 'gold',
+        'bg-white border border-grey-400': this.player.tier === 'white',
+        'bg-blue-800 border border-blue-800 text-white': this.player.tier === 'blue',
+        'bg-amber-800 border border-amber-800 text-white': this.player.tier === 'gold',
       };
     },
   },

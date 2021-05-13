@@ -9,11 +9,19 @@
       </div>
     </template>
     <div class="p-4">
-      <base-input v-if="playerId == 0" v-model="email" label="Email" :valid.sync="isFirstNameValid" required />
-      <base-input v-model="firstName" label="First Name" :valid.sync="isLastNameValid" required />
-      <base-input v-model="lastName" label="Last Name" :valid.sync="isEmailValid" required />
+      <base-input v-if="playerId == 0" v-model="player.email" label="Email" :valid.sync="isFirstNameValid" required />
+      <base-input v-model="player.firstName" label="First Name" :valid.sync="isLastNameValid" required />
+      <base-input v-model="player.lastName" label="Last Name" :valid.sync="isEmailValid" required />
       <file-upload v-model="pictureList" accept="image/*" label="Profile Picture" />
-      <base-textarea v-model="biography" label="Scouting Report" />
+      <base-label class="mb-2">
+        Player Tier
+      </base-label>
+      <div class="flex">
+        <base-radio v-model="player.tier" name="tier" value="white" label="White" class="mr-20" />
+        <base-radio v-model="player.tier" name="tier" value="blue" label="Blue" class="mr-20" />
+        <base-radio v-model="player.tier" name="tier" value="gold" label="Gold" class="mr-20" />
+      </div>
+      <base-textarea v-model="player.biography" label="Scouting Report" />
 
       <div class="flex justify-end mt-8">
         <router-link :to="getPreviousPage()" class="block">
@@ -34,12 +42,14 @@ import { mapActions, mapGetters } from 'vuex';
 
 import BaseButton from '@/components/buttons/BaseButton';
 import BaseInput from '@/components/forms/BaseInput';
+import BaseLabel from '@/components/forms/BaseLabel';
 import BasePage from '@/components/layout/BasePage';
+import BaseRadio from '@/components/forms/BaseRadio';
 import BaseTextarea from '@/components/forms/BaseTextarea';
 import FileUpload from '@/components/forms/FileUpload';
 
 export default {
-  components: { BaseButton, BaseInput, BasePage, BaseTextarea, FileUpload },
+  components: { BaseButton, BaseInput, BaseLabel, BasePage, BaseRadio, BaseTextarea, FileUpload },
 
   props: {
     playerId: {
@@ -51,7 +61,7 @@ export default {
   data() {
     return {
       saving: false,
-      player: {},
+      player: { email: '', firstName: '', lastName: '', biography: '', tier: 'white' },
       isFirstNameValid: true,
       isLastNameValid: true,
       isEmailValid: true,
@@ -61,42 +71,6 @@ export default {
 
   computed: {
     ...mapGetters('players', ['getPlayer']),
-
-    firstName: {
-      get() {
-        return this.player.firstName || '';
-      },
-      set(value) {
-        this.player.firstName = value;
-      },
-    },
-
-    lastName: {
-      get() {
-        return this.player.lastName || '';
-      },
-      set(value) {
-        this.player.lastName = value;
-      },
-    },
-
-    email: {
-      get() {
-        return this.player.email || '';
-      },
-      set(value) {
-        this.player.email = value;
-      },
-    },
-
-    biography: {
-      get() {
-        return this.player.biography || '';
-      },
-      set(value) {
-        this.player.biography = value;
-      },
-    },
 
     picture() {
       if (this.pictureList != null) {
@@ -110,9 +84,11 @@ export default {
   },
 
   mounted() {
-    this.fetchPlayer(this.playerId).then((player) => {
-      this.player = player;
-    });
+    if (this.playerId > 0) {
+      this.fetchPlayer(this.playerId).then((player) => {
+        this.player = player;
+      });
+    }
   },
 
   methods: {

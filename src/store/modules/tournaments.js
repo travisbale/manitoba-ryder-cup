@@ -73,6 +73,7 @@ export default {
         name: tournament.name,
         startDate: tournament.startDate.toISODate(),
         endDate: tournament.endDate.toISODate(),
+        location: tournament.location,
       };
 
       if (tournament.id == null) {

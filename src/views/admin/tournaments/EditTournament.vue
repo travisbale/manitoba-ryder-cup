@@ -14,6 +14,7 @@
             <date-picker v-model="tournament.endDate" label="End Date" />
           </div>
         </div>
+        <base-input v-model="tournament.location" label="Tournament Location" />
       </tab>
 
       <tab title="Players">
@@ -69,6 +70,7 @@ export default {
         name: '',
         startDate: DateTime.local(),
         endDate: DateTime.local(),
+        location: '',
       },
     };
   },

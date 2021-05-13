@@ -1,6 +1,9 @@
 <template>
   <base-card v-on="$listeners">
-    <h2 class="font-semibold text-xl mb-1">
+    <div class="text-sm text-grey-600">
+      {{ location }}
+    </div>
+    <h2 class="font-raleway-semibold text-2xl mb-1">
       {{ name }}
     </h2>
     <div class="text-sm text-grey-600">
@@ -35,6 +38,10 @@ export default {
     },
     endDate: {
       type: DateTime,
+      required: true,
+    },
+    location: {
+      type: String,
       required: true,
     },
   },

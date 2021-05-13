@@ -1,7 +1,12 @@
 <template>
   <base-page image-url="/img/oceanside.webp">
     <template v-slot:header>
-      Edit Tournament
+      <div v-if="tournamentId > 0">
+        Edit Tournament
+      </div>
+      <div v-else>
+        Create Tournament
+      </div>
     </template>
     <tabs>
       <tab title="Details" class="p-4">

@@ -4,7 +4,10 @@
       Tournament Schedule
     </template>
     <div class="p-4 pt-6">
-      <div v-for="season in seasons" :key="season.year">
+      <p v-if="tournaments.length === 0" class="text-center">
+        There are currently no tournaments scheduled
+      </p>
+      <div v-for="season in seasons" v-else :key="season.year">
         <section-header class="mb-4">
           {{ season.year }} Season
         </section-header>

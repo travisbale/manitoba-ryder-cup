@@ -4,6 +4,9 @@
       {{ tournament.name }}
     </template>
     <score-bar :tournament-id="tournamentId" />
+    <p v-if="matches.length === 0" class="text-center pt-6">
+      There are currently no matches scheduled.
+    </p>
     <div class="px-2 pb-4 pt-6">
       <scoring-summary match-format="Fourball" class="mb-8" :matches="getMatches('Fourball')" />
       <scoring-summary match-format="Alternate Shot" class="mb-8" :matches="getMatches('Alternate Shot')" />
@@ -17,7 +20,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
@@ -41,6 +44,7 @@ export default {
   },
 
   computed: {
+    ...mapState('matches', ['matches']),
     ...mapGetters('currentUser', ['isAdmin']),
     ...mapGetters('matches', ['getMatches']),
     ...mapGetters('tournaments', ['getTournament']),

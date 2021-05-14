@@ -1,9 +1,12 @@
 <template>
-  <base-page>
+  <base-page image-url="/img/sunset-green.webp">
     <template v-slot:header>
       Scorecards
     </template>
     <div class="p-4 mt-2">
+      <p v-if="tournaments.length === 0" class="text-center">
+        You have not participated in any matches yet.
+      </p>
       <div v-for="tournament in tournaments" :key="tournament.id">
         <section-header class="mb-3">
           {{ tournament.name }}

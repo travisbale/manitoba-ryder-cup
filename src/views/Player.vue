@@ -1,6 +1,6 @@
 <template>
   <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }">
-    <div class="p-4">
+    <div class="p-4 border-b border-grey-300 shadow sticky top-0">
       <div class="flex items-center">
         <img class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200" :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()" />
         <div class="mb-1">
@@ -15,10 +15,12 @@
           </div>
         </div>
       </div>
-      <section-header class="mt-8">
+    </div>
+    <div class="p-4 pt-6">
+      <section-header>
         Scouting Report
       </section-header>
-      <p class="mt-2">
+      <p class="mt-2 whitespace-pre-wrap">
         {{ player.biography || `${player.firstName} ${player.lastName} has no biography.` }}
       </p>
       <div class="flex items-center mt-10">

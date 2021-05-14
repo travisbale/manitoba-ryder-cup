@@ -3,13 +3,14 @@
     <template v-slot:header>
       Create Account
     </template>
-    <div class="p-4">
-      <section-header class="mb-6">
-        Set Password
-        <template v-slot:subheader>
-          Create a password to log into the application using your email
-        </template>
+    <div class="p-4 pt-6">
+      <section-header class="mb-4">
+        Set password
       </section-header>
+      <p class="mb-8">
+        Create a password to log into the application using your email. After
+        creating your account you will be able to save scores for your matches.
+      </p>
       <base-alert v-if="errorMessage" variant="danger" class="mb-6">
         {{ errorMessage }}
       </base-alert>

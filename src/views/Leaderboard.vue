@@ -1,5 +1,5 @@
 <template>
-  <base-page image-url="/img/fox-harbr.webp">
+  <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
       {{ tournament.name }}
     </template>

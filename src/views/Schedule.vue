@@ -14,7 +14,7 @@
         <router-link v-for="t in season.tournaments" :key="t.id" :to="{ name: 'leaderboard', params: { tournamentId: t.id }}" v-bind="t" class="block">
           <tournament-card v-bind="t" class="mb-4" />
         </router-link>
-        <div class="pb-8" />
+        <div class="pb-4" />
       </div>
     </div>
     <router-link v-if="hasPermission('create:tournaments')" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">

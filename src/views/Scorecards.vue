@@ -1,22 +1,31 @@
 <template>
   <base-page image-url="/img/sunset-green.webp">
     <template v-slot:header>
-      Scorecards
+      My Rounds
     </template>
-    <div class="p-4 mt-2">
-      <p v-if="tournaments.length === 0" class="text-center">
-        You have not participated in any matches yet.
-      </p>
-      <div v-for="tournament in tournaments" :key="tournament.id">
-        <section-header class="mb-3">
-          {{ tournament.name }}
-          <template v-slot:subheader>
-            {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}
-          </template>
-        </section-header>
-        <match-card v-for="match in getMatches(tournament.id)" :key="match.id" v-bind="match" />
-      </div>
-    </div>
+    <tabs>
+      <tab title="Tournaments" class="p-4 pt-6">
+        <p v-if="tournaments.length === 0" class="text-center">
+          You have not participated in any tournaments yet.
+        </p>
+        <div v-for="tournament in tournaments" :key="tournament.id">
+          <section-header class="mb-3">
+            {{ tournament.name }}
+            <template v-slot:subheader>
+              {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}
+            </template>
+          </section-header>
+          <match-summary v-for="match in getMatches(tournament.id)" :key="match.id" v-bind="match" />
+        </div>
+      </tab>
+
+      <tab title="Single Matches" class="p-4 pt-6">
+        <p class="text-center">
+          You have not participated in any single matches yet.
+        </p>
+      </tab>
+    </tabs>
+    <div class="p-4 mt-2" />
   </base-page>
 </template>
 
@@ -25,13 +34,14 @@ import { DateTime } from 'luxon';
 import { mapState } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
-import MatchCard from '@/components/cards/match-card';
+import MatchSummary from '@/components/MatchSummary';
 import SectionHeader from '@/components/typography/SectionHeader';
+import Tab from '@/components/tabs/Tab';
+import Tabs from '@/components/tabs/Tabs';
 import axios from '@/lib/axios';
-// import datetimeFilters from '@/mixins/filters/datetime';
 
 export default {
-  components: { BasePage, MatchCard, SectionHeader },
+  components: { BasePage, MatchSummary, SectionHeader, Tab, Tabs },
 
   filters: {
     printDate(date) {

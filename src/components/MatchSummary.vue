@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'scorecard', params: { matchId: id }}" class="block">
+  <router-link :to="{ name: 'scorecard', params: { tournamentId: tournamentId, matchId: id }}" class="block">
     <div class="flex items-center text-center py-2">
       <div class="w-2/5 p-2 shadow rounded-l border border-r-0 border-grey-300 truncate" :class="blueTeamClasses">
         {{ blueTeam }}
@@ -22,6 +22,11 @@ export default {
 
   props: {
     id: {
+      type: Number,
+      required: true,
+    },
+
+    tournamentId: {
       type: Number,
       required: true,
     },

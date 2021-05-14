@@ -86,15 +86,15 @@ export default {
   },
 
   mounted() {
-    this.fetchTournaments().then(() => {
-      this.tournament = {
-        ...this.getTournament(this.tournamentId),
-      };
-    });
+    if (this.tournamentId > 0) {
+      this.fetchTournament(this.tournamentId).then((tournament) => {
+        this.tournament = tournament;
+      });
+    }
   },
 
   methods: {
-    ...mapActions('tournaments', ['fetchTournaments', 'saveTournament']),
+    ...mapActions('tournaments', ['fetchTournament', 'saveTournament']),
 
     clickSaveTournament() {
       this.saving = true;

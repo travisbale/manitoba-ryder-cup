@@ -9,7 +9,7 @@
           You have not participated in any tournaments yet.
         </p>
         <div v-for="tournament in tournaments" :key="tournament.id">
-          <section-header class="mb-3">
+          <section-header class="mb-3 text-center">
             {{ tournament.name }}
             <template v-slot:subheader>
               {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}

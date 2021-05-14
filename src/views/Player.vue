@@ -32,7 +32,7 @@
         </div>
       </div>
     </div>
-    <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: playerId }}">
+    <router-link v-if="hasPermission('update:players')" :to="{ name: 'edit-player', params: { playerId: playerId }}">
       <floating-action-button action="edit" />
     </router-link>
   </base-page>
@@ -59,7 +59,7 @@ export default {
 
   computed: {
     ...mapGetters('players', ['getPlayer']),
-    ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('currentUser', ['hasPermission']),
 
     player() {
       return this.getPlayer(this.playerId) || {

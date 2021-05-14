@@ -20,6 +20,10 @@ export default {
     isAdmin(state) {
       return state.currentUser.roles.includes('Administrator');
     },
+
+    hasPermission: (state) => (permission) => {
+      return state.currentUser.permissions.find((p) => p === permission) != null;
+    },
   },
 
   mutations: {

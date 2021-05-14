@@ -13,7 +13,7 @@
       <scoring-summary match-format="Scramble" class="mb-8" :matches="getMatches('Scramble')" />
       <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />
     </div>
-    <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">
+    <router-link v-if="hasPermission('update:tournaments')" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">
       <floating-action-button action="edit" />
     </router-link>
   </base-page>
@@ -45,7 +45,7 @@ export default {
 
   computed: {
     ...mapState('matches', ['matches']),
-    ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('currentUser', ['hasPermission']),
     ...mapGetters('matches', ['getMatches']),
     ...mapGetters('tournaments', ['getTournament']),
   },

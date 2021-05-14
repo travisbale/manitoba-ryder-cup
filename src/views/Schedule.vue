@@ -17,7 +17,7 @@
         <div class="pb-8" />
       </div>
     </div>
-    <router-link v-if="isAdmin" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">
+    <router-link v-if="hasPermission('create:tournaments')" :to="{ name: 'edit-tournament', params: { tournamentId: 0 }}">
       <floating-action-button action="add" />
     </router-link>
   </base-page>
@@ -37,7 +37,7 @@ export default {
 
   computed: {
     ...mapState('tournaments', ['tournaments']),
-    ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('currentUser', ['hasPermission']),
 
     year() {
       return DateTime.local().year;

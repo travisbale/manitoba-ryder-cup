@@ -11,7 +11,7 @@
         <player-card v-for="player in players" :key="player.id" v-bind="player" class="mb-4" />
       </div>
     </div>
-    <router-link v-if="isAdmin" :to="{ name: 'edit-player', params: { playerId: 0 }}">
+    <router-link v-if="hasPermission('create:players')" :to="{ name: 'edit-player', params: { playerId: 0 }}">
       <floating-action-button action="add" />
     </router-link>
   </base-page>
@@ -29,7 +29,7 @@ export default {
 
   computed: {
     ...mapState('players', ['players']),
-    ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('currentUser', ['hasPermission']),
   },
 
   mounted() {

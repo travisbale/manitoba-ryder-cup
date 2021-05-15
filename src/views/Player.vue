@@ -20,7 +20,7 @@
       <section-header>
         Scouting Report
       </section-header>
-      <p class="mt-2 whitespace-pre-wrap">
+      <p class="mt-2 whitespace-pre-line">
         {{ player.biography || `${player.firstName} ${player.lastName} has no biography.` }}
       </p>
       <div class="flex items-center mt-10">

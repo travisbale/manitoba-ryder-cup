@@ -30,8 +30,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import { DateTime } from 'luxon';
-import { mapState } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
@@ -61,12 +61,18 @@ export default {
   },
 
   mounted() {
-    this.fecthTournaments(this.currentUser.id);
-    this.fetchMatches(this.currentUser.id);
+    this.fetchPlayers({ email: this.currentUser.email }).then((players) => {
+      if (players.length > 0) {
+        this.fetchTournaments(players[0].id);
+        this.fetchMatches(players[0].id);
+      }
+    });
   },
 
   methods: {
-    fecthTournaments(playerId) {
+    ...mapActions('players', ['fetchPlayers']),
+
+    fetchTournaments(playerId) {
       const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/players/${playerId}/tournaments`;
 
       return axios.get(url).then((response) => {

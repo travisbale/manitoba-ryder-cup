@@ -1,4 +1,5 @@
 import axios from '@/lib/axios';
+import querystring from '@/lib/querystring';
 
 export default {
   namespaced: true,
@@ -34,9 +35,16 @@ export default {
   },
 
   actions: {
-    fetchPlayers({ commit }) {
-      return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/players`).then((response) => {
+    fetchPlayers({ commit }, queryParams) {
+      let query = '';
+
+      if (queryParams) {
+        query = `?${querystring.encode(queryParams)}`;
+      }
+
+      return axios.get(`${process.env.VUE_APP_SCORECARD_URL}/v1/players${query}`).then((response) => {
         commit('setPlayers', response.data);
+        return response.data;
       });
     },
 

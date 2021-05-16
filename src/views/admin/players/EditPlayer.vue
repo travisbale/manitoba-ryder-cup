@@ -1,14 +1,14 @@
 <template>
-  <base-page image-url="/img/ocean-hills.webp">
+  <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }" image-url="/img/ocean-hills.webp">
     <template v-slot:header>
       <div v-if="playerId > 0">
         Edit Player
       </div>
       <div v-else>
-        Create Player
+        Add New Player
       </div>
     </template>
-    <div class="p-4">
+    <div class="p-4 pt-6">
       <base-input v-if="playerId == 0" v-model="player.email" label="Email" :valid.sync="isFirstNameValid" required />
       <base-input v-model="player.firstName" label="First Name" :valid.sync="isLastNameValid" required />
       <base-input v-model="player.lastName" label="Last Name" :valid.sync="isEmailValid" required />

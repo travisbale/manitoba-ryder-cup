@@ -36,6 +36,7 @@
         <span v-else>Complete Round</span>
       </base-button>
     </div>
+    <base-toast ref="toast" variant="danger" />
   </base-page>
 </template>
 
@@ -45,12 +46,13 @@ import { DateTime } from 'luxon';
 
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
+import BaseToast from '@/components/toasts/BaseToast';
 import MatchSummary from '@/components/MatchSummary';
 import ScoreSlider from '@/components/ScoreSlider';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, BaseButton, MatchSummary, ScoreSlider },
+  components: { BasePage, BaseButton, BaseToast, MatchSummary, ScoreSlider },
 
   props: {
     tournamentId: {
@@ -174,7 +176,11 @@ export default {
       this.saving = true;
 
       const recording = axios.post(url, scores);
-      recording.finally(() => { this.saving = false; });
+      recording
+        .catch((error) => {
+          this.$refs.toast.show(error.response.data.message);
+        })
+        .finally(() => { this.saving = false; });
       return recording;
     },
 

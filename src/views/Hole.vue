@@ -40,6 +40,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
+import { DateTime } from 'luxon';
 
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
@@ -83,8 +84,8 @@ export default {
     ...mapGetters('currentUser', ['isAdmin']),
 
     readonly() {
-      // Once a match is complete it cannot be edited
-      if (this.match.finished) { return true; }
+      // Match cannot be edited before it starts or after it finishes
+      if (this.match.teeTime > DateTime.now() || this.match.finished) { return true; }
 
       // Admins can edit any incomplete match
       if (this.isAdmin) { return false; }

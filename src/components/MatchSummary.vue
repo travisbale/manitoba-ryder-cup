@@ -5,7 +5,7 @@
         {{ blueTeam }}
       </div>
       <div class="w-1/5 py-3 text-lg shadow-md rounded border font-bold uppercase tracking-wide" :class="scoreClasses">
-        <match-status :status-text="currentScore.statusText" />
+        <match-status :status-text="getStatusText()" />
       </div>
       <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 truncate" :class="redTeamClasses">
         {{ redTeam }}
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { DateTime } from 'luxon';
 import MatchStatus from '@/components/MatchStatus';
 
 export default {
@@ -48,6 +49,11 @@ export default {
 
     scores: {
       type: Array,
+      required: true,
+    },
+
+    teeTime: {
+      type: DateTime,
       required: true,
     },
   },
@@ -100,6 +106,16 @@ export default {
       }
 
       return `${players[0].lastName} / ${players[1].lastName}`;
+    },
+
+    getStatusText() {
+      const now = DateTime.now();
+
+      if (now < this.teeTime) {
+        return this.teeTime.toLocaleString(DateTime.TIME_24_SIMPLE);
+      }
+
+      return this.currentScore.statusText;
     },
   },
 };

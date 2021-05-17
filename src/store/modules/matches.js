@@ -43,8 +43,12 @@ export default {
       const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/matches/${matchId}`;
 
       return axios.get(url).then((response) => {
-        commit('setMatch', response.data);
-        return response.data;
+        const match = response.data;
+
+        match.teeTime = DateTime.fromISO(match.teeTime);
+
+        commit('setMatch', match);
+        return match;
       });
     },
 

@@ -23,7 +23,7 @@
     <div class="pt-6">
       <score-slider v-for="score in currentScores" :key="score.playerId" v-model="score.strokes"
                     :number="number" :current-score="getCurrentStrokes(score.playerId)" :player="score.playerName"
-                    :par="hole.par" :current-par="getCurrentPar()" :readonly="readonly"
+                    :par="hole.par" :current-par="getCurrentPar(score.playerId)" :readonly="readonly"
       />
     </div>
     <div class="p-4 mb-8 bg-white">
@@ -32,6 +32,7 @@
         <span v-if="number < 18">
           Next Hole
         </span>
+        <span v-else-if="readonly">Return To Leaderboard</span>
         <span v-else>Complete Round</span>
       </base-button>
     </div>
@@ -86,9 +87,6 @@ export default {
     readonly() {
       // Match cannot be edited before it starts or after it finishes
       if (this.match.teeTime > DateTime.now() || this.match.finished) { return true; }
-
-      // Admins can edit any incomplete match
-      if (this.isAdmin) { return false; }
 
       // Anyone participating in an incomplete match can edit it
       for (let i = 0; i < this.match.participants.length; i++) {
@@ -200,12 +198,12 @@ export default {
       return currentStrokes;
     },
 
-    getCurrentPar() {
+    getCurrentPar(playerId) {
       let currentPar = 0;
 
-      this.teeSet.holes.forEach((hole) => {
-        if (hole.number <= this.number) {
-          currentPar += hole.par;
+      this.scores.forEach((score) => {
+        if (score.playerId === playerId && score.holeNumber < this.number) {
+          currentPar += this.teeSet.holes[score.holeNumber - 1].par;
         }
       });
 

@@ -92,7 +92,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('players', ['fetchPlayer', 'savePlayer', 'savePlayerPhoto']),
+    ...mapActions('players', ['fetchPlayer', 'savePlayer', 'savePlayerPhoto', 'sendAccountCreationEmail']),
 
     clickSavePlayer() {
       if (this.firstName === '') this.isFirstNameValid = false;
@@ -104,6 +104,9 @@ export default {
 
         this.savePlayer(this.player)
           .then((player) => {
+            if (this.player.id === 0) {
+              this.sendAccountCreationEmail(player.id);
+            }
             if (this.picture) {
               this.savePlayerPhoto({ playerId: player.id, formData: this.picture }).then(() => {
                 this.$router.push(this.getPreviousPage());

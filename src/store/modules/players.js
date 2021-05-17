@@ -89,5 +89,9 @@ export default {
           commit('savePlayer', response.data);
         });
     },
+
+    sendAccountCreationEmail(context, playerId) {
+      return axios.post(`${process.env.VUE_APP_SCORECARD_URL}/v1/players/${playerId}/invitation`);
+    },
   },
 };

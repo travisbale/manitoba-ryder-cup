@@ -67,13 +67,9 @@ export default {
       };
 
       this.submitCredentials(creds).then(() => {
-        if (this.$route.params.nextUrl != null) {
-        // Redirect the user to whatever page theyi were trying to access
-          this.$router.push(this.$route.params.nextUrl);
-        } else {
-        // Otherwise take them to the schedule page
-          this.$router.push({ name: 'schedule' });
-        }
+        this.$router.push({ name: 'schedule' }, () => {
+          this.$toaster.success('Logged in successfully');
+        });
       }).catch((error) => {
         this.password = '';
 

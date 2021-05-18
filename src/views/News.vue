@@ -13,12 +13,14 @@
       >
         <article-card v-bind="article" class="mb-4" />
       </router-link>
-      <floating-action-button type="add" />
+      <floating-action-button v-if="hasPermission('create:articles')" type="add" />
     </div>
   </base-page>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import ArticleCard from '@/components/cards/article-card';
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
@@ -30,6 +32,10 @@ export default {
     return {
       articles: [],
     };
+  },
+
+  computed: {
+    ...mapGetters('currentUser', ['hasPermission']),
   },
 };
 </script>

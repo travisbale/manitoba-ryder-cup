@@ -50,10 +50,10 @@
                 <golf-ball-icon class="mr-4" />
                 My Rounds
               </menu-link>
-              <menu-link to="login" @click.native="logUserOut">
+              <a class="flex items-center px-4 py-2" @click="logUserOut">
                 <login-icon class="mr-4" />
                 Logout
-              </menu-link>
+              </a>
             </div>
             <div v-else>
               <menu-link to="login" @click.native="navOpen = false">
@@ -159,7 +159,11 @@ export default {
     },
 
     logUserOut() {
-      this.logout().finally(() => { this.closeNav(); });
+      this.logout()
+        .then(() => {
+          this.$toaster.success('Logged out');
+        })
+        .finally(() => { this.closeNav(); });
     },
   },
 };

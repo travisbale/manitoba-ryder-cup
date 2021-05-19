@@ -27,6 +27,10 @@ export default {
       error(message, options = this.defaults) {
         this.send(message, 'error', options);
       },
+
+      basic(message, options = this.defaults) {
+        this.send(message, 'basic', options);
+      },
     };
 
     Vue.component('BaseToast', BaseToast);

@@ -14,13 +14,14 @@
              'bg-red-700': variant === 'error',
              'bg-blue-700': variant === 'info',
              'bg-orange-700': variant === 'warning',
+             'bg-grey-800 px-4': variant === 'basic',
            }"
       >
-        <alert-icon class="pl-4 pr-3" :variant="variant" />
+        <alert-icon v-if="variant != 'basic'" class="pl-4 pr-3" :variant="variant" />
         <div class="flex-grow text-sm font-semibold">
           {{ message }}
         </div>
-        <div v-if="dismissible" class="ml-3 mr-3 cursor-pointer" @click="visible = false">
+        <div v-if="dismissible && variant != 'basic'" class="ml-3 mr-3 cursor-pointer" @click="visible = false">
           <x-icon />
         </div>
       </div>

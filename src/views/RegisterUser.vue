@@ -8,8 +8,8 @@
         Set password
       </section-header>
       <p class="mb-8">
-        Create a password to log into the application using your email. After
-        creating your account you will be able to save scores for your matches.
+        Set a password to finish creating your account. After creating your
+        account you will be able to log in and save scores for your matches.
       </p>
       <base-alert v-if="errorMessage" variant="error" class="mb-6">
         {{ errorMessage }}

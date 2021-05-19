@@ -1,6 +1,9 @@
 <template>
   <base-page back-link-text="Scorecard" :back-link-route="{ name: 'scorecard', params: { touranamentId: tournamentId, matchId: matchId }}">
     <div class="sticky top-0 px-2 py-4 border-b border-grey-400 bg-white shadow">
+      <base-alert v-if="errorMessage" variant="error" class="mb-2" dismissible>
+        {{ errorMessage }}
+      </base-alert>
       <match-summary v-if="match.id != null" v-bind="match" class="mb-4" />
       <div class="flex items-center justify-center text-grey-700">
         <div class="flex items-center mr-10">
@@ -43,6 +46,7 @@
 import { mapActions, mapGetters, mapState } from 'vuex';
 import { DateTime } from 'luxon';
 
+import BaseAlert from '@/components/BaseAlert';
 import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
@@ -50,7 +54,7 @@ import ScoreSlider from '@/components/ScoreSlider';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, BaseButton, MatchSummary, ScoreSlider },
+  components: { BaseAlert, BasePage, BaseButton, MatchSummary, ScoreSlider },
 
   props: {
     tournamentId: {
@@ -76,6 +80,7 @@ export default {
       },
       scores: [],
       saving: false,
+      errorMessage: '',
     };
   },
 
@@ -183,10 +188,9 @@ export default {
 
       const recording = axios.post(url, scores);
       recording
-        .catch((error) => {
-          this.$toaster.error(error.response.data.message, { position: 'top' });
-        })
+        .catch((error) => { this.errorMessage = `Save failed – ${error.response.data.message}`; })
         .finally(() => { this.saving = false; });
+
       return recording;
     },
 

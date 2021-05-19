@@ -160,7 +160,15 @@ export default {
       if (this.readonly) {
         this.pushNextRoute();
       } else {
-        this.recordStrokes().then(this.pushNextRoute);
+        this.recordStrokes().then(() => {
+          this.pushNextRoute().then(() => {
+            if (this.number < 18) {
+              this.$toaster.success('Score saved');
+            } else {
+              this.$toaster.success('Match completed');
+            }
+          });
+        });
       }
     },
 
@@ -184,10 +192,10 @@ export default {
 
     pushNextRoute() {
       if (this.number < 18) {
-        this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
-      } else {
-        this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
+        return this.$router.push({ name: 'hole', params: { matchId: this.matchId, number: this.number + 1 } });
       }
+
+      return this.$router.push({ name: 'leaderboard', params: { tournamentId: this.tournamentId } });
     },
 
     getCurrentStrokes(playerId) {

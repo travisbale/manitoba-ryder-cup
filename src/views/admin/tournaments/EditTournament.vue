@@ -100,7 +100,11 @@ export default {
       this.saving = true;
 
       this.saveTournament(this.tournament)
-        .then(() => this.$router.push(this.getPreviousPage()))
+        .then(() => {
+          this.$router.push(this.getPreviousPage()).then(() => {
+            this.$toaster.success(this.tournamentId > 0 ? 'Tournament updated' : 'Tournament created');
+          });
+        })
         .finally(() => { this.saving = false; });
     },
 

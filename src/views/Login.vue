@@ -67,7 +67,7 @@ export default {
       };
 
       this.submitCredentials(creds).then(() => {
-        this.$router.push({ name: 'schedule' }, () => {
+        this.$router.push({ name: 'schedule' }).then(() => {
           this.$toaster.success('Logged in successfully');
         });
       }).catch((error) => {

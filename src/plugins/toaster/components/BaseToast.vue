@@ -4,16 +4,16 @@
          :class="{
            'opacity-0': !visible,
            'opacity-100': visible,
-           'bottom-8': position === 'bottom',
+           'bottom-6': position === 'bottom',
            'top-16': position === 'top',
          }"
     >
       <div class="flex items-center py-3 rounded shadow-lg text-white"
            :class="{
-             'bg-green-600': variant === 'success',
-             'bg-red-600': variant === 'error',
-             'bg-blue-600': variant === 'info',
-             'bg-orange-600': variant === 'warning',
+             'bg-green-700': variant === 'success',
+             'bg-red-700': variant === 'error',
+             'bg-blue-700': variant === 'info',
+             'bg-orange-700': variant === 'warning',
            }"
       >
         <div class="flex items-center justify-center pl-4 pr-3">

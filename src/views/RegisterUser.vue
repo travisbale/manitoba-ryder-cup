@@ -64,7 +64,9 @@ export default {
 
         this.register({ token: this.token, password: this.password }).then(() => {
           this.errorMessage = '';
-          this.$router.push({ name: 'schedule' });
+          this.$router.push({ name: 'schedule' }).then(() => {
+            this.$toaster.push('Account created');
+          });
         })
           .catch(() => { this.errorMessage = 'Registration failed'; })
           .finally(() => { this.registering = false; });

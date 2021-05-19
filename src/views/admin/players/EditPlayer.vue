@@ -109,10 +109,10 @@ export default {
             }
             if (this.picture) {
               this.savePlayerPhoto({ playerId: player.id, formData: this.picture }).then(() => {
-                this.$router.push(this.getPreviousPage());
+                this.goToPreviousPage();
               }).finally(() => { this.saving = false; });
             } else {
-              this.$router.push(this.getPreviousPage());
+              this.goToPreviousPage();
             }
           })
           .finally(() => { this.saving = false; });
@@ -124,6 +124,16 @@ export default {
         return { name: 'player', param: { playerId: this.playerId } };
       }
       return { name: 'players' };
+    },
+
+    goToPreviousPage() {
+      this.$router.push(this.getPreviousPage()).then(() => {
+        if (this.playerId > 0) {
+          this.$toaster.success('Player updated');
+        } else {
+          this.$toaster.success('Player created');
+        }
+      });
     },
 
     validatePlayer() {

@@ -164,7 +164,10 @@ export default {
     goToNextHole() {
       if (this.readonly) {
         this.pushNextRoute();
+      } else if (this.number > this.match.scores.length + 1) {
+        this.errorMessage = 'Holes must be completed in order';
       } else {
+        this.errorMessage = '';
         this.recordStrokes().then(() => {
           this.pushNextRoute().then(() => {
             if (this.number < 18) {

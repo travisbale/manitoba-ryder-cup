@@ -44,7 +44,7 @@ export default {
       variant: 'info',
       visible: false,
       message: '',
-      duration: 4000,
+      duration: 3000,
       dismissible: true,
       position: 'bottom',
     };

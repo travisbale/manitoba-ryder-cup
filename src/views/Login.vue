@@ -6,7 +6,7 @@
         <h1 class="font-bold text-3xl text-center text-white mt-16 mb-12">
           Welcome Back
         </h1>
-        <base-alert v-if="errorMessage" variant="danger" class="mb-6">
+        <base-alert v-if="errorMessage" variant="error" class="mb-6">
           {{ errorMessage }}
         </base-alert>
         <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />

@@ -11,7 +11,7 @@
         Create a password to log into the application using your email. After
         creating your account you will be able to save scores for your matches.
       </p>
-      <base-alert v-if="errorMessage" variant="danger" class="mb-6">
+      <base-alert v-if="errorMessage" variant="error" class="mb-6">
         {{ errorMessage }}
       </base-alert>
       <base-input v-model="password" type="password" label="Password" />

@@ -5,7 +5,7 @@
     </base-label>
     <input ref="input"
            :type="type"
-           class="block mb-6 border rounded-sm px-3 py-2 w-full shadow-sm"
+           class="block mb-6 border rounded px-3 py-2 w-full shadow-sm"
            :class="{ 'border-grey-400': valid, 'border-red-400': !valid }"
            :value="value"
            :placeholder="placeholder"

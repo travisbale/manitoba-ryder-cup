@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-toast />
     <router-view />
+    <base-toast />
   </div>
 </template>

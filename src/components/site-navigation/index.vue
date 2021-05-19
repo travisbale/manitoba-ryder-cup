@@ -161,7 +161,7 @@ export default {
     logUserOut() {
       this.logout()
         .then(() => {
-          this.$toaster.success('Logged out');
+          this.$toaster.basic('Logged out');
         })
         .finally(() => { this.closeNav(); });
     },

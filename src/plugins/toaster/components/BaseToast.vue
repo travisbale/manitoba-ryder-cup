@@ -14,7 +14,7 @@
              'bg-red-700': variant === 'error',
              'bg-blue-700': variant === 'info',
              'bg-orange-700': variant === 'warning',
-             'bg-grey-800 px-4': variant === 'basic',
+             'bg-grey-900 px-4': variant === 'basic',
            }"
       >
         <alert-icon v-if="variant != 'basic'" class="pl-4 pr-3" :variant="variant" />

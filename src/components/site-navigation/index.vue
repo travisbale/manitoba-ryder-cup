@@ -58,7 +58,7 @@
             <div v-else>
               <menu-link to="login" @click.native="navOpen = false">
                 <login-icon class="mr-4" />
-                Sign in
+                Login
               </menu-link>
             </div>
           </aside>

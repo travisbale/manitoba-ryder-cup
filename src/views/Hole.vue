@@ -111,7 +111,8 @@ export default {
     },
 
     currentScores() {
-      return this.scores.filter((s) => s.holeNumber === this.number);
+      const scores = this.scores.filter((s) => s.holeNumber === this.number);
+      return scores.sort((first, second) => first.playerName.localeCompare(second.playerName));
     },
   },
 
@@ -138,7 +139,7 @@ export default {
       this.fetchMatch(matchId).then((match) => {
         this.match = match;
         this.fetchTeeSet({ courseId: this.match.courseId, teeColorId: this.match.teeColorId });
-        this.fetchScores(this.matchId, this.number).then((scores) => {
+        this.fetchScores(this.matchId).then((scores) => {
           this.scores = scores;
 
           this.match.participants.forEach((player) => {

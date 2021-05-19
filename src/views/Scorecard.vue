@@ -48,7 +48,6 @@ export default {
       teeSet: {
         holes: [],
       },
-      scores: [],
     };
   },
 
@@ -67,7 +66,6 @@ export default {
       this.fetchTeeSet({ courseId: this.match.courseId, teeColorId: this.match.teeColorId }).then((teeSet) => {
         this.teeSet = teeSet;
       });
-      this.fetchScores(this.matchId).then((scores) => { this.scores = scores; });
     }).catch((error) => {
       if (error.response && error.response.status === 404) {
         this.$router.push({ name: 'not-found' });

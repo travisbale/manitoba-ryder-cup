@@ -59,26 +59,30 @@ export default {
     ...mapActions({ submitCredentials: 'currentUser/login' }),
 
     login() {
-      this.loggingIn = true;
+      if (this.email === '' || this.password === '') {
+        this.errorMessage = 'Email and password are required';
+      } else {
+        this.loggingIn = true;
 
-      const creds = {
-        email: this.email,
-        password: this.password,
-      };
+        const creds = {
+          email: this.email,
+          password: this.password,
+        };
 
-      this.submitCredentials(creds).then(() => {
-        this.$router.push({ name: 'schedule' }).then(() => {
-          this.$toaster.success('Logged in successfully');
-        });
-      }).catch((error) => {
-        this.password = '';
+        this.submitCredentials(creds).then(() => {
+          this.$router.push({ name: 'schedule' }).then(() => {
+            this.$toaster.success('Logged in successfully');
+          });
+        }).catch((error) => {
+          this.password = '';
 
-        if (error.response && error.response.status === HttpStatus.UNAUTHORIZED) {
-          this.errorMessage = 'Incorrect username or password';
-        } else {
-          this.errorMessage = 'Sorry, something went wrong';
-        }
-      }).finally(() => { this.loggingIn = false; });
+          if (error.response && error.response.status === HttpStatus.UNAUTHORIZED) {
+            this.errorMessage = error.response.data.message;
+          } else {
+            this.errorMessage = 'Sorry, something went wrong';
+          }
+        }).finally(() => { this.loggingIn = false; });
+      }
     },
   },
 };

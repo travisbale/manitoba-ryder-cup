@@ -5,7 +5,7 @@
         <div class="flex items-center h-12">
           <router-link v-if="!transparent" :to="homeLink" class="text-white text-xl font-semibold">
             <div v-if="backLinkText === ''" class="flex items-center">
-              <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/manitoba-ryder-cup.webp" alt="Manitoba Ryder Cup" />
+              <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/logo.webp" alt="logo" />
               DGA Tour
             </div>
             <div v-else class="flex items-center">

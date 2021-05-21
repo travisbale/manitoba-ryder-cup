@@ -104,7 +104,7 @@ export default {
 
         this.savePlayer(this.player)
           .then((player) => {
-            if (this.player.id === 0) {
+            if (this.playerId === 0) {
               this.sendAccountCreationEmail(player.id);
             }
             if (this.picture) {

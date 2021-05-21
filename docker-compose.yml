@@ -1,10 +1,10 @@
 version: '3.7'
 
 services:
-  web:
+  mb-ryder-cup:
     image: node:15.8-alpine3.10
     restart: always
-    container_name: web
+    container_name: mb-ryder-cup
     command: ['npm', 'run', 'serve']
     env_file: ./.env.local
     ports:

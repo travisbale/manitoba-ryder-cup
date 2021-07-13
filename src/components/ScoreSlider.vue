@@ -77,7 +77,7 @@ export default {
     },
 
     scoreUnderPar() {
-      const score = this.newScore - this.currentPar - (this.readonly ? 0 : this.par);
+      const score = this.newScore - this.currentPar - (this.value === 0 ? 0 : this.par);
 
       if (score > 0) return `+${score}`;
       if (score < 0) return score;

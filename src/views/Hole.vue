@@ -35,7 +35,7 @@
         <span v-if="number < 18">
           Next Hole
         </span>
-        <span v-else-if="readonly">Return To Leaderboard</span>
+        <span v-else-if="readonly">Return to Leaderboard</span>
         <span v-else>Complete Round</span>
       </base-button>
     </div>

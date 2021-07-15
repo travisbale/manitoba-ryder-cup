@@ -5,6 +5,9 @@
   >
     <template v-slot:header>
       {{ match.format }}
+      <h4 class="font-opensans text-white text-sm">
+        {{ match.teeTime | printDateTime }}
+      </h4>
     </template>
     <div class="p-4 pt-6">
       <section-header class="mb-4">
@@ -26,9 +29,12 @@ import { mapActions, mapGetters } from 'vuex';
 import BasePage from '@/components/layout/BasePage';
 import HoleCard from '@/components/cards/hole-card';
 import SectionHeader from '@/components/typography/SectionHeader';
+import datetimeFilters from '@/mixins/filters/datetime';
 
 export default {
   components: { BasePage, HoleCard, SectionHeader },
+
+  mixins: [datetimeFilters],
 
   props: {
     tournamentId: {

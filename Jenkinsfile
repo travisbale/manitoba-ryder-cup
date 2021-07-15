@@ -6,6 +6,10 @@ pipeline {
     }
   }
 
+  options {
+    buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
+  }
+
   environment {
     ENV_FILE = "${env.BRANCH_NAME == 'master' ? 'prod.env' : 'staging.env'}"
     DEPLOY_DIR = "${env.BRANCH_NAME == 'master' ? 'prod' : 'staging'}"

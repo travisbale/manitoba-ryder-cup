@@ -50,7 +50,9 @@ export default {
 
   data() {
     return {
-      match: {},
+      match: {
+        teeTime: '',
+      },
       teeSet: {
         holes: [],
       },

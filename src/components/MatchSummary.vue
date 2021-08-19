@@ -101,11 +101,10 @@ export default {
     getTeamName(team) {
       const players = this.participants.filter((p) => p.team === team);
 
-      if (players.length === 1) {
-        return players[0].lastName;
-      }
+      if (players.length === 1) return players[0].lastName;
+      if (players.length === 2) return `${players[0].lastName} / ${players[1].lastName}`;
 
-      return `${players[0].lastName} / ${players[1].lastName}`;
+      return 'TBD';
     },
 
     getStatusText() {

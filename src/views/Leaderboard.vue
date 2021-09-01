@@ -9,8 +9,8 @@
     </p>
     <div class="px-2 pb-4 pt-6">
       <scoring-summary match-format="Fourball" class="mb-8" :matches="getMatches('Fourball')" />
+      <scoring-summary match-format="Modified Scotch" class="mb-8" :matches="getMatches('Modified Scotch')" />
       <scoring-summary match-format="Alternate Shot" class="mb-8" :matches="getMatches('Alternate Shot')" />
-      <scoring-summary match-format="Scramble" class="mb-8" :matches="getMatches('Scramble')" />
       <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />
     </div>
     <router-link v-if="hasPermission('update:tournaments')" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">

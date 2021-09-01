@@ -48,8 +48,8 @@ export default {
         case -2: return 'Eagle';
         case -1: return 'Birdie';
         case 0: return 'Par';
-        case 1: return 'Bogie';
-        default: return `${this.strokes - this.par} Bogie`;
+        case 1: return 'Bogey';
+        default: return `${this.strokes - this.par} Bogey`;
       }
     },
   },

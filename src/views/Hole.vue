@@ -151,6 +151,7 @@ export default {
                 holeNumber: this.number,
                 playerId: player.playerId,
                 playerName: player.fullName,
+                playerTier: player.tier,
                 strokes: this.readonly ? 0 : this.hole.par,
               });
             }

@@ -19,8 +19,7 @@
 </template>
 
 <script>
-import { DateTime } from 'luxon';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 import ArticleCard from '@/components/cards/article-card';
 import BasePage from '@/components/layout/BasePage';
@@ -29,22 +28,9 @@ import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 export default {
   components: { ArticleCard, BasePage, FloatingActionButton },
 
-  data() {
-    return {
-      articles: [
-        {
-          id: 1,
-          title: 'L.O.T.S... We\'re Back for 2021',
-          imagePath: '/img/lots.jpg',
-          publishedDate: DateTime.fromISO('2021-09-07'),
-          author: 'Jon Ray',
-        },
-      ],
-    };
-  },
-
   computed: {
     ...mapGetters('currentUser', ['hasPermission']),
+    ...mapState('articles', ['articles']),
   },
 };
 </script>

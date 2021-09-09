@@ -1,7 +1,7 @@
 <template>
   <base-card v-on="$listeners">
     <template v-slot:image>
-      <img class="w-full h-56 object-cover object-center" :src="imagePath" alt="image" />
+      <img class="w-full h-56 object-cover object-center" :src="imageUrl" alt="image" />
     </template>
     <h4 class="text-3xl font-raleway-semibold mb-4">
       {{ title }}
@@ -36,7 +36,7 @@ export default {
       type: String,
       required: true,
     },
-    imagePath: {
+    imageUrl: {
       type: String,
       required: true,
     },

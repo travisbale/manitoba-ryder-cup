@@ -16,27 +16,8 @@
       <div class="text-sm text-grey-600 mb-4">
         {{ printDate(article.publishedDate) }}
       </div>
-      <p class="mb-6">
-        Our 4th visit to Lake of the Sandhills will feature the first ever September Ryder, where time is not on the heavy drinker's side.
-        Early tee times and too much time for refills in the evenings, could pose problems for those not "managing their caps".
-      </p>
-      <p class="mb-6">
-        With great success of last year's MM Scotch, the format will again include four different formats:
-        Four ball and MM Scotch on Friday, followed by Alternate Shot and Singles on Saturday.
-      </p>
-      <p>
-        Important items to note for the 13th Annual MB Ryder Cup:
-      </p>
-      <ul class="list-disc list-outside mb-6 ml-6">
-        <li>
-          Three players will be teeing it up for their first ever Ryder: Bale, Martin, and Mansfield
-        </li>
-        <li>7 Golds, 4 Blues, and 5 Whites, make up the field</li>
-        <li>Practice that short game because the 19th hole will award you with more than a round of drinks this time around</li>
-      </ul>
-      <p>
-        We are less than two weeks away, and only eight will come out as Lords of the Sandhills.
-      </p>
+      <!-- eslint-disable-next-line -->
+      <div v-html="article.html" />
     </div>
   </base-page>
 </template>
@@ -45,6 +26,7 @@
 import { DateTime } from 'luxon';
 
 import BasePage from '@/components/layout/BasePage';
+import { mapGetters } from 'vuex';
 
 export default {
   components: { BasePage },
@@ -56,16 +38,12 @@ export default {
     },
   },
 
-  data() {
-    return {
-      article: {
-        id: 1,
-        title: 'L.O.T.S... We\'re Back for 2021',
-        imageUrl: '/img/lots.jpg',
-        publishedDate: DateTime.fromISO('2021-09-07'),
-        author: 'Jon Ray',
-      },
-    };
+  computed: {
+    ...mapGetters('articles', ['getArticle']),
+
+    article() {
+      return this.getArticle(this.articleId);
+    },
   },
 
   methods: {

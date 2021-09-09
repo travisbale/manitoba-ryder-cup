@@ -25,8 +25,9 @@
     </div>
     <div class="pt-6">
       <score-slider v-for="score in currentScores" :key="score.playerId" v-model="score.strokes"
-                    :number="number" :current-score="getCurrentStrokes(score.playerId)" :player="score.playerName"
-                    :par="hole.par" :current-par="getCurrentPar(score.playerId)" :readonly="readonly"
+                    :number="number" :current-score="getCurrentStrokes(score.playerId)" :player-name="score.playerName"
+                    :player-tier="score.playerTier" :par="hole.par" :current-par="getCurrentPar(score.playerId)"
+                    :readonly="readonly"
       />
     </div>
     <div class="p-4 mb-8 bg-white">

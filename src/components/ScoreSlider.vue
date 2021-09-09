@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="flex justify-between text-2xl px-4 pt-2">
-      <div class="font-raleway-semibold">
-        {{ player }}
+      <div class="font-raleway-semibold flex items-center">
+        <div class="mr-3">
+          {{ playerName }}
+        </div>
+        <div class="rounded-full h-3 w-3 mt-0.5" :class="playerTierClass" />
       </div>
       <div>
         {{ newScore }} ({{ scoreUnderPar }})
@@ -48,7 +51,12 @@ export default {
       default: 0,
     },
 
-    player: {
+    playerName: {
+      type: String,
+      required: true,
+    },
+
+    playerTier: {
       type: String,
       required: true,
     },
@@ -82,6 +90,14 @@ export default {
       if (score > 0) return `+${score}`;
       if (score < 0) return score;
       return 'E';
+    },
+
+    playerTierClass() {
+      return {
+        'bg-blue-800': this.playerTier === 'blue',
+        'bg-white border border-grey-400': this.playerTier === 'white',
+        'bg-amber-800': this.playerTier === 'gold',
+      };
     },
   },
 

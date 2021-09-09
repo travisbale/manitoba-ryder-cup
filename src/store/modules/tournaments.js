@@ -11,7 +11,7 @@ export default {
 
   getters: {
     currentTournament(state) {
-      return state.tournaments.length > 0 ? state.tournaments[0] : { id: 0 };
+      return state.tournaments.length > 0 ? state.tournaments[state.tournaments.length - 1] : { id: 0 };
     },
 
     getTournament: (state) => (tournamentId) => {

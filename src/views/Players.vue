@@ -1,7 +1,7 @@
 <template>
   <base-page image-url="/img/mountain-green.webp">
     <template v-slot:header>
-      Tour Players
+      Tournament Players
     </template>
     <div class="p-4 pt-6">
       <p v-if="players.length === 0" class="text-center">

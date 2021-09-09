@@ -39,7 +39,7 @@
             </menu-link>
             <menu-link to="schedule" @click.native="navOpen = false">
               <trophy-icon class="mr-4" />
-              Tournament History
+              History
             </menu-link>
 
             <menu-header>

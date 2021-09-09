@@ -1,10 +1,10 @@
 <template>
-  <base-page :back-link-text="tournament.name"
+  <base-page back-link-text="Leaderboard"
              :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
              image-url="/img/ocean-green.webp"
   >
     <template v-slot:header>
-      {{ match.format }}
+      Scorecard
       <h4 class="font-opensans text-white text-sm">
         {{ match.teeTime | printDateTime }}
       </h4>

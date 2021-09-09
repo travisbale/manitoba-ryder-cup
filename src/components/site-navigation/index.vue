@@ -6,7 +6,7 @@
           <router-link v-if="!transparent" :to="homeLink" class="text-white text-xl font-semibold">
             <div v-if="backLinkText === ''" class="flex items-center">
               <img v-if="!transparent" class="h-12 w-12 object-contain mr-2" src="/img/logo.webp" alt="logo" />
-              DGA Tour
+              Manitoba Ryder Cup
             </div>
             <div v-else class="flex items-center">
               <arrow-left-icon class="ml-2 mr-4" />
@@ -23,23 +23,23 @@
           </div>
           <aside class="transform fixed w-80 h-screen right-0 top-0 duration-300 ease-in-out bg-grey-900 z-20 text-white" :class="translationClass">
             <div class="px-4 pt-4 pb-3 mb-2 font-semibold text-sm tracking-wide bg-deep-purple-800 bg-opacity-75">
-              DGA Tour
+              Manitoba Ryder Cup
             </div>
-            <menu-link to="schedule" @click.native="navOpen = false">
-              <calendar-icon class="mr-4" />
-              Schedule
+            <menu-link to="news" @click.native="navOpen = false">
+              <newspaper-icon class="mr-4" />
+              News & Media
+            </menu-link>
+            <menu-link to="leaderboard" :params="{ tournamentId: currentTournament.id }" @click.native="navOpen = false">
+              <leaderboard-icon class="mr-4" />
+              Leaderboard
             </menu-link>
             <menu-link to="players" @click.native="navOpen = false">
               <groups-icon class="mr-4" />
               Players
             </menu-link>
-            <menu-link to="news" @click.native="navOpen = false">
-              <newspaper-icon class="mr-4" />
-              News & Media
-            </menu-link>
-            <menu-link to="about" @click.native="navOpen = false">
+            <menu-link to="schedule" @click.native="navOpen = false">
               <trophy-icon class="mr-4" />
-              Tour History
+              Tournament History
             </menu-link>
 
             <menu-header>
@@ -72,9 +72,9 @@
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 import ArrowLeftIcon from '@/components/icons/ArrowLeftIcon';
-import CalendarIcon from '@/components/icons/CalendarIcon';
 import GolfBallIcon from '@/components/icons/GolfBallIcon';
 import GroupsIcon from '@/components/icons/GroupsIcon';
+import LeaderboardIcon from '@/components/icons/LeaderboardIcon';
 import LoginIcon from '@/components/icons/LoginIcon';
 import MenuIcon from '@/components/icons/MenuIcon';
 import NewspaperIcon from '@/components/icons/NewspaperIcon';
@@ -86,10 +86,10 @@ import MenuLink from './MenuLink';
 export default {
   components: {
     ArrowLeftIcon,
-    CalendarIcon,
     NewspaperIcon,
     GolfBallIcon,
     GroupsIcon,
+    LeaderboardIcon,
     LoginIcon,
     MenuIcon,
     MenuLink,
@@ -134,17 +134,22 @@ export default {
     },
 
     homeLink() {
-      return this.backLinkRoute || { name: 'schedule' };
+      return this.backLinkRoute || { name: 'splash' };
     },
   },
 
   created() {
     // Check to see if the user is currently logged in
     this.refresh();
+
+    if (this.currentTournament.id === 0) {
+      this.fetchTournaments();
+    }
   },
 
   methods: {
     ...mapActions('currentUser', ['refresh', 'logout']),
+    ...mapActions('tournaments', ['fetchTournaments']),
 
     openNav() {
       this.navOpen = true;

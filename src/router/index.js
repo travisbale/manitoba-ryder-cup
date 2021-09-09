@@ -10,7 +10,7 @@ const router = new VueRouter({
   routes: [{
     path: '/',
     name: 'splash',
-    component: () => import(/* webpackChunkName: "splash" */ '../views/Splash.vue'),
+    component: () => import(/* webpackChunkName: "splash" */ '../views/News.vue'),
   },
   {
     path: '/schedule',

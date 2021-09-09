@@ -1,7 +1,7 @@
 <template>
   <base-page image-url="/img/oceanside.webp">
     <template v-slot:header>
-      Tournament Schedule
+      Tournament History
     </template>
     <div class="p-4 pt-6">
       <p v-if="tournaments.length === 0" class="text-center">

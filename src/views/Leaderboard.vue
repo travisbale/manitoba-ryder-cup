@@ -1,7 +1,7 @@
 <template>
   <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
-      {{ tournament.name }}
+      Leaderboard
     </template>
     <score-bar :tournament-id="tournamentId" />
     <p v-if="matches.length === 0" class="text-center pt-6">

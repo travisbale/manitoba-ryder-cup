@@ -2,7 +2,7 @@
   <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
       {{ tournament.startDate.year }} Leaderboard
-      <h4 class="font-opensans text-white text-sm">
+      <h4 class="font-opensans text-white text-base">
         {{ tournament.location }}
       </h4>
     </template>

@@ -35,7 +35,7 @@
             </menu-link>
             <menu-link to="news" @click.native="navOpen = false">
               <newspaper-icon class="mr-4" />
-              News
+              News & Media
             </menu-link>
             <menu-link to="about" @click.native="navOpen = false">
               <trophy-icon class="mr-4" />

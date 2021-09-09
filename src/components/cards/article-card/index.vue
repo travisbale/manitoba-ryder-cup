@@ -1,10 +1,23 @@
 <template>
   <base-card v-on="$listeners">
-    This is an article
+    <template v-slot:image>
+      <img class="w-full h-56 object-cover object-center" :src="imagePath" alt="image" />
+    </template>
+    <h4 class="text-3xl font-raleway-semibold mb-4">
+      {{ title }}
+    </h4>
+    <p class="font-semibold mb-1">
+      By {{ author }}
+    </p>
+    <p class="text-sm text-grey-600">
+      {{ printDate(publishedDate) }}
+    </p>
   </base-card>
 </template>
 
 <script>
+import { DateTime } from 'luxon';
+
 import BaseCard from '@/components/cards/base-card';
 
 export default {
@@ -14,6 +27,28 @@ export default {
     id: {
       type: Number,
       required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    imagePath: {
+      type: String,
+      required: true,
+    },
+    publishedDate: {
+      type: DateTime,
+      required: true,
+    },
+  },
+
+  methods: {
+    printDate(date) {
+      return date.toLocaleString(DateTime.DATE_FULL);
     },
   },
 };

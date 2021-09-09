@@ -1,7 +1,10 @@
 <template>
   <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
-      Leaderboard
+      {{ tournament.startDate.year }} Leaderboard
+      <h4 class="font-opensans text-white text-sm">
+        {{ tournament.location }}
+      </h4>
     </template>
     <score-bar :tournament-id="tournamentId" />
     <p v-if="matches.length === 0" class="text-center pt-6">
@@ -21,6 +24,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
+import { DateTime } from 'luxon';
 
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
@@ -39,7 +43,11 @@ export default {
 
   data() {
     return {
-      tournament: { name: '' },
+      tournament: {
+        name: '',
+        startDate: DateTime.now(),
+        location: '',
+      },
     };
   },
 

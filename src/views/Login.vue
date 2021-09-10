@@ -70,7 +70,7 @@ export default {
         };
 
         this.submitCredentials(creds).then(() => {
-          this.$router.push({ name: 'schedule' }).then(() => {
+          this.$router.push({ name: 'news' }).then(() => {
             this.$toaster.success('Logged in');
           });
         }).catch((error) => {

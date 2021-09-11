@@ -23,14 +23,14 @@
       <p class="mt-2 whitespace-pre-line">
         {{ player.biography || `${player.firstName} ${player.lastName} has no biography.` }}
       </p>
-      <div class="flex items-center mt-10">
+      <!-- <div class="flex items-center mt-10">
         <div class="mr-3 font-raleway-semibold text-lg mt-1">
           Pre Ryder Confidence
         </div>
         <div class="flex items-center">
           <star-icon v-for="i in 5" :key="i" :class="i >= 0 ? 'text-cyan-800': 'text-grey-400'" />
         </div>
-      </div>
+      </div> -->
     </div>
     <router-link v-if="hasPermission('update:players')" :to="{ name: 'edit-player', params: { playerId: playerId }}">
       <floating-action-button action="edit" />
@@ -45,10 +45,10 @@ import BaseBadge from '@/components/BaseBadge';
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import SectionHeader from '@/components/typography/SectionHeader';
-import StarIcon from '@/components/icons/StarIcon';
+// import StarIcon from '@/components/icons/StarIcon';
 
 export default {
-  components: { BaseBadge, BasePage, FloatingActionButton, SectionHeader, StarIcon },
+  components: { BaseBadge, BasePage, FloatingActionButton, SectionHeader },
 
   props: {
     playerId: {

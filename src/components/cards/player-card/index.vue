@@ -4,10 +4,10 @@
       <template v-slot:image>
         <img class="h-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
-      <base-badge :class="badgeColor">
+      <base-badge :class="badgeColor" class="mb-1">
         {{ tier }}
       </base-badge>
-      <h4 class="text-2xl font-semibold whitespace-nowrap">
+      <h4 class="text-2xl font-raleway-semibold whitespace-nowrap">
         {{ fullName }}
       </h4>
       <div class="font-semibold text-grey-600 mr-2">

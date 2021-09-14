@@ -1,5 +1,5 @@
 <template>
-  <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }">
+  <base-page back-link-text="Tournament Players" :back-link-route="{ name: 'players' }">
     <div class="p-4 border-b border-grey-300 shadow sticky top-0">
       <div class="flex items-center">
         <img class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200" :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()" />

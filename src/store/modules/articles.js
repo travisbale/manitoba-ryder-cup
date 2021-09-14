@@ -54,7 +54,7 @@ export default {
       {
         id: 1,
         title: 'L.O.T.S... We\'re Back for 2021',
-        imageUrl: '/img/lots.jpg',
+        imageUrl: '/img/lots-sign.jpg',
         publishedDate: DateTime.fromISO('2021-09-07'),
         author: 'Jon Ray',
         html: `

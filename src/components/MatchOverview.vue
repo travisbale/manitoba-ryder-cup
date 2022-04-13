@@ -105,8 +105,8 @@ export default {
     statusTextColors(index) {
       if (this.scores[index] != null) {
         return {
-          'bg-blue-800': this.scores[index].blueTeamScore > this.scores[index].redTeamScore,
-          'bg-red-800': this.scores[index].blueTeamScore < this.scores[index].redTeamScore,
+          'bg-red-800': this.scores[index].blueTeamScore > this.scores[index].redTeamScore,
+          'bg-blue-800': this.scores[index].blueTeamScore < this.scores[index].redTeamScore,
           'bg-grey-300': this.scores[index].blueTeamScore === this.scores[index].redTeamScore,
           'text-white': this.scores[index].blueTeamScore !== this.scores[index].redTeamScore,
         };

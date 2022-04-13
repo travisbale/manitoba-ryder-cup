@@ -1,6 +1,6 @@
 <template>
   <div v-if="matches.length > 0">
-    <section-header class="text-center mb-2">
+    <section-header class="text-center mb-6">
       {{ matchFormat }}
       <template v-slot:subheader>
         {{ matchDate | printDate }}

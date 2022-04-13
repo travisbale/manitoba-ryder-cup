@@ -9,7 +9,7 @@
         {{ match.teeTime | printDateTime }}
       </h4>
     </template>
-    <div class="p-4 pt-6">
+    <div class="p-4 pt-6 bg-grey-100">
       <section-header class="mb-4">
         {{ teeSet.course }}
         <template v-slot:subheader>

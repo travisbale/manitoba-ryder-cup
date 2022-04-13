@@ -1,15 +1,14 @@
 <template>
   <router-link :to="{ name: 'scorecard', params: { tournamentId: tournamentId, matchId: id }}" class="block">
-    <div class="py-4">
-      <div class="shadow rounded border border-grey-400 bg-white">
-        <div class="flex">
+    <div class="mb-6">
+      <div class="shadow rounded-md border border-grey-300 bg-white">
+        <div class="flex border-b border-grey-300">
           <team-names :members="blueTeam" team-color="Blue" />
           <div class="flex items-center w-1/5 justify-center text-center">
             <match-details :status-text="getStatusText()" :match-status="currentScore.matchStatus" />
           </div>
           <team-names :members="redTeam" team-color="Red" />
         </div>
-        <hr class="border-grey-300" />
         <div class="flex p-4 justify-center">
           <div v-for="hole in holes" :key="hole">
             <div class="flex justify-center items-center h-5 w-5 rounded-full mx-0.5" :class="statusTextColors(hole - 1)">

@@ -3,7 +3,7 @@
     <template v-slot:header>
       News & Media
     </template>
-    <div class="p-4 pt-6">
+    <div class="p-4 pt-6 bg-grey-100">
       <p v-if="articles.length === 0" class="text-center">
         There are currently no published articles.
       </p>

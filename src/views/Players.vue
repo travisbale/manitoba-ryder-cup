@@ -3,7 +3,7 @@
     <template v-slot:header>
       Tournament Players
     </template>
-    <div class="p-4 pt-6">
+    <div class="p-4 pt-6 bg-grey-100">
       <p v-if="players.length === 0" class="text-center">
         There are currently no players registered.
       </p>

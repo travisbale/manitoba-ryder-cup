@@ -12,8 +12,8 @@
         <hr class="border-grey-300" />
         <div class="flex p-4 justify-center">
           <div v-for="hole in holes" :key="hole">
-            <div class="flex justify-center items-center h-5 w-5 rounded-full mr-0.5" :class="statusTextColors(hole - 1)">
-              <div class="font-bold tracking-tighter text-sm">
+            <div class="flex justify-center items-center h-5 w-5 rounded-full mx-0.5" :class="statusTextColors(hole - 1)">
+              <div class="font-semibold tracking-tighter text-sm">
                 {{ hole }}
               </div>
             </div>
@@ -106,14 +106,14 @@ export default {
     statusTextColors(index) {
       if (this.scores[index] != null) {
         return {
-          'text-blue-800': this.scores[index].blueTeamScore > this.scores[index].redTeamScore,
-          'text-red-800': this.scores[index].blueTeamScore < this.scores[index].redTeamScore,
-          'text-grey-900': this.scores[index].blueTeamScore === this.scores[index].redTeamScore,
-          // 'text-white': this.scores[index].blueTeamScore !== this.scores[index].redTeamScore,
+          'bg-blue-800': this.scores[index].blueTeamScore > this.scores[index].redTeamScore,
+          'bg-red-800': this.scores[index].blueTeamScore < this.scores[index].redTeamScore,
+          'bg-grey-300': this.scores[index].blueTeamScore === this.scores[index].redTeamScore,
+          'text-white': this.scores[index].blueTeamScore !== this.scores[index].redTeamScore,
         };
       }
 
-      return 'text-grey-300';
+      return 'text-grey-400';
     },
   },
 };

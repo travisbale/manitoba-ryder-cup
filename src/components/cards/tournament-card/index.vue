@@ -1,7 +1,10 @@
 <template>
   <base-card v-on="$listeners">
-    <h2 class="font-raleway-semibold text-2xl mb-1">
+    <div class="mb-1">
       {{ location }}
+    </div>
+    <h2 class="font-raleway-semibold text-xl mb-1">
+      {{ `${getTeamName('Blue')} vs ${getTeamName('Red')}` }}
     </h2>
     <div class="text-sm text-grey-600">
       {{ startDate | printDate }} &ndash; {{ endDate | printDate }}
@@ -40,6 +43,16 @@ export default {
     location: {
       type: String,
       required: true,
+    },
+    teams: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  methods: {
+    getTeamName(teamColor) {
+      return `Team ${this.teams.find((t) => t.name === teamColor)?.captain?.lastName}`;
     },
   },
 };

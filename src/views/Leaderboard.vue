@@ -1,12 +1,15 @@
 <template>
   <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
+      <h4 class="font-opensans text-white text-base">
+        {{ `${getTeamName('Blue')} vs ${getTeamName('Red')}` }}
+      </h4>
       {{ tournament.startDate.year }} Leaderboard
       <h4 class="font-opensans text-white text-base">
         {{ tournament.location }}
       </h4>
     </template>
-    <score-bar :tournament-id="tournamentId" />
+    <score-bar :tournament-id="tournamentId" :matches="matches" />
     <p v-if="matches.length === 0" class="text-center pt-6">
       There are currently no matches scheduled.
     </p>
@@ -47,6 +50,7 @@ export default {
         name: '',
         startDate: DateTime.now(),
         location: '',
+        teams: [],
       },
     };
   },
@@ -68,6 +72,10 @@ export default {
   methods: {
     ...mapActions('matches', ['fetchMatches']),
     ...mapActions('tournaments', ['fetchTournament']),
+
+    getTeamName(teamColor) {
+      return `Team ${this.tournament.teams.find((t) => t.name === teamColor)?.captain?.lastName}`;
+    },
   },
 };
 </script>

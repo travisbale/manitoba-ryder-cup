@@ -10,7 +10,7 @@ export default {
         title: 'In Memoriam...',
         showTitle: false,
         imageUrl: '/img/rip-dm.jpg',
-        publishedDate: DateTime.fromISO('2021-05-12'),
+        publishedDate: DateTime.fromISO('2022-04-12'),
         author: 'Tournament Commissioner',
         html: `
           <p class="mb-6">

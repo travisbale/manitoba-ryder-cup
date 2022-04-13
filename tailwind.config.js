@@ -332,6 +332,10 @@ module.exports = {
         '5xl': '3rem',
         '6xl': '4rem',
       },
+      gridTemplateColumns: {
+        20: 'repeat(20, minmax(0, 1fr))',
+        40: 'repeat(40, minmax(0, 1fr))',
+      },
       letterSpacing: {
         widest: '0.25em',
       },

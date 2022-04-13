@@ -6,8 +6,34 @@ export default {
   state: {
     articles: [
       {
+        id: 4,
+        title: 'In Memoriam...',
+        showTitle: false,
+        imageUrl: '/img/rip-dm.jpg',
+        publishedDate: DateTime.fromISO('2021-05-12'),
+        author: 'Tournament Commissioner',
+        html: `
+          <p class="mb-6">
+            It is with great sadness that we must announce the inability of our colleague and friend, DM, to participate in
+            the 2022 Manitoba Ryder Cup.
+          </p>
+          <p class="mb-6">
+            DM had been a staple at Manitoba's most prestigious golf event for over 5 years, and during that time he had
+            established a reputation as a fierce competitor, heavy drinker, and above all, an outstanding teammate.
+            Unfortunately, as all CAs know all too well, "Month End" comes for us all and it waits for no one.
+          </p>
+          <p class="mb-6">
+            While you may not be with us in Kenora this year, know that we will hold you in our hearts forever.
+          </p>
+          <p class="mb-6">
+            Godspeed, DM, until we meet again...
+          </p>
+        `,
+      },
+      {
         id: 2,
         title: 'Captain Phin',
+        showTitle: true,
         imageUrl: '/img/captain-phin.jpg',
         publishedDate: DateTime.fromISO('2021-09-09'),
         author: 'Tournament Commissioner',
@@ -31,12 +57,13 @@ export default {
       {
         id: 3,
         title: 'Captain Macaulay',
+        showTitle: true,
         imageUrl: '/img/captain-macaulay.jpg',
         publishedDate: DateTime.fromISO('2021-09-09'),
         author: 'Tournament Commissioner',
         html: `
-          <p class="mb-6">
-            Some may call him Captain America, as Jordan Spieth has the same hate for him as Jordan does towards Patty
+        <p class="mb-6">
+        Some may call him Captain America, as Jordan Spieth has the same hate for him as Jordan does towards Patty
             Reed. Moving Jordan's ball at 2016 Hazeltine was a gesture none of us can comprehend, but it's these acts of
             outrageousness that could write this Captain's name in the MB Ryder history books.
           </p>
@@ -54,6 +81,7 @@ export default {
       {
         id: 1,
         title: 'L.O.T.S... We\'re Back for 2021',
+        showTitle: true,
         imageUrl: '/img/lots-sign.jpg',
         publishedDate: DateTime.fromISO('2021-09-07'),
         author: 'Jon Ray',

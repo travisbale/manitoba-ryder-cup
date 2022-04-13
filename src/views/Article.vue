@@ -1,10 +1,8 @@
 <template>
   <base-page back-link-text="News & Media" :back-link-route="{ name: 'news' }">
-    <div class="flex justify-center items-center h-60 md:h-72 text-center bg-cover bg-center"
-         :style="`background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('${article.imageUrl}')`"
-    >
+    <div class="flex justify-center items-center h-60 md:h-72 text-center bg-cover bg-center" :style="backgroundImage">
       <div class="text-white">
-        <h1 class="font-raleway-bold text-4xl leading-none mb-4">
+        <h1 v-if="article.showTitle" class="font-raleway-bold text-4xl leading-none mb-4">
           {{ article.title }}
         </h1>
       </div>
@@ -43,6 +41,14 @@ export default {
 
     article() {
       return this.getArticle(this.articleId);
+    },
+
+    backgroundImage() {
+      if (this.article.showTitle) {
+        return `background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('${this.article.imageUrl}')`;
+      }
+
+      return `background-image: url('${this.article.imageUrl}')`;
     },
   },
 

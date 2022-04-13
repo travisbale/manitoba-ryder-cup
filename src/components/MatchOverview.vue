@@ -10,11 +10,9 @@
           <team-names :members="redTeam" team-color="Red" />
         </div>
         <div class="flex p-4 justify-center">
-          <div v-for="hole in holes" :key="hole">
-            <div class="flex justify-center items-center h-5 w-5 rounded-full mx-0.5" :class="statusTextColors(hole - 1)">
-              <div class="font-semibold tracking-tighter text-sm">
-                {{ hole }}
-              </div>
+          <div v-for="hole in holes" :key="hole" class="flex justify-center items-center font-semibold tracking-tighter text-sm">
+            <div class="h-5 w-5 rounded-full text-center" style="margin: 0 1px;" :class="statusTextColors(hole - 1)">
+              {{ hole }}
             </div>
           </div>
         </div>

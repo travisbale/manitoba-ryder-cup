@@ -1,16 +1,16 @@
 <template>
-  <div class="w-2/5 justify-end px-3 py-4 rounded-t leading-tight" :class="borderColor">
-    <div class="font-italic">
-      {{ getMember(1).firstName }}
-    </div>
-    <div class="font-bold uppercase">
-      {{ getMember(1).lastName }}
-    </div>
-    <div v-if="members.length > 1">
-      <div class="font-italic mt-4">
-        {{ getMember(2).firstName }}
+  <div class="flex items-center w-2/5 px-3 py-4 rounded-t leading-tight" :class="borderColor">
+    <div>
+      <div class="font-italic">
+        {{ getMember(1).firstName }}
       </div>
       <div class="font-bold uppercase">
+        {{ getMember(1).lastName }}
+      </div>
+      <div v-if="members.length > 1" class="font-italic mt-4">
+        {{ getMember(2).firstName }}
+      </div>
+      <div v-if="members.length > 1" class="font-bold uppercase">
         {{ getMember(2).lastName }}
       </div>
     </div>
@@ -34,7 +34,7 @@ export default {
   computed: {
     borderColor() {
       return {
-        'border-r-4 border-red-800 text-right': this.teamColor === 'Red',
+        'border-r-4 border-red-800 justify-end text-right': this.teamColor === 'Red',
         'border-l-4 border-blue-800': this.teamColor === 'Blue',
       };
     },

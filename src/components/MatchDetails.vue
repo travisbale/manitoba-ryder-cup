@@ -13,7 +13,7 @@
       </span>
       <span class="text-6xl">{{ statusText.substring(statusText.indexOf('&') + 2) }}</span>
     </div>
-    <div v-else class="text-4xl">
+    <div v-else class="text-5xl">
       {{ statusText }}
     </div>
   </div>

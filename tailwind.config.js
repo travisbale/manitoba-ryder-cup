@@ -314,6 +314,7 @@ module.exports = {
         opensans: ['OpenSans'],
         semibold: ['OpenSansSemiBold'],
         bold: ['OpenSansBold'],
+        italic: ['OpenSansItalic'],
         'raleway-light': ['RalewayLight'],
         raleway: ['Raleway'],
         'raleway-semibold': ['RalewaySemibold'],

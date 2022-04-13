@@ -6,7 +6,7 @@
         {{ matchDate | printDate }}
       </template>
     </section-header>
-    <match-summary v-for="match in matches" :key="match.id" v-bind="match" />
+    <match-overview v-for="match in matches" :key="match.id" v-bind="match" />
   </div>
 </template>
 
@@ -14,10 +14,10 @@
 import SectionHeader from '@/components/typography/SectionHeader';
 import datetimeFilters from '@/mixins/filters/datetime';
 
-import MatchSummary from './MatchSummary';
+import MatchOverview from './MatchOverview';
 
 export default {
-  components: { MatchSummary, SectionHeader },
+  components: { MatchOverview, SectionHeader },
 
   mixins: [datetimeFilters],
 

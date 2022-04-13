@@ -6,7 +6,7 @@ services:
     restart: always
     container_name: mb-ryder-cup
     command: ['npm', 'run', 'serve']
-    env_file: ./.env.local
+    env_file: .env/local.env
     ports:
       - '8081:8080'
     working_dir: /app

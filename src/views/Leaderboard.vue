@@ -2,7 +2,7 @@
   <base-page image-url="/img/crowd.webp">
     <template v-slot:header>
       <h4 class="font-opensans text-white text-base">
-        {{ `${getTeamName('Blue')} vs ${getTeamName('Red')}` }}
+        {{ `${getTeamName('Blue')} vs. ${getTeamName('Red')}` }}
       </h4>
       {{ tournament.startDate.year }} Leaderboard
       <h4 class="font-opensans text-white text-base">
@@ -74,7 +74,8 @@ export default {
     ...mapActions('tournaments', ['fetchTournament']),
 
     getTeamName(teamColor) {
-      return `Team ${this.tournament.teams.find((t) => t.name === teamColor)?.captain?.lastName}`;
+      const teamName = this.tournament.teams.find((t) => t.name === teamColor)?.captain?.lastName;
+      return `Team ${teamName || teamColor}`;
     },
   },
 };

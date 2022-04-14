@@ -64,6 +64,11 @@ export default {
       type: DateTime,
       required: true,
     },
+
+    format: {
+      type: String,
+      required: true,
+    },
   },
 
   data() {
@@ -74,11 +79,11 @@ export default {
 
   computed: {
     redTeam() {
-      return this.participants.filter((p) => p.team === 'Red');
+      return this.getTeamMembers('Red');
     },
 
     blueTeam() {
-      return this.participants.filter((p) => p.team === 'Blue');
+      return this.getTeamMembers('Blue');
     },
 
     currentScore() {
@@ -91,12 +96,6 @@ export default {
 
   methods: {
     getStatusText() {
-      const now = DateTime.now();
-
-      if (now < this.teeTime) {
-        return this.teeTime.toLocaleString(DateTime.TIME_24_SIMPLE);
-      }
-
       return this.currentScore.statusText;
     },
 
@@ -111,6 +110,22 @@ export default {
       }
 
       return 'text-grey-400';
+    },
+
+    getTeamMembers(teamColor) {
+      if (this.participants.length > 0) {
+        return this.participants.filter((p) => p.team === teamColor);
+      }
+
+      const participants = [
+        { firstName: 'Player', lastName: 'One' },
+      ];
+
+      if (this.format !== 'Singles') {
+        participants.push({ firstName: 'Player', lastName: 'Two' });
+      }
+
+      return participants;
     },
   },
 };

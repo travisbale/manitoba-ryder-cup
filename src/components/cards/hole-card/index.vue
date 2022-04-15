@@ -112,17 +112,21 @@ export default {
   },
 
   methods: {
-    getTeamName(team) {
+    getTeamName(teamColor) {
       // Reduce the list of players to only those on the given team
-      const players = this.participants.filter((p) => p.team === team);
+      const players = this.participants.filter((p) => p.team === teamColor);
 
       if (players.length === 1) {
         // Singles match team name is just the player's last name
         return players[0].lastName;
       }
 
-      // Team of two is both last names separated by "/"
-      return `${players[0].lastName} / ${players[1].lastName}`;
+      if (players.length === 2) {
+        // Team of two is both last names separated by "/"
+        return `${players[0].lastName} / ${players[1].lastName}`;
+      }
+
+      return `Team ${teamColor}`;
     },
   },
 };

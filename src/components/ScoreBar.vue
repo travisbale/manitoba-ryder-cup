@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'leaderboard', params: { tournamentId } }" class="block sticky top-0">
     <div class="relative shadow border-b border-grey-400 bg-white">
       <div class="grid grid-cols-40">
-        <div v-for="i in 40" :key="i" class="h-20" :class="getClassesForBar(i)" />
+        <div v-for="i in 40" :key="i" class="h-20" :class="getBlockClasses(i)" />
       </div>
       <div class="absolute top-0 left-0 right-0">
         <div class="flex px-2 -mt-0.5">
@@ -37,6 +37,11 @@ export default {
       type: Number,
       required: true,
     },
+
+    matches: {
+      type: Array,
+      required: true,
+    },
   },
 
   computed: {
@@ -45,6 +50,14 @@ export default {
 
     tournament() {
       return this.getTournament(this.tournamentId);
+    },
+
+    projectedBluePoints() {
+      return this.getProjectedPoints('Blue');
+    },
+
+    projectedRedPoints() {
+      return this.getProjectedPoints('Red');
     },
   },
 
@@ -66,37 +79,52 @@ export default {
       return this.getTeam(teamName).points || 0;
     },
 
-    getClassesForBar(index) {
+    getBlockClasses(index) {
       const blueScore = this.getScore('Blue') * 2;
+      const projBlueScore = this.projectedBluePoints * 2 + blueScore;
       const redScore = this.getScore('Red') * 2;
+      const projRedScore = this.projectedRedPoints * 2 + redScore;
+      const blueBlock = index <= blueScore;
+      const projBlueBlock = !blueBlock && index <= projBlueScore;
+      const greyBlock = !blueBlock && !projBlueBlock && index <= 40 - projRedScore;
+      const projRedBlock = !blueBlock && !projBlueBlock && !greyBlock && index <= 40 - redScore;
+      const redBlock = !blueBlock && !projBlueBlock && !greyBlock && !projRedBlock;
       const centerBlock = index === 20;
-      const lastBlock = index === 40;
-      const needsBorder = index % 2 === 0 && !lastBlock;
-      const blueBlock = blueScore >= index;
-      const lastBlueBlock = blueScore === index;
-      const redBlock = redScore >= (41 - index);
 
       return {
-        'border-r': needsBorder,
-        'border-grey-900': centerBlock,
-        'border-blue-200': needsBorder && blueBlock && !lastBlueBlock,
-        'border-red-200': needsBorder && redBlock,
-        'border-white': needsBorder && !blueBlock && !centerBlock && !redBlock,
-
         'bg-blue-800': blueBlock,
+        'bg-blue-200': projBlueBlock,
+        'bg-grey-200': greyBlock,
+        'bg-red-200': projRedBlock,
         'bg-red-800': redBlock,
-        'bg-grey-300': !redBlock && !blueBlock,
+        'border-r': index % 2 === 0,
+        'border-grey-900': centerBlock,
+        'border-white': greyBlock && !centerBlock,
+        'border-blue-100': projBlueBlock && !centerBlock,
+        'border-blue-300': blueBlock && !centerBlock,
+        'border-red-100': projRedBlock && !centerBlock,
+        'border-red-300': redBlock && !centerBlock,
       };
     },
 
-    shouldColorHalfPoint(index, color) {
-      const score = this.getScore(color);
+    getProjectedPoints(color) {
+      let projectedPoints = 0;
 
-      if (color === 'Blue') {
-        return score % 1 !== 0 && Math.ceil(score) === index;
-      }
+      this.matches.forEach((match) => {
+        if (match.scores.length > 0 && !match.finished) {
+          const { matchStatus } = match.scores[match.scores.length - 1];
 
-      return score % 1 !== 0 && Math.floor(score) === (20 - index);
+          if (matchStatus === 0) {
+            projectedPoints += 0.5;
+          } else if (color === 'Red' && matchStatus > 0) {
+            projectedPoints++;
+          } else if (color === 'Blue' && matchStatus < 0) {
+            projectedPoints++;
+          }
+        }
+      });
+
+      return projectedPoints;
     },
   },
 };

@@ -94,9 +94,9 @@ export default {
 
     playerTierClass() {
       return {
-        'bg-blue-800': this.playerTier === 'blue',
+        'bg-blue-600': this.playerTier === 'blue',
         'bg-white border border-grey-400': this.playerTier === 'white',
-        'bg-amber-800': this.playerTier === 'gold',
+        'bg-amber-600': this.playerTier === 'gold',
       };
     },
   },

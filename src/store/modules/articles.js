@@ -2,9 +2,38 @@ import { DateTime } from 'luxon';
 
 export default {
   namespaced: true,
-
   state: {
     articles: [
+      {
+        id: 5,
+        title: 'Ontario, More to Discover!',
+        showTitle: true,
+        imageUrl: '/img/husky-the-musky.jpg',
+        publishedDate: DateTime.fromISO('2022-04-19'),
+        author: 'Tournament Commissioner',
+        html: `
+          <p class="mb-6">
+            After a tumultuous couple of COVID ridden years, the Ryder Cup will make its glorious return to June in 2022.
+            And after spraying dozens of balls towards the Ontario shoreline during last year's event at Buffalo Point, 
+            it only made sense that we go the extra mile and officially cross the border to find our next venue in Kenora
+            for 2022.
+          </p>
+          <p class="mb-6">
+            This year's event will feature the same four formats that by now veteran participants should be very familiar
+            with. The tournament will begin Friday morning with Fourball, followed by MM Scotch in the afternoon. Play 
+            will continue Saturday morning with Alternate shot, and will be concluded in the afternoon with the Singles 
+            matches.
+          </p>
+          <p class="mb-6">
+            With the first tee time less than 2 months away, preparations are well underway as serious golfers have begun
+            fine tuning their swings in the simulator, while serious drinkers having been ramping up their tolerances on
+            the curling ice.
+          </p>
+          <p class="mb-6">
+            Stay tuned for more updates as the field is finalized and the start of the event approaches.
+          </p>
+        `,
+      },
       {
         id: 4,
         title: 'In Memoriam...',

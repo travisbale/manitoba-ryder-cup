@@ -1,13 +1,34 @@
 <template>
   <base-card v-on="$listeners">
-    <div class="mb-1 text-sm">
+    <div class="mb-1 text-2xl font-raleway-semibold text-center">
       {{ location }}
     </div>
-    <h2 class="font-raleway-semibold text-xl mb-1">
-      {{ `${getTeamName('Blue')} vs. ${getTeamName('Red')}` }}
-    </h2>
-    <div class="text-sm text-grey-600">
+    <div class="text-sm text-grey-600 text-center mb-4">
       {{ startDate | printDate }} &ndash; {{ endDate | printDate }}
+    </div>
+    <div class="flex">
+      <div class="w-1/2 pr-4">
+        <div class="flex justify-center">
+          <div class="flex items-center font-bold leading-none text-blue-800">
+            <span class="text-6xl tracking-tighter mr-1">{{ Math.trunc(getTeamScore('Blue')) }}</span>
+            <span v-if="getTeamScore('Red') % 1 !== 0" class="text-3xl pt-1">&#189;</span>
+          </div>
+        </div>
+        <div class="text-center">
+          Team {{ getTeamName('Blue') }}
+        </div>
+      </div>
+      <div class="w-1/2 pl-4">
+        <div class="flex justify-center">
+          <div class="flex items-center mr-2 font-bold leading-none text-red-800">
+            <span class="text-6xl tracking-tighter mr-1">{{ Math.trunc(getTeamScore('Red')) }}</span>
+            <span v-if="getTeamScore('Red') % 1 !== 0" class="text-3xl pt-1">&#189;</span>
+          </div>
+        </div>
+        <div class="text-center">
+          Team {{ getTeamName('Red') }}
+        </div>
+      </div>
     </div>
   </base-card>
 </template>
@@ -53,7 +74,11 @@ export default {
   methods: {
     getTeamName(teamColor) {
       const teamName = this.teams.find((t) => t.name === teamColor)?.captain?.lastName;
-      return `Team ${teamName || teamColor}`;
+      return teamName || teamColor;
+    },
+
+    getTeamScore(teamColor) {
+      return this.teams.find((t) => t.name === teamColor).points;
     },
   },
 };

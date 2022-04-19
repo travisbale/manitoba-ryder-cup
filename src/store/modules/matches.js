@@ -53,7 +53,13 @@ export default {
     },
 
     fetchMatches({ commit }, tournamentId) {
-      const url = `${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournamentId}/matches`;
+      let url = `${process.env.VUE_APP_SCORECARD_URL}/v1/`;
+
+      if (tournamentId == null) {
+        url += 'matches';
+      } else {
+        url += `tournaments/${tournamentId}/matches`;
+      }
 
       return axios.get(url).then((response) => {
         commit('setMatches', response.data);

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <site-navigation :back-link-text="backLinkText" :back-link-route="backLinkRoute" />
-    <div class="lg:container lg:mx-auto">
+    <div class="lg:container lg:mx-auto lg:max-w-3xl">
       <image-header v-if="$slots.header" :image-url="imageUrl">
         <slot name="header" />
       </image-header>

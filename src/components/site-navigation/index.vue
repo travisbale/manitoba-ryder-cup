@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="py-2" :class="{ 'transparent': transparent, 'bg-grey-900': !transparent }">
-      <div class="flex items-center justify-between lg:container lg:mx-auto">
+      <div class="flex items-center justify-between lg:container lg:mx-auto lg:max-w-3xl">
         <div class="flex items-center h-12">
           <router-link v-if="!transparent" :to="homeLink" class="text-white text-xl font-semibold">
             <div v-if="backLinkText === ''" class="flex items-center">

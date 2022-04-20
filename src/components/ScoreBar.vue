@@ -1,8 +1,8 @@
 <template>
   <router-link :to="{ name: 'leaderboard', params: { tournamentId } }" class="block sticky top-0">
     <div class="relative shadow border-b border-grey-400 bg-white">
-      <div class="grid grid-cols-40">
-        <div v-for="i in 40" :key="i" class="h-20" :class="getBlockClasses(i)" />
+      <div class="grid" :class="'grid-cols-' + numBars">
+        <div v-for="i in numBars" :key="i" class="h-20" :class="getBlockClasses(i)" />
       </div>
       <div class="absolute top-0 left-0 right-0">
         <div class="flex px-2 -mt-0.5">
@@ -59,6 +59,10 @@ export default {
     projectedRedPoints() {
       return this.getProjectedPoints('Red');
     },
+
+    numBars() {
+      return this.matches.length * 2;
+    },
   },
 
   methods: {
@@ -86,10 +90,10 @@ export default {
       const projRedScore = this.projectedRedPoints * 2 + redScore;
       const blueBlock = index <= blueScore;
       const projBlueBlock = !blueBlock && index <= projBlueScore;
-      const greyBlock = !blueBlock && !projBlueBlock && index <= 40 - projRedScore;
-      const projRedBlock = !blueBlock && !projBlueBlock && !greyBlock && index <= 40 - redScore;
+      const greyBlock = !blueBlock && !projBlueBlock && index <= this.numBars - projRedScore;
+      const projRedBlock = !blueBlock && !projBlueBlock && !greyBlock && index <= this.numBars - redScore;
       const redBlock = !blueBlock && !projBlueBlock && !greyBlock && !projRedBlock;
-      const centerBlock = index === 20;
+      const centerBlock = index === this.matches.length;
 
       return {
         'bg-blue-800': blueBlock,
@@ -97,7 +101,7 @@ export default {
         'bg-grey-200': greyBlock,
         'bg-red-200': projRedBlock,
         'bg-red-800': redBlock,
-        'border-r': index % 2 === 0,
+        'border-r': index % 2 === 0 || centerBlock,
         'border-grey-900': centerBlock,
         'border-white': greyBlock && !centerBlock,
         'border-blue-100': projBlueBlock && !centerBlock,

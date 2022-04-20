@@ -3,10 +3,30 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: [
-    './public/**/*.html',
-    './src/**/*.vue',
-  ],
+  purge: {
+    content: [
+      './public/**/*.html',
+      './src/**/*.vue',
+    ],
+    safelist: [
+      'grid-cols-20',
+      'grid-cols-22',
+      'grid-cols-24',
+      'grid-cols-26',
+      'grid-cols-28',
+      'grid-cols-30',
+      'grid-cols-32',
+      'grid-cols-34',
+      'grid-cols-36',
+      'grid-cols-38',
+      'grid-cols-40',
+      'grid-cols-42',
+      'grid-cols-44',
+      'grid-cols-46',
+      'grid-cols-48',
+      'grid-cols-50',
+    ],
+  },
   theme: {
     colors: {
       red: {
@@ -334,7 +354,21 @@ module.exports = {
       },
       gridTemplateColumns: {
         20: 'repeat(20, minmax(0, 1fr))',
+        22: 'repeat(22, minmax(0, 1fr))',
+        24: 'repeat(24, minmax(0, 1fr))',
+        26: 'repeat(26, minmax(0, 1fr))',
+        28: 'repeat(28, minmax(0, 1fr))',
+        30: 'repeat(30, minmax(0, 1fr))',
+        32: 'repeat(32, minmax(0, 1fr))',
+        34: 'repeat(34, minmax(0, 1fr))',
+        36: 'repeat(36, minmax(0, 1fr))',
+        38: 'repeat(38, minmax(0, 1fr))',
         40: 'repeat(40, minmax(0, 1fr))',
+        42: 'repeat(42, minmax(0, 1fr))',
+        44: 'repeat(44, minmax(0, 1fr))',
+        46: 'repeat(46, minmax(0, 1fr))',
+        48: 'repeat(48, minmax(0, 1fr))',
+        50: 'repeat(50, minmax(0, 1fr))',
       },
       letterSpacing: {
         widest: '0.25em',

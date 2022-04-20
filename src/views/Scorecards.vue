@@ -4,18 +4,18 @@
       My Rounds
     </template>
     <tabs>
-      <tab title="Tournaments" class="p-4 pt-6">
+      <tab title="Tournaments" class="px-2 pt-6 bg-grey-100">
         <p v-if="tournaments.length === 0" class="text-center">
           You have not participated in any tournaments yet.
         </p>
         <div v-for="tournament in tournaments" :key="tournament.id">
-          <section-header class="mb-3 text-center">
-            {{ tournament.name }}
+          <section-header class="mb-6 text-center">
+            {{ tournament.location }}
             <template v-slot:subheader>
               {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}
             </template>
           </section-header>
-          <match-summary v-for="match in getMatches(tournament.id)" :key="match.id" v-bind="match" />
+          <match-overview v-for="match in getMatches(tournament.id)" :key="match.id" v-bind="match" />
         </div>
       </tab>
 
@@ -34,14 +34,14 @@ import { mapActions, mapState } from 'vuex';
 import { DateTime } from 'luxon';
 
 import BasePage from '@/components/layout/BasePage';
-import MatchSummary from '@/components/MatchSummary';
+import MatchOverview from '@/components/MatchOverview';
 import SectionHeader from '@/components/typography/SectionHeader';
 import Tab from '@/components/tabs/Tab';
 import Tabs from '@/components/tabs/Tabs';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BasePage, MatchSummary, SectionHeader, Tab, Tabs },
+  components: { BasePage, MatchOverview, SectionHeader, Tab, Tabs },
 
   filters: {
     printDate(date) {
@@ -90,6 +90,10 @@ export default {
 
       return axios.get(url).then((response) => {
         this.matches = response.data;
+
+        for (let i = 0; i < this.matches.length; i++) {
+          this.matches[i].teeTime = DateTime.fromISO(this.matches[i].teeTime);
+        }
       });
     },
 

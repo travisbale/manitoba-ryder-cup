@@ -9,57 +9,39 @@
       </div>
     </template>
     <tabs>
-      <tab title="Details" class="p-4">
-        <base-input v-model="tournament.name" label="Tournament Name" required />
-        <div class="grid grid-cols-2 gap-4">
-          <div>
-            <date-picker v-model="tournament.startDate" label="Start Date" required />
-          </div>
-          <div>
-            <date-picker v-model="tournament.endDate" label="End Date" required />
-          </div>
-        </div>
-        <base-input v-model="tournament.location" label="Tournament Location" />
+      <tab title="Details" class="px-4 py-6">
+        <tournament-details v-bind="tournament" />
       </tab>
 
-      <tab title="Players">
-        <tournament-players />
+      <tab title="Red Team">
+        <team-members team-color="Red" :tournament-id="tournamentId" :available-players="availablePlayers" :members="redTeamPlayers" />
       </tab>
 
-      <tab title="Rounds" class="p-4">
-        <tournament-rounds />
+      <tab title="Blue Team">
+        <team-members team-color="Blue" :tournament-id="tournamentId" :available-players="availablePlayers" :members="blueTeamPlayers" />
+      </tab>
+
+      <tab title="Matches" class="px-4 py-6">
+        <tournament-matches />
       </tab>
     </tabs>
-
-    <div class="flex justify-end px-4">
-      <router-link :to="getPreviousPage()" class="block">
-        <base-button type="secondary" class="mr-2">
-          Cancel
-        </base-button>
-      </router-link>
-      <base-button :loading="saving" @click="clickSaveTournament">
-        Save
-      </base-button>
-    </div>
   </base-page>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { DateTime } from 'luxon';
 
-import BaseButton from '@/components/buttons/BaseButton';
-import BaseInput from '@/components/forms/BaseInput';
 import BasePage from '@/components/layout/BasePage';
-import DatePicker from '@/components/forms/DatePicker';
 import Tab from '@/components/tabs/Tab';
 import Tabs from '@/components/tabs/Tabs';
 
-import TournamentPlayers from './tabs/TournamentPlayers';
-import TournamentRounds from './tabs/TournamentRounds';
+import TeamMembers from './components/TeamMembers';
+import TournamentDetails from './components/TournamentDetails';
+import TournamentMatches from './components/TournamentMatches';
 
 export default {
-  components: { BaseButton, BaseInput, BasePage, DatePicker, Tabs, Tab, TournamentPlayers, TournamentRounds },
+  components: { BasePage, Tabs, Tab, TournamentDetails, TeamMembers, TournamentMatches },
 
   props: {
     tournamentId: {
@@ -70,8 +52,8 @@ export default {
 
   data() {
     return {
-      saving: false,
       tournament: {
+        id: 0,
         name: '',
         startDate: DateTime.local(),
         endDate: DateTime.local(),
@@ -81,8 +63,20 @@ export default {
   },
 
   computed: {
-    ...mapState('players', ['players']),
-    ...mapGetters('tournaments', ['getTournament']),
+    ...mapState({
+      allPlayers: (state) => state.players.players,
+      blueTeamPlayers: (state) => state.players.blueTeam,
+      redTeamPlayers: (state) => state.players.redTeam,
+    }),
+
+    availablePlayers() {
+      return this.allPlayers.filter((player) => {
+        const blueTeamMember = this.blueTeamPlayers.find((p) => p.id === player.id);
+        const redTeamMember = this.redTeamPlayers.find((p) => p.id === player.id);
+
+        return !blueTeamMember && !redTeamMember;
+      });
+    },
   },
 
   mounted() {
@@ -90,30 +84,17 @@ export default {
       this.fetchTournament(this.tournamentId).then((tournament) => {
         this.tournament = tournament;
       });
+
+      this.fetchTeamMembers({ tournamentId: this.tournamentId, teamColor: 'Red' });
+      this.fetchTeamMembers({ tournamentId: this.tournamentId, teamColor: 'Blue' });
     }
+
+    this.fetchPlayers();
   },
 
   methods: {
-    ...mapActions('tournaments', ['fetchTournament', 'saveTournament']),
-
-    clickSaveTournament() {
-      this.saving = true;
-
-      this.saveTournament(this.tournament)
-        .then(() => {
-          this.$router.push(this.getPreviousPage()).then(() => {
-            this.$toaster.success(this.tournamentId > 0 ? 'Tournament updated' : 'Tournament created');
-          });
-        })
-        .finally(() => { this.saving = false; });
-    },
-
-    getPreviousPage() {
-      if (this.tournamentId > 0) {
-        return { name: 'leaderboard', params: { tournamentId: this.tournamentId } };
-      }
-      return { name: 'schedule' };
-    },
+    ...mapActions('tournaments', ['fetchTournament']),
+    ...mapActions('players', ['fetchPlayers', 'fetchTeamMembers']),
   },
 };
 </script>

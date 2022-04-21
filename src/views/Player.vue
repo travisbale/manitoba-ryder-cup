@@ -41,7 +41,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import BaseBadge from '@/components/BaseBadge';
+import BaseBadge from '@/components/badges/BaseBadge';
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import SectionHeader from '@/components/typography/SectionHeader';

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-show="isOpen" class="fixed flex flex-col z-20 inset-0 bg-white shadow-lg">
+    <div v-show="isOpen" class="fixed flex flex-col z-20 inset-5 bg-white shadow-lg">
       <div class="p-4 border-b border-grey-300 shadow">
-        <h2 class="font-bold text-3xl">
+        <h2 class="font-raleway-semibold text-3xl">
           <slot name="header" />
         </h2>
       </div>
-      <div class="flex-grow p-4 border-b border-grey-300">
+      <div class="flex-grow p-4 border-b border-grey-300 overflow-scroll">
         <slot name="body" />
       </div>
       <div class="p-4 border-b border-grey-300 bg-grey-200">

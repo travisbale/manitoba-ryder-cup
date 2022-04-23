@@ -117,6 +117,17 @@ const router = new VueRouter({
     },
   },
   {
+    path: '/admin/matches/:matchId',
+    name: 'edit-match',
+    component: () => import(/* webpackChunkName: "editMatch" */ '../views/admin/matches/EditMatch.vue'),
+    props: (route) => ({
+      matchId: parseInt(route.params.matchId),
+    }),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: '/unauthorized',
     name: 'unauthorized',
     component: () => import(/* webpackChunkName: "unauthorized" */ '../views/Unauthorized.vue'),

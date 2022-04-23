@@ -20,6 +20,9 @@
                  :participants="match.participants" v-bind="match.scores[hole.number - 1]"
       />
     </div>
+    <router-link v-if="hasPermission('create:matches')" :to="{ name: 'edit-match', params: { matchId: matchId }}">
+      <floating-action-button action="edit" />
+    </router-link>"
   </base-page>
 </template>
 
@@ -27,12 +30,13 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import BasePage from '@/components/layout/BasePage';
+import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import HoleCard from '@/components/cards/hole-card';
 import SectionHeader from '@/components/typography/SectionHeader';
 import datetimeFilters from '@/mixins/filters/datetime';
 
 export default {
-  components: { BasePage, HoleCard, SectionHeader },
+  components: { BasePage, HoleCard, SectionHeader, FloatingActionButton },
 
   mixins: [datetimeFilters],
 
@@ -61,6 +65,7 @@ export default {
 
   computed: {
     ...mapGetters('tournaments', ['getTournament']),
+    ...mapGetters('currentUser', ['hasPermission']),
 
     tournament() {
       return this.getTournament(this.tournamentId);

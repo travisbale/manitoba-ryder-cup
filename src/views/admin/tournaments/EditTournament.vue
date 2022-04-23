@@ -20,10 +20,6 @@
       <tab title="Blue Team">
         <team-members team-color="Blue" :tournament-id="tournamentId" :available-players="availablePlayers" :members="blueTeamPlayers" />
       </tab>
-
-      <tab title="Matches" class="px-4 py-6">
-        <tournament-matches />
-      </tab>
     </tabs>
   </base-page>
 </template>
@@ -38,10 +34,9 @@ import Tabs from '@/components/tabs/Tabs';
 
 import TeamMembers from './components/TeamMembers';
 import TournamentDetails from './components/TournamentDetails';
-import TournamentMatches from './components/TournamentMatches';
 
 export default {
-  components: { BasePage, Tabs, Tab, TournamentDetails, TeamMembers, TournamentMatches },
+  components: { BasePage, Tabs, Tab, TournamentDetails, TeamMembers },
 
   props: {
     tournamentId: {

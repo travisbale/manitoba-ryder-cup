@@ -5,12 +5,14 @@
     </template>
     <template v-slot:body>
       <div class="-m-4">
-        <player-selection-container
+        <player-tile
           v-for="(player, index) in players"
           :key="index"
-          :player="player"
-          @player-selected="selectPlayer"
-          @player-deselected="deselectPlayer"
+          v-bind="player"
+          :selected="playerSelections[index].selected"
+          :selected-color="teamColor"
+          class="p-4"
+          @click="selectPlayer(index)"
         />
       </div>
     </template>
@@ -33,10 +35,10 @@ import { mapActions } from 'vuex';
 import BaseButton from '@/components/buttons/BaseButton';
 import BaseModal from '@/components/modals/base-modal';
 
-import PlayerSelectionContainer from './PlayerSelectionContainer';
+import PlayerTile from './PlayerTile';
 
 export default {
-  components: { BaseButton, BaseModal, PlayerSelectionContainer },
+  components: { BaseButton, BaseModal, PlayerTile },
 
   props: {
     isOpen: {
@@ -61,19 +63,37 @@ export default {
   data() {
     return {
       saving: false,
-      selectedPlayers: [],
+      playerSelections: [],
     };
+  },
+
+  watch: {
+    players(newValues) {
+      this.playerSelections = [];
+
+      newValues.forEach((p) => {
+        this.playerSelections.push({
+          player: p,
+          selected: false,
+        });
+      });
+    },
   },
 
   methods: {
     ...mapActions('players', ['saveTeamMembers']),
 
     close() {
+      this.playerSelections.forEach((s) => { s.selected = false; });
       this.$emit('close');
     },
 
-    selectPlayer(player) {
-      this.selectedPlayers.push(player);
+    selectPlayer(index) {
+      this.playerSelections[index].selected = !this.playerSelections[index].selected;
+    },
+
+    getSelectedPlayers() {
+      return this.playerSelections.filter((s) => s.selected).map((s) => s.player);
     },
 
     deselectPlayer(player) {
@@ -87,10 +107,9 @@ export default {
       this.saveTeamMembers({
         tournamentId: this.tournamentId,
         teamColor: this.teamColor,
-        players: this.selectedPlayers,
+        players: this.getSelectedPlayers(),
       }).then(() => {
-        this.selectedPlayers = [];
-        this.$emit('close');
+        this.close();
         this.$toaster.success('Players added');
       }).catch((error) => {
         if (error.response && error.response.data) {

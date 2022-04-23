@@ -45,12 +45,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectedColor: {
+      type: String,
+      default: 'Blue',
+      validator: (color) => ['Red', 'Blue'].indexOf(color) !== -1,
+    },
   },
 
   computed: {
     tileClasses() {
       return {
-        'bg-blue-50 border-blue-100': this.selected,
+        'bg-red-50 border-red-100': this.selected && this.selectedColor === 'Red',
+        'bg-blue-50 border-blue-100': this.selected && this.selectedColor === 'Blue',
         'border-grey-300': !this.selected,
       };
     },

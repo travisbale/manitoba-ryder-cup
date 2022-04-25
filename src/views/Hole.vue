@@ -91,6 +91,9 @@ export default {
     ...mapGetters('currentUser', ['isAdmin']),
 
     readonly() {
+      // An administrator can always edit the match
+      if (this.isAdmin) { return false; }
+
       // Match cannot be edited before it starts or after it finishes
       if (this.match.teeTime > DateTime.now() || this.match.finished) { return true; }
 
@@ -151,7 +154,7 @@ export default {
               // Assign a default score of par or 0 if the hole is readonly
               this.scores.push({
                 holeNumber: this.number,
-                playerId: player.playerId,
+                playerId: player.id,
                 playerName: player.fullName,
                 playerTier: player.tier,
                 strokes: this.readonly ? 0 : this.hole.par,

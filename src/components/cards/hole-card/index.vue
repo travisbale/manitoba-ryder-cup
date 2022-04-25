@@ -114,7 +114,7 @@ export default {
   methods: {
     getTeamName(teamColor) {
       // Reduce the list of players to only those on the given team
-      const players = this.participants.filter((p) => p.team === teamColor);
+      const players = this.participants.filter((p) => p.team === teamColor).map((p) => p.player);
 
       if (players.length === 1) {
         // Singles match team name is just the player's last name

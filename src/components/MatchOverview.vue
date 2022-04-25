@@ -114,7 +114,7 @@ export default {
 
     getTeamMembers(teamColor) {
       if (this.participants.length > 0) {
-        return this.participants.filter((p) => p.team === teamColor);
+        return this.participants.filter((p) => p.team === teamColor).map((p) => p.player);
       }
 
       const participants = [

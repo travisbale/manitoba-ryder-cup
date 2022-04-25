@@ -96,7 +96,7 @@ export default {
 
       // Anyone participating in an incomplete match can edit it
       for (let i = 0; i < this.match.participants.length; i++) {
-        if (this.match.participants[i].email === this.currentUser.email) {
+        if (this.match.participants[i].player.email === this.currentUser.email) {
           return false;
         }
       }
@@ -143,9 +143,11 @@ export default {
         this.fetchScores(this.matchId).then((scores) => {
           this.scores = scores;
 
-          this.match.participants.forEach((player) => {
+          this.match.participants.forEach((participant) => {
+            const { player } = participant;
+
             // Check if each player has already recorded a score on the hole
-            if (this.scores.find((score) => score.playerId === player.playerId && score.holeNumber === this.number) == null) {
+            if (this.scores.find((score) => score.playerId === player.id && score.holeNumber === this.number) == null) {
               // Assign a default score of par or 0 if the hole is readonly
               this.scores.push({
                 holeNumber: this.number,

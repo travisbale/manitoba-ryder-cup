@@ -99,7 +99,7 @@ export default {
 
   methods: {
     getTeamName(team) {
-      const players = this.participants.filter((p) => p.team === team);
+      const players = this.participants.filter((p) => p.team === team).map((p) => p.player);
 
       if (players.length === 1) return players[0].lastName;
       if (players.length === 2) return `${players[0].lastName} / ${players[1].lastName}`;

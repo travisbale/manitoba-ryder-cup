@@ -1,5 +1,9 @@
 <template>
-  <base-page image-url="/img/oceanside.webp">
+  <base-page
+    back-link-text="Leaderboard"
+    :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
+    image-url="/img/oceanside.webp"
+  >
     <template v-slot:header>
       <div v-if="tournamentId > 0">
         Edit Tournament
@@ -12,13 +16,21 @@
       <tab title="Details" class="px-4 py-6">
         <tournament-details v-bind="tournament" />
       </tab>
-
-      <tab title="Red Team">
-        <team-members team-color="Red" :tournament-id="tournamentId" :available-players="availablePlayers" :members="redTeamPlayers" />
-      </tab>
-
       <tab title="Blue Team">
-        <team-members team-color="Blue" :tournament-id="tournamentId" :available-players="availablePlayers" :members="blueTeamPlayers" />
+        <team-members
+          team-color="Blue"
+          :tournament-id="tournamentId"
+          :available-players="availablePlayers"
+          :members="blueTeamPlayers"
+        />
+      </tab>
+      <tab title="Red Team">
+        <team-members
+          team-color="Red"
+          :tournament-id="tournamentId"
+          :available-players="availablePlayers"
+          :members="redTeamPlayers"
+        />
       </tab>
     </tabs>
   </base-page>

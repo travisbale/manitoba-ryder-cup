@@ -4,6 +4,9 @@
       Add Participants
     </template>
     <template v-slot:body>
+      <div v-if="players.length === 0" class="text-center">
+        There are no players available to be selected
+      </div>
       <div class="-m-4">
         <player-tile
           v-for="(player, index) in players"
@@ -30,12 +33,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 import BaseButton from '@/components/buttons/BaseButton';
 import BaseModal from '@/components/modals/base-modal';
-
-import PlayerTile from './PlayerTile';
+import PlayerTile from '@/components/tiles/PlayerTile';
 
 export default {
   components: { BaseButton, BaseModal, PlayerTile },
@@ -45,9 +45,9 @@ export default {
       type: Boolean,
       required: true,
     },
-    tournamentId: {
-      type: Number,
-      required: true,
+    saving: {
+      type: Boolean,
+      default: false,
     },
     teamColor: {
       type: String,
@@ -58,12 +58,16 @@ export default {
       type: Array,
       required: true,
     },
+    selectionMax: {
+      type: Number,
+      default: 0,
+    },
   },
 
   data() {
     return {
-      saving: false,
       playerSelections: [],
+      totalSelected: 0,
     };
   },
 
@@ -78,46 +82,41 @@ export default {
         });
       });
     },
+
+    isOpen(newValue) {
+      // Clear the list of selected players when the modal closes
+      if (!newValue) {
+        this.playerSelections.forEach((s) => { s.selected = false; });
+        this.totalSelected = 0;
+      }
+    },
   },
 
   methods: {
-    ...mapActions('players', ['saveTeamMembers']),
-
     close() {
-      this.playerSelections.forEach((s) => { s.selected = false; });
       this.$emit('close');
     },
 
     selectPlayer(index) {
-      this.playerSelections[index].selected = !this.playerSelections[index].selected;
+      const isSelected = this.playerSelections[index].selected;
+
+      if (isSelected) {
+        this.playerSelections[index].selected = false;
+        this.totalSelected--;
+      } else if (this.selectionMax === 0 || this.totalSelected < this.selectionMax) {
+        this.playerSelections[index].selected = true;
+        this.totalSelected++;
+      } else {
+        this.$toaster.error('Cannot add more players');
+      }
     },
 
     getSelectedPlayers() {
       return this.playerSelections.filter((s) => s.selected).map((s) => s.player);
     },
 
-    deselectPlayer(player) {
-      const index = this.selectedPlayers.findIndex((p) => p.id === player.id);
-      this.selectedPlayers.splice(index, 1);
-    },
-
     addPlayers() {
-      this.saving = true;
-
-      this.saveTeamMembers({
-        tournamentId: this.tournamentId,
-        teamColor: this.teamColor,
-        players: this.getSelectedPlayers(),
-      }).then(() => {
-        this.close();
-        this.$toaster.success('Players added');
-      }).catch((error) => {
-        if (error.response && error.response.data) {
-          this.$toaster.error(error.response.data.message);
-        }
-      }).finally(() => {
-        this.saving = false;
-      });
+      this.$emit('add-players', this.getSelectedPlayers());
     },
   },
 };

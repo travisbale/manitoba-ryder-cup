@@ -117,10 +117,11 @@ const router = new VueRouter({
     },
   },
   {
-    path: '/admin/matches/:matchId',
+    path: '/admin/tournaments/:tournamentId/matches/:matchId',
     name: 'edit-match',
     component: () => import(/* webpackChunkName: "editMatch" */ '../views/admin/matches/EditMatch.vue'),
     props: (route) => ({
+      tournamentId: parseInt(route.params.tournamentId),
       matchId: parseInt(route.params.matchId),
     }),
     meta: {

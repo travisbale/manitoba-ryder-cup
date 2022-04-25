@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div v-if="members.length === 0" class="text-center mt-6">
-      There are no players assigned to this team
+    <div v-if="participatingPlayers.length === 0" class="text-center mt-6">
+      There are no players playing for this team
     </div>
     <div>
       <player-tile
-        v-for="(member, index) in members"
+        v-for="(player, index) in participatingPlayers"
         :key="index"
-        v-bind="member"
+        v-bind="player"
         class="p-4"
         :deletable="true"
-        @delete-player="removeMember(member)"
+        @delete-player="removePlayer(player)"
       />
     </div>
     <player-selection-modal
@@ -18,19 +18,19 @@
       :saving="addingPlayers"
       :team-color="teamColor"
       :players="availablePlayers"
+      :selection-max="selectionMax"
       @close="modalOpen = false"
       @add-players="addPlayers"
     />
-    <floating-action-button action="add" @click="modalOpen = true" />
+    <floating-action-button v-if="selectionMax > 0" action="add" @click="modalOpen = true" />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import PlayerSelectionModal from '@/components/modals/PlayerSelectionModal';
 import PlayerTile from '@/components/tiles/PlayerTile';
+import { mapActions } from 'vuex';
 
 export default {
   components: { FloatingActionButton, PlayerSelectionModal, PlayerTile },
@@ -40,15 +40,28 @@ export default {
       type: Number,
       required: true,
     },
+
+    matchId: {
+      type: Number,
+      required: true,
+    },
+
+    format: {
+      type: String,
+      required: true,
+    },
+
     teamColor: {
       type: String,
       required: true,
       validator: (teamColor) => ['Red', 'Blue'].indexOf(teamColor) !== -1,
     },
-    members: {
+
+    participatingPlayers: {
       type: Array,
       required: true,
     },
+
     availablePlayers: {
       type: Array,
       required: true,
@@ -62,42 +75,32 @@ export default {
     };
   },
 
-  methods: {
-    ...mapActions('players', ['saveTeamMembers', 'deleteTeamMembers']),
-
-    toggleSelected(player) {
-      const index = this.selectedPlayers.findIndex((p) => p.id === player.id);
-
-      if (index < 0) {
-        this.selectedPlayers.push(player);
-      } else {
-        this.selectedPlayers.splice(index, 1);
+  computed: {
+    selectionMax() {
+      switch (this.format) {
+        case 'Singles': return 1 - this.participatingPlayers.length;
+        default: return 2 - this.participatingPlayers.length;
       }
     },
+  },
 
-    getTeamBackgroundClass(teamColor) {
-      return {
-        'bg-blue-800': teamColor === 'Blue',
-        'bg-red-800': teamColor === 'Red',
-      };
-    },
-
-    deleteParticipant(playerId) {
-      console.log(`playerId: ${playerId}`);
-    },
+  methods: {
+    ...mapActions('matches', ['saveParticipants', 'deleteParticipants']),
 
     addPlayers(selectedPlayers) {
-      this.addingPlayers = true;
-
-      this.saveTeamMembers({
+      const payload = {
         tournamentId: this.tournamentId,
+        matchId: this.matchId,
         teamColor: this.teamColor,
         players: selectedPlayers,
-      }).then(() => {
+      };
+      this.addingPlayers = true;
+
+      this.saveParticipants(payload).then(() => {
         this.modalOpen = false;
         this.$toaster.success('Players added');
       }).catch((error) => {
-        if (error.response && error.response.data) {
+        if (error && error.response && error.response.data) {
           this.$toaster.error(error.response.data.message);
         }
       }).finally(() => {
@@ -105,15 +108,17 @@ export default {
       });
     },
 
-    removeMember(member) {
-      this.deleteTeamMembers({
+    removePlayer(player) {
+      const payload = {
         tournamentId: this.tournamentId,
-        teamColor: this.teamColor,
-        players: [member],
-      }).then(() => {
+        matchId: this.matchId,
+        players: [player],
+      };
+
+      this.deleteParticipants(payload).then(() => {
         this.$toaster.success('Player removed');
       }).catch((error) => {
-        if (error.response && error.response.data) {
+        if (error && error.response && error.response.data) {
           this.$toaster.error(error.response.data.message);
         }
       });

@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="visible" class="flex items-center justify-center fixed left-2 right-2"
+    <div v-if="visible" class="flex items-center justify-center fixed left-2 right-2 z-50"
          :class="{
            'opacity-0': !visible,
            'opacity-100': visible,

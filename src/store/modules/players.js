@@ -82,6 +82,15 @@ export default {
       });
     },
 
+    fetchTournamentPlayers({ state, dispatch }, tournamentId) {
+      const fetchingBlueTeam = dispatch('fetchTeamMembers', { tournamentId, teamColor: 'Blue ' });
+      const fetchingRedTeam = dispatch('fetchTeamMembers', { tournamentId, teamColor: 'Red' });
+
+      return Promise.all([fetchingBlueTeam, fetchingRedTeam]).then(() => {
+        return [...state.blueTeam, ...state.redTeam];
+      });
+    },
+
     fetchTeamMembers({ commit }, payload) {
       const teamId = payload.teamColor === 'Red' ? 1 : 2;
 

@@ -69,6 +69,11 @@ export default {
       type: String,
       required: true,
     },
+
+    finished: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   data() {
@@ -107,9 +112,11 @@ export default {
           'bg-grey-300': this.scores[index].blueTeamScore === this.scores[index].redTeamScore,
           'text-white': this.scores[index].blueTeamScore !== this.scores[index].redTeamScore,
         };
+      } if (this.finished) {
+        return 'text-grey-400';
       }
 
-      return 'text-grey-400';
+      return 'text-grey-900';
     },
 
     getTeamMembers(teamColor) {

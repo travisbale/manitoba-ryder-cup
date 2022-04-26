@@ -177,13 +177,12 @@ export default {
       } else {
         this.errorMessage = '';
         this.recordStrokes().then(() => {
-          this.pushNextRoute().then(() => {
-            if (this.number < 18) {
-              this.$toaster.success('Score saved');
-            } else {
-              this.$toaster.success('Match completed');
-            }
-          });
+          if (this.number < 18) {
+            this.$toaster.success('Scores saved');
+          } else {
+            this.$toaster.success('Match completed');
+          }
+          this.pushNextRoute();
         });
       }
     },

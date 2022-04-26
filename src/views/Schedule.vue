@@ -26,7 +26,7 @@
         </div>
         <div class="w-1/3 border-l border-r border-grey-400 text-center px-4">
           <div class="font-bold text-4xl leading-none mb-2">
-            {{ matches.length }}
+            {{ totalMatches }}
           </div>
           <div class="uppercase text-xs text-grey-600">
             Matches
@@ -82,9 +82,14 @@ import TournamentCard from '@/components/cards/tournament-card';
 export default {
   components: { FloatingActionButton, BasePage, TournamentCard },
 
+  data() {
+    return {
+      totalMatches: 0,
+    };
+  },
+
   computed: {
     ...mapState('tournaments', ['tournaments']),
-    ...mapState('matches', ['matches']),
     ...mapState('players', ['players']),
     ...mapGetters('currentUser', ['hasPermission']),
 
@@ -115,13 +120,13 @@ export default {
   created() {
     this.fetchTournaments();
     this.fetchPlayers();
-    this.fetchMatches();
+    this.fetchMatchCount().then((response) => { this.totalMatches = response; });
   },
 
   methods: {
     ...mapActions('tournaments', ['fetchTournaments']),
     ...mapActions('players', ['fetchPlayers']),
-    ...mapActions('matches', ['fetchMatches']),
+    ...mapActions('matches', ['fetchMatchCount']),
   },
 
 };

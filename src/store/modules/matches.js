@@ -72,17 +72,20 @@ export default {
       });
     },
 
-    fetchMatches({ commit }, tournamentId) {
-      let matchesUrl = `${process.env.VUE_APP_SCORECARD_URL}/v1/`;
+    fetchMatchCount() {
+      return axios.get(`${url}/v1/matches`).then((response) => {
+        return response.data;
+      });
+    },
 
-      if (tournamentId == null) {
-        matchesUrl += 'matches';
-      } else {
-        matchesUrl += `tournaments/${tournamentId}/matches`;
-      }
+    fetchMatches({ commit }, tournamentId) {
+      const matchesUrl = `${process.env.VUE_APP_SCORECARD_URL}/v1/tournaments/${tournamentId}/matches`;
 
       return axios.get(matchesUrl).then((response) => {
-        commit('setMatches', response.data);
+        if (tournamentId != null) {
+          commit('setMatches', response.data);
+        }
+
         return response.data;
       });
     },

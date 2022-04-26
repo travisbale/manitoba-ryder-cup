@@ -10,19 +10,21 @@
       <div class="w-1/2 pr-4">
         <div class="flex justify-center">
           <div class="flex items-center font-bold leading-none text-blue-800">
-            <span class="text-6xl tracking-tighter mr-1">{{ Math.trunc(getTeamScore('Blue')) }}</span>
-            <span v-if="getTeamScore('Red') % 1 !== 0" class="text-3xl pt-1">&#189;</span>
+            <span class="text-6xl tracking-tighter">{{ Math.trunc(getTeamScore('Blue')) }}</span>
+            <span v-if="getTeamScore('Blue') % 1 !== 0" class="text-3xl pt-1 ml-1">&#189;</span>
+            <trophy-icon v-if="winner === 'Blue'" class="text-amber-800 ml-2 mt-2" />
           </div>
         </div>
-        <div class="text-center">
+        <div class="text-center flex items-center justify-center">
           Team {{ getTeamName('Blue') }}
         </div>
       </div>
       <div class="w-1/2 pl-4">
         <div class="flex justify-center">
-          <div class="flex items-center mr-2 font-bold leading-none text-red-800">
-            <span class="text-6xl tracking-tighter mr-1">{{ Math.trunc(getTeamScore('Red')) }}</span>
-            <span v-if="getTeamScore('Red') % 1 !== 0" class="text-3xl pt-1">&#189;</span>
+          <div class="flex items-center font-bold leading-none text-red-800">
+            <trophy-icon v-if="winner === 'Red'" class="text-amber-800 mr-2 mt-2" />
+            <span class="text-6xl tracking-tighter">{{ Math.trunc(getTeamScore('Red')) }}</span>
+            <span v-if="getTeamScore('Red') % 1 !== 0" class="text-3xl pt-1 ml-1">&#189;</span>
           </div>
         </div>
         <div class="text-center">
@@ -37,10 +39,11 @@
 import { DateTime } from 'luxon';
 
 import BaseCard from '@/components/cards/base-card';
+import TrophyIcon from '@/components/icons/TrophyIcon';
 import datetimeFilters from '@/mixins/filters/datetime';
 
 export default {
-  components: { BaseCard },
+  components: { BaseCard, TrophyIcon },
 
   mixins: [datetimeFilters],
 
@@ -68,6 +71,20 @@ export default {
     teams: {
       type: Array,
       required: true,
+    },
+    isFinished: {
+      type: Boolean,
+      required: true,
+    },
+  },
+
+  computed: {
+    winner() {
+      if (this.isFinished) {
+        return this.getTeamScore('Blue') > this.getTeamScore('Red') ? 'Blue' : 'Red';
+      }
+
+      return '';
     },
   },
 

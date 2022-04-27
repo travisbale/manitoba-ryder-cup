@@ -8,7 +8,7 @@
     </div>
     <div v-else-if="statusText.indexOf('&') != -1" class="flex items-center">
       <span class="text-6xl">{{ statusText.substring(0, statusText.indexOf(' ')) }}</span>
-      <span class="text-3xl pt-1">
+      <span class="text-4xl pt-1">
         &
       </span>
       <span class="text-6xl">{{ statusText.substring(statusText.indexOf('&') + 2) }}</span>

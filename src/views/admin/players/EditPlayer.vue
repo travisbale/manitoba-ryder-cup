@@ -23,15 +23,23 @@
       </div>
       <base-textarea v-model="player.biography" label="Scouting Report" />
 
-      <div class="flex justify-end mt-8">
-        <router-link :to="getPreviousPage()" class="block">
-          <base-button type="secondary" class="mr-2">
-            Cancel
+      <div class="flex justify-between mt-8">
+        <div>
+          <base-button v-if="player.id > 0" type="primary" @click="sendInvitation">
+            Send Invitation
           </base-button>
-        </router-link>
-        <base-button :loading="saving" @click="clickSavePlayer">
-          Save
-        </base-button>
+        </div>
+
+        <div class="flex justify-end">
+          <router-link :to="getPreviousPage()" class="block">
+            <base-button type="secondary" class="mr-2">
+              Cancel
+            </base-button>
+          </router-link>
+          <base-button :loading="saving" @click="clickSavePlayer">
+            Save
+          </base-button>
+        </div>
       </div>
     </div>
   </base-page>
@@ -104,9 +112,6 @@ export default {
 
         this.savePlayer(this.player)
           .then((player) => {
-            if (this.playerId === 0) {
-              this.sendAccountCreationEmail(player.id);
-            }
             if (this.picture) {
               this.savePlayerPhoto({ playerId: player.id, formData: this.picture }).then(() => {
                 this.goToPreviousPage();
@@ -117,6 +122,10 @@ export default {
           })
           .finally(() => { this.saving = false; });
       }
+    },
+
+    sendInvitation() {
+      this.sendAccountCreationEmail(this.player.id);
     },
 
     getPreviousPage() {

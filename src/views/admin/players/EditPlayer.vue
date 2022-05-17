@@ -25,7 +25,7 @@
 
       <div class="flex justify-between mt-8">
         <div>
-          <base-button v-if="player.id > 0" type="primary" @click="sendInvitation">
+          <base-button v-if="player.id > 0" type="primary" :disabled="invitationSent" @click="sendInvitation">
             Send Invitation
           </base-button>
         </div>
@@ -74,6 +74,7 @@ export default {
       isLastNameValid: true,
       isEmailValid: true,
       pictureList: null,
+      invitationSent: false,
     };
   },
 
@@ -125,7 +126,10 @@ export default {
     },
 
     sendInvitation() {
-      this.sendAccountCreationEmail(this.player.id);
+      this.sendAccountCreationEmail(this.player.id).then(() => {
+        this.$toaster.success('Account creation email sent');
+        this.invitationSent = true;
+      });
     },
 
     getPreviousPage() {

@@ -2,7 +2,7 @@
   <button type="button"
           class="inline-flex items-center justify-center px-6 py-2
           rounded font-semibold shadow-md"
-          :disabled="loading"
+          :disabled="loading || disabled"
           :class="classes"
           v-on="$listeners"
   >
@@ -34,10 +34,19 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     classes() {
+      if (this.disabled) {
+        return 'text-grey-500 bg-grey-300';
+      }
+
       return {
         'transparent text-white border-2 border-white': this.type === 'transparent',
         'bg-deep-purple-800 text-white hover:bg-deep-purple-900': this.type === 'primary',

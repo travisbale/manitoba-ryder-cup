@@ -66,5 +66,11 @@ export default {
         commit('setCurrentUser', response.data);
       });
     },
+
+    changePassword({ commit }, credentials) {
+      return axios.post('reset-password', credentials).then((response) => {
+        commit('setCurrentUser', response.data);
+      });
+    },
   },
 };

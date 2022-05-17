@@ -89,6 +89,17 @@ const router = new VueRouter({
     }),
   },
   {
+    path: '/forgot-password',
+    name: 'forgot-password',
+    component: () => import(/* webpackChunkName: "forgotPassword", */ '../views/ForgotPassword.vue'),
+  },
+  {
+    path: '/reset-password/:token',
+    name: 'reset-password',
+    component: () => import(/* webpackChunkName: "resetPassword", */ '../views/ResetPassword.vue'),
+    props: true,
+  },
+  {
     path: '/register/:token',
     name: 'register',
     component: () => import(/* webpackChunkName: "register" */ '../views/RegisterUser.vue'),

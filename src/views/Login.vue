@@ -10,7 +10,12 @@
           {{ errorMessage }}
         </base-alert>
         <base-input v-model="email" type="email" placeholder="Email Address" class="mb-6" />
-        <base-input v-model="password" type="password" placeholder="Password" class="mb-12" @keyup.enter="login" />
+        <base-input v-model="password" type="password" placeholder="Password" @keyup.enter="login" />
+        <router-link :to="{ name: 'forgot-password'}" class="block">
+          <div class="flex justify-end mb-12 -mt-5 mr-1 text-sm text-purple-800 underline">
+            Forgot your password?
+          </div>
+        </router-link>
         <base-button class="w-full py-4" :loading="loggingIn" @click="login">
           {{ loginButtonText }}
         </base-button>

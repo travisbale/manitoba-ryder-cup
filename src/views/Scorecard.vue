@@ -89,7 +89,6 @@ export default {
   methods: {
     ...mapActions('matches', ['fetchMatch']),
     ...mapActions('teeSets', ['fetchTeeSet']),
-    ...mapActions('scores', ['fetchScores']),
     ...mapActions('tournaments', ['fetchTournament']),
   },
 };

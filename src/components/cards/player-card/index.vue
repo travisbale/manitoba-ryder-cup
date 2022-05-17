@@ -2,7 +2,7 @@
   <router-link :to="{ name: 'player', params: { playerId: id }}" class="block">
     <base-card class="flex items-center">
       <template v-slot:image>
-        <img class="h-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
+        <img class="h-32 w-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
       <base-badge :class="badgeColor" class="mb-1">
         {{ tier }}

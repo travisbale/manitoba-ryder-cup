@@ -9,6 +9,7 @@
            :class="{ 'border-grey-400': valid, 'border-red-400': !valid }"
            :value="value"
            :placeholder="placeholder"
+           :disabled="disabled"
            v-on="inputListeners"
     />
     <label v-if="!valid" class="block -mt-3.5 mb-4 text-red-800 text-xs">Required</label>
@@ -50,6 +51,11 @@ export default {
     },
 
     required: {
+      type: Boolean,
+      default: false,
+    },
+
+    disabled: {
       type: Boolean,
       default: false,
     },

@@ -9,7 +9,7 @@
       </div>
     </template>
     <div class="p-4 pt-6">
-      <base-input v-model="player.email" :disabled="playerId > 0" label="Email" :valid.sync="isFirstNameValid" required />
+      <base-input v-model="player.email" label="Email" :valid.sync="isFirstNameValid" required />
       <base-input v-model="player.firstName" label="First Name" :valid.sync="isLastNameValid" required />
       <base-input v-model="player.lastName" label="Last Name" :valid.sync="isEmailValid" required />
       <file-upload v-model="pictureList" accept="image/*" label="Profile Picture" />

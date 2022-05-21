@@ -24,7 +24,7 @@
       <base-textarea v-model="player.biography" label="Scouting Report" />
 
       <div class="flex justify-between mt-8">
-        <div>
+        <div v-if="hasPermission('create:players')">
           <base-button v-if="player.id > 0" type="primary" :disabled="invitationSent" @click="sendInvitation">
             Send Invitation
           </base-button>
@@ -80,6 +80,7 @@ export default {
 
   computed: {
     ...mapGetters('players', ['getPlayer']),
+    ...mapGetters('currentUser', ['hasPermission']),
 
     picture() {
       if (this.pictureList != null) {

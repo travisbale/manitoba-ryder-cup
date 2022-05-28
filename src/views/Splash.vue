@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="h-screen bg-cover relative" style="background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(img/golf-ball.webp)">
+    <div class="h-screen bg-cover relative"
+         style="background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url(img/golf-ball.webp)"
+    >
       <site-nav transparent />
       <div class="p-4 text-white text-center">
         <div class="font-raleway-light tracking-widest text-3xl my-4">

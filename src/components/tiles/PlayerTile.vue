@@ -1,6 +1,8 @@
 <template>
   <div class="flex items-center border-b" :class="tileClasses" v-on="$listeners">
-    <img class="h-16 w-16 object-cover object-center mr-4 rounded-full border border-grey-200" :src="photoPath || '/img/default-avatar.webp'" alt="Avatar" />
+    <img class="h-16 w-16 object-cover object-center mr-4 rounded-full border border-grey-200"
+         :src="photoPath || '/img/default-avatar.webp'" alt="Avatar"
+    />
     <div class="mt-1">
       <div class="font-semibold text-xl leading-tight">
         {{ fullName }}

@@ -2,7 +2,10 @@
   <base-page back-link-text="Tournament Players" :back-link-route="{ name: 'players' }">
     <div class="p-4 border-b border-grey-300 shadow sticky top-0">
       <div class="flex items-center">
-        <img class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200" :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()" />
+        <img
+          class="h-24 w-24 object-cover object-center mr-4 rounded-full border border-grey-200"
+          :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()"
+        />
         <div class="mb-1">
           <base-badge :class="badgeColor()">
             {{ player.tier }}
@@ -23,14 +26,6 @@
       <p class="mt-2 whitespace-pre-line">
         {{ player.biography || `${player.firstName} ${player.lastName} has no biography.` }}
       </p>
-      <!-- <div class="flex items-center mt-10">
-        <div class="mr-3 font-raleway-semibold text-lg mt-1">
-          Pre Ryder Confidence
-        </div>
-        <div class="flex items-center">
-          <star-icon v-for="i in 5" :key="i" :class="i >= 0 ? 'text-cyan-800': 'text-grey-400'" />
-        </div>
-      </div> -->
     </div>
     <router-link v-if="hasPermission('update:players')" :to="{ name: 'edit-player', params: { playerId: playerId }}">
       <floating-action-button action="edit" />

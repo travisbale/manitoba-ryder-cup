@@ -45,7 +45,8 @@ export default {
 
     backgroundImage() {
       if (this.article.showTitle) {
-        return `background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('${this.article.imageUrl}')`;
+        const url = this.article.imageUrl;
+        return `background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('${url}')`;
       }
 
       return `background-image: url('${this.article.imageUrl}')`;

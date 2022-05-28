@@ -38,6 +38,10 @@ module.exports = {
       files: ['*.vue'],
       rules: {
         'vue/max-attributes-per-line': ['off'],
+        'vue/max-len': ['error', {
+          code: 120,
+          template: 150,
+        }],
         'vue/html-self-closing': [
           'error',
           {

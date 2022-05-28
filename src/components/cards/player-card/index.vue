@@ -4,9 +4,7 @@
       <template v-slot:image>
         <img class="h-32 w-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
-      <base-badge :class="badgeColor" class="mb-1">
-        {{ tier }}
-      </base-badge>
+      <tier-badge :tier="tier" class="mb-1" />
       <h4 class="text-2xl font-raleway-semibold whitespace-nowrap">
         {{ fullName }}
       </h4>
@@ -18,11 +16,12 @@
 </template>
 
 <script>
-import BaseBadge from '@/components/badges/BaseBadge';
 import BaseCard from '@/components/cards/base-card';
+import TierBadge from '@/components/badges/TierBadge';
+import playerValidation from '@/lib/validators/player';
 
 export default {
-  components: { BaseCard, BaseBadge },
+  components: { BaseCard, TierBadge },
 
   props: {
     id: {
@@ -68,7 +67,7 @@ export default {
     tier: {
       type: String,
       required: true,
-      validator: (tier) => ['white', 'blue', 'gold'].indexOf(tier) !== -1,
+      validator: (tier) => playerValidation.validateTier(tier),
     },
   },
 
@@ -87,14 +86,6 @@ export default {
 
     cupText() {
       return this.cups !== 1 ? 'CUPS' : 'CUP';
-    },
-
-    badgeColor() {
-      return {
-        'bg-white border border-grey-400': this.tier === 'white',
-        'bg-blue-800 border border-blue-800 text-white': this.tier === 'blue',
-        'bg-amber-800 border border-amber-800 text-white': this.tier === 'gold',
-      };
     },
   },
 };

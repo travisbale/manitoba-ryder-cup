@@ -26,6 +26,7 @@
 
 <script>
 import StrokeIndex from '@/components/StrokeIndex';
+import playerValidation from '@/lib/validators/player';
 
 export default {
   components: { StrokeIndex },
@@ -58,7 +59,8 @@ export default {
 
     playerTier: {
       type: String,
-      required: true,
+      default: 'white',
+      validator: (tier) => playerValidation.validateTier(tier),
     },
 
     number: {
@@ -94,9 +96,11 @@ export default {
 
     playerTierClass() {
       return {
-        'bg-blue-600': this.playerTier === 'blue',
         'bg-white border border-grey-400': this.playerTier === 'white',
-        'bg-amber-600': this.playerTier === 'gold',
+        'bg-blue-800': this.playerTier === 'blue',
+        'bg-grey-900': this.playerTier === 'black',
+        'bg-grey-500': this.playerTier === 'silver',
+        'bg-amber-800': this.playerTier === 'gold',
       };
     },
   },

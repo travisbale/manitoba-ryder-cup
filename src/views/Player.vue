@@ -7,9 +7,7 @@
           :src="player.photoPath || '/img/default-avatar.webp'" alt="Avatar" @click="changePhoto()"
         />
         <div class="mb-1">
-          <base-badge :class="badgeColor()">
-            {{ player.tier }}
-          </base-badge>
+          <tier-badge :tier="player.tier" />
           <h1 class="text-3xl font-raleway-semibold">
             {{ player.firstName }} {{ player.lastName }}
           </h1>
@@ -36,14 +34,13 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import BaseBadge from '@/components/badges/BaseBadge';
 import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import SectionHeader from '@/components/typography/SectionHeader';
-// import StarIcon from '@/components/icons/StarIcon';
+import TierBadge from '@/components/badges/TierBadge';
 
 export default {
-  components: { BaseBadge, BasePage, FloatingActionButton, SectionHeader },
+  components: { TierBadge, BasePage, FloatingActionButton, SectionHeader },
 
   props: {
     playerId: {
@@ -62,6 +59,7 @@ export default {
         lastName: '',
         biography: '',
         photoPath: '/img/default-avatar.webp',
+        tier: 'white',
       };
     },
 
@@ -83,14 +81,6 @@ export default {
 
     changePhoto() {
       console.log('click');
-    },
-
-    badgeColor() {
-      return {
-        'bg-white border border-grey-400': this.player.tier === 'white',
-        'bg-blue-800 border border-blue-800 text-white': this.player.tier === 'blue',
-        'bg-amber-800 border border-amber-800 text-white': this.player.tier === 'gold',
-      };
     },
   },
 };

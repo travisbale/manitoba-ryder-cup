@@ -16,10 +16,12 @@
       <base-label class="mb-2">
         Player Tier
       </base-label>
-      <div class="flex">
-        <base-radio v-model="player.tier" name="tier" value="white" label="White" class="mr-20" />
-        <base-radio v-model="player.tier" name="tier" value="blue" label="Blue" class="mr-20" />
-        <base-radio v-model="player.tier" name="tier" value="gold" label="Gold" class="mr-20" />
+      <div class="flex justify-between">
+        <base-radio v-model="player.tier" name="tier" value="white" label="White" />
+        <base-radio v-model="player.tier" name="tier" value="blue" label="Blue" />
+        <base-radio v-model="player.tier" name="tier" value="black" label="Black" />
+        <base-radio v-model="player.tier" name="tier" value="silver" label="Silver" />
+        <base-radio v-model="player.tier" name="tier" value="gold" label="Gold" />
       </div>
       <base-textarea v-model="player.biography" label="Scouting Report" />
 

@@ -9,7 +9,7 @@
           This year's roster has not been finalized.
         </p>
         <div class="md:grid md:grid-cols-2 gap-4">
-          <player-card v-for="player in [...blueTeam, ...redTeam]" :key="player.id" v-bind="player" class="mb-4" />
+          <player-card v-for="player in sortedPlayers" :key="player.id" v-bind="player" class="mb-4" />
         </div>
       </tab>
       <tab title="Past Participants" class="px-4 py-6">
@@ -43,6 +43,10 @@ export default {
     ...mapState('players', ['players', 'blueTeam', 'redTeam']),
     ...mapGetters('currentUser', ['hasPermission']),
     ...mapGetters('tournaments', ['currentTournament']),
+
+    sortedPlayers() {
+      return [...this.blueTeam, ...this.redTeam].sort((a, b) => this.sortPlayersByTier(a, b));
+    },
   },
 
   mounted() {
@@ -60,6 +64,19 @@ export default {
   methods: {
     ...mapActions('players', ['fetchPlayers', 'fetchTournamentPlayers']),
     ...mapActions('tournaments', ['fetchTournaments']),
+
+    sortPlayersByTier(playerA, playerB) {
+      if (playerA.tier === 'gold') return -1;
+      if (playerB.tier === 'gold') return 1;
+      if (playerA.tier === 'silver') return -1;
+      if (playerB.tier === 'silver') return 1;
+      if (playerA.tier === 'black') return -1;
+      if (playerB.tier === 'black') return 1;
+      if (playerA.tier === 'blue') return -1;
+      if (playerB.tier === 'blue') return 1;
+      if (playerA.tier === 'white') return -1;
+      return 1;
+    },
   },
 };
 </script>

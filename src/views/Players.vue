@@ -45,7 +45,7 @@ export default {
     ...mapGetters('tournaments', ['currentTournament']),
 
     sortedPlayers() {
-      return [...this.blueTeam, ...this.redTeam].sort((a, b) => this.sortPlayersByTier(a, b));
+      return [...this.blueTeam, ...this.redTeam].sort((a, b) => a.hdcp - b.hdcp);
     },
   },
 
@@ -64,19 +64,6 @@ export default {
   methods: {
     ...mapActions('players', ['fetchPlayers', 'fetchTournamentPlayers']),
     ...mapActions('tournaments', ['fetchTournaments']),
-
-    sortPlayersByTier(playerA, playerB) {
-      if (playerA.tier === 'gold') return -1;
-      if (playerB.tier === 'gold') return 1;
-      if (playerA.tier === 'silver') return -1;
-      if (playerB.tier === 'silver') return 1;
-      if (playerA.tier === 'black') return -1;
-      if (playerB.tier === 'black') return 1;
-      if (playerA.tier === 'blue') return -1;
-      if (playerB.tier === 'blue') return 1;
-      if (playerA.tier === 'white') return -1;
-      return 1;
-    },
   },
 };
 </script>

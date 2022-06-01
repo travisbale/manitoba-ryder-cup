@@ -13,6 +13,7 @@
       <base-input v-model="player.firstName" label="First Name" :valid.sync="isLastNameValid" required />
       <base-input v-model="player.lastName" label="Last Name" :valid.sync="isEmailValid" required />
       <file-upload v-model="pictureList" accept="image/*" label="Profile Picture" />
+      <base-input v-model.number="player.hdcp" label="Handicap" type="number" />
       <base-label class="mb-2">
         Player Tier
       </base-label>
@@ -71,7 +72,7 @@ export default {
   data() {
     return {
       saving: false,
-      player: { email: '', firstName: '', lastName: '', biography: '', tier: 'white' },
+      player: { email: '', firstName: '', lastName: '', biography: '', hdcp: 0, tier: 'white' },
       isFirstNameValid: true,
       isLastNameValid: true,
       isEmailValid: true,

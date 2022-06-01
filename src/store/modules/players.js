@@ -126,6 +126,7 @@ export default {
         lastName: player.lastName,
         biography: player.biography,
         tier: player.tier,
+        hdcp: player.hdcp,
       };
 
       if (player.id == null) {

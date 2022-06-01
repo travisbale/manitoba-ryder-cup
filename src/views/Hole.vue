@@ -23,12 +23,16 @@
         <div>HDCP {{ hole.hdcp }}</div>
       </div>
     </div>
-    <div class="pt-6">
+    <div v-if="match.format === 'Fourball' || match.format == 'Singles'" class="pt-6">
       <score-slider v-for="score in currentScores" :key="score.playerId" v-model="score.strokes"
                     :number="number" :current-score="getCurrentStrokes(score.playerId)" :player-name="score.playerName"
-                    :player-tier="score.playerTier" :par="hole.par" :current-par="getCurrentPar(score.playerId)"
+                    :player-tier="score.playerTier" :par="hole.par" :current-par="getCurrentPar()"
                     :readonly="readonly"
       />
+    </div>
+    <div v-else-if="currentScores.length > 0" class="pt-6">
+      <team-score :number="number" :par="hole.par" :scores="blueTeamScores" :current-par="getCurrentPar()" :readonly="readonly" />
+      <team-score :number="number" :par="hole.par" :scores="redTeamScores" :current-par="getCurrentPar()" :readonly="readonly" />
     </div>
     <div class="p-4 mb-8 bg-white">
       <base-button :loading="saving" class="w-full py-4" @click="goToNextHole">
@@ -52,10 +56,11 @@ import BaseButton from '@/components/buttons/BaseButton';
 import BasePage from '@/components/layout/BasePage';
 import MatchSummary from '@/components/MatchSummary';
 import ScoreSlider from '@/components/ScoreSlider';
+import TeamScore from '@/components/TeamScore';
 import axios from '@/lib/axios';
 
 export default {
-  components: { BaseAlert, BasePage, BaseButton, MatchSummary, ScoreSlider },
+  components: { BaseAlert, BasePage, BaseButton, MatchSummary, ScoreSlider, TeamScore },
 
   props: {
     tournamentId: {
@@ -118,6 +123,14 @@ export default {
       const scores = this.scores.filter((s) => s.holeNumber === this.number);
       return scores.sort((first, second) => first.playerName.localeCompare(second.playerName));
     },
+
+    blueTeamScores() {
+      return this.getTeamScores('Blue');
+    },
+
+    redTeamScores() {
+      return this.getTeamScores('Red');
+    },
   },
 
   watch: {
@@ -156,6 +169,7 @@ export default {
                 holeNumber: this.number,
                 playerId: player.id,
                 playerName: player.fullName,
+                lastName: player.lastName,
                 playerTier: player.tier,
                 strokes: this.readonly ? 0 : this.hole.par,
               });
@@ -224,7 +238,8 @@ export default {
       return currentStrokes;
     },
 
-    getCurrentPar(playerId) {
+    getCurrentPar() {
+      const { playerId } = this.scores[0];
       let currentPar = 0;
 
       this.scores.forEach((score) => {
@@ -234,6 +249,11 @@ export default {
       });
 
       return currentPar;
+    },
+
+    getTeamScores(teamColor) {
+      const participants = this.match.participants.filter((p) => p.team === teamColor);
+      return this.scores.filter((s) => participants.find((p) => p.player.id === s.playerId) != null);
     },
   },
 };

@@ -5,7 +5,7 @@
         <div class="mr-3">
           {{ playerName }}
         </div>
-        <div class="rounded-full h-3 w-3 mt-0.5" :class="playerTierClass" />
+        <div v-if="playerTier !== ''" class="rounded-full h-3 w-3 mt-0.5" :class="playerTierClass" />
       </div>
       <div>
         {{ newScore }} ({{ scoreUnderPar }})
@@ -59,8 +59,9 @@ export default {
 
     playerTier: {
       type: String,
-      default: 'white',
-      validator: (tier) => playerValidation.validateTier(tier),
+      default: '',
+      // Tier can be empty if the team only records one score
+      validator: (tier) => playerValidation.validateTier(tier) || tier === '',
     },
 
     number: {

@@ -27,12 +27,12 @@
       <score-slider v-for="score in currentScores" :key="score.playerId" v-model="score.strokes"
                     :number="number" :current-score="getCurrentStrokes(score.playerId)" :player-name="score.playerName"
                     :player-tier="score.playerTier" :par="hole.par" :current-par="getCurrentPar()"
-                    :readonly="readonly"
+                    :readonly="false"
       />
     </div>
     <div v-else-if="currentScores.length > 0" class="pt-6">
-      <team-score :number="number" :par="hole.par" :scores="blueTeamScores" :current-par="getCurrentPar()" :readonly="readonly" />
-      <team-score :number="number" :par="hole.par" :scores="redTeamScores" :current-par="getCurrentPar()" :readonly="readonly" />
+      <team-score :number="number" :par="hole.par" :scores="blueTeamScores" :current-par="getCurrentPar()" :readonly="false" />
+      <team-score :number="number" :par="hole.par" :scores="redTeamScores" :current-par="getCurrentPar()" :readonly="false" />
     </div>
     <div class="p-4 mb-8 bg-white">
       <base-button :loading="saving" class="w-full py-4" @click="goToNextHole">
@@ -49,7 +49,7 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
-import { DateTime } from 'luxon';
+// import { DateTime } from 'luxon';
 
 import BaseAlert from '@/components/BaseAlert';
 import BaseButton from '@/components/buttons/BaseButton';
@@ -96,20 +96,22 @@ export default {
     ...mapGetters('currentUser', ['isAdmin']),
 
     readonly() {
-      // An administrator can always edit the match
-      if (this.isAdmin) { return false; }
+      return false;
 
-      // Match cannot be edited before it starts or after it finishes
-      if (this.match.teeTime > DateTime.now() || this.match.finished) { return true; }
-
-      // Anyone participating in an incomplete match can edit it
-      for (let i = 0; i < this.match.participants.length; i++) {
-        if (this.match.participants[i].player.email === this.currentUser.email) {
-          return false;
-        }
-      }
-
-      return true;
+      // // An administrator can always edit the match
+      // if (this.isAdmin) { return false; }
+      //
+      // // Match cannot be edited before it starts or after it finishes
+      // if (this.match.teeTime > DateTime.now() || this.match.finished) { return true; }
+      //
+      // // Anyone participating in an incomplete match can edit it
+      // for (let i = 0; i < this.match.participants.length; i++) {
+      //   if (this.match.participants[i].player.email === this.currentUser.email) {
+      //     return false;
+      //   }
+      // }
+      //
+      // return true;
     },
 
     hole() {

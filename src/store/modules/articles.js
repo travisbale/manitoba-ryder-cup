@@ -5,6 +5,33 @@ export default {
   state: {
     articles: [
       {
+        id: 7,
+        title: 'Ryder Returns to Cragun\'s',
+        showTitle: true,
+        publishedDate: DateTime.fromISO('2024-07-07'),
+        imageUrl: '/img/cragun.jpg',
+        author: 'Ryder Commissioner',
+        html: `
+          <p class="mb-6">
+            Back for the second time, the Ryder Cup finally returns to the site of arguably the best Ryder in now its 15th year
+            of competiton. From the Ryder’s humble beginning of setting up tents at the Morden campground, the Ryder Cup has grown
+            to an annual competition with a cast of characters that truly bring the life of the tournament. This year, twenty four
+            competitors eagerly anticipate testing their game at the newly finished Lehman 18 and renovated Dutch course and then
+            relaxing with one (or more) Legacy Teas!
+          </p>
+          <p class="mb-6">
+            With the newly renovated courses, the tournament director has reformatted the schedule of play with MM Scotch leading
+            the tournament off with fourball filling in the afternoon session. The standard Alternate Shot and Singles will follow
+            on Saturday.  With all twenty four players returning, the field will be made up of  2 Golds, 7 Silvers, 5 Blacks, 6
+            Blues and 4  Whites.
+          </p>
+          <p class="mb-6">
+            With the draft taking place this weekend, and balls in the air less than two weeks away, team captains St- Hilaire and
+            Gunnlaugson look to lead their team to glory.
+          </p>
+        `,
+      },
+      {
         id: 6,
         title: 'The Whiskey Room Awaits',
         showTitle: true,
@@ -19,8 +46,8 @@ export default {
           <p class="mb-6">
             After hours and hours of arguments, debates, and deliberations, the decision was made to move to a five color
             system. To keep the singles and fourball matches competitive, players will be pitted against players who are
-            within one color grouping either above or below them. The modified scotch and alternate shot matches are less 
-            prescriptive, the only restriction being that teams must be evenly matched. As always, there are no repeat 
+            within one color grouping either above or below them. The modified scotch and alternate shot matches are less
+            prescriptive, the only restriction being that teams must be evenly matched. As always, there are no repeat
             pairings throughout the weekend.
           </p>
           <p class="mb-6">
@@ -28,7 +55,7 @@ export default {
             strategies. But come Saturday evening, when it's all said and done, only one captain will be etching their name into
             the Ryder history books and hoisting the Cup in the famous Whiskey Room at the Lake of the Woods Brewery. The other,
             will only be able to imagine what could have been as they reflect upon their mistakes and ponder how it all went so
-            horribly wrong. Who will get the better of whom in what's sure to be another classic Zander/Rohan showdown? Only 
+            horribly wrong. Who will get the better of whom in what's sure to be another classic Zander/Rohan showdown? Only
             time will tell which team is going to come out on top...
           </p>
         `,
@@ -43,14 +70,14 @@ export default {
         html: `
           <p class="mb-6">
             After a tumultuous couple of COVID ridden years, the Ryder Cup will make its glorious return to June in 2022.
-            And after spraying dozens of balls towards the Ontario shoreline during last year's event at Buffalo Point, 
+            And after spraying dozens of balls towards the Ontario shoreline during last year's event at Buffalo Point,
             it only made sense that we go the extra mile and officially cross the border to find our next venue in Kenora
             for 2022.
           </p>
           <p class="mb-6">
             This year's event will feature the same four formats that by now veteran participants should be very familiar
-            with. The tournament will begin Friday morning with Fourball, followed by MM Scotch in the afternoon. Play 
-            will continue Saturday morning with Alternate shot, and will be concluded in the afternoon with the Singles 
+            with. The tournament will begin Friday morning with Fourball, followed by MM Scotch in the afternoon. Play
+            will continue Saturday morning with Alternate shot, and will be concluded in the afternoon with the Singles
             matches.
           </p>
           <p class="mb-6">

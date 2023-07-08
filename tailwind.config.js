@@ -30,6 +30,8 @@ module.exports = {
       'grid-cols-56',
       'grid-cols-58',
       'grid-cols-60',
+      'grid-cols-62',
+      'grid-cols-64',
     ],
   },
   theme: {
@@ -376,9 +378,11 @@ module.exports = {
         50: 'repeat(50, minmax(0, 1fr))',
         52: 'repeat(52, minmax(0, 1fr))',
         54: 'repeat(54, minmax(0, 1fr))',
-        56: 'repeat(50, minmax(0, 1fr))',
-        58: 'repeat(50, minmax(0, 1fr))',
+        56: 'repeat(56, minmax(0, 1fr))',
+        58: 'repeat(58, minmax(0, 1fr))',
         60: 'repeat(60, minmax(0, 1fr))',
+        62: 'repeat(62, minmax(0, 1fr))',
+        64: 'repeat(64, minmax(0, 1fr))',
       },
       letterSpacing: {
         widest: '0.25em',

@@ -98,7 +98,7 @@ export default {
       return {
         'bg-blue-800': blueBlock,
         'bg-blue-200': projBlueBlock,
-        'bg-grey-200': greyBlock,
+        'bg-grey-300': greyBlock,
         'bg-red-200': projRedBlock,
         'bg-red-800': redBlock,
         'border-r': index % 2 === 0 || centerBlock,

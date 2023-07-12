@@ -1,23 +1,16 @@
 <template>
   <div v-if="matches.length > 0">
-    <section-header class="text-center mb-6">
-      {{ matchFormat }}
-      <template v-slot:subheader>
-        {{ matchDate | printDate }}
-      </template>
-    </section-header>
     <match-overview v-for="match in matches" :key="match.id" v-bind="match" />
   </div>
 </template>
 
 <script>
-import SectionHeader from '@/components/typography/SectionHeader';
 import datetimeFilters from '@/mixins/filters/datetime';
 
 import MatchOverview from './MatchOverview';
 
 export default {
-  components: { MatchOverview, SectionHeader },
+  components: { MatchOverview },
 
   mixins: [datetimeFilters],
 

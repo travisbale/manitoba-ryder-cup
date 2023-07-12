@@ -13,13 +13,21 @@
     <p v-if="matches.length === 0" class="text-center pt-6">
       There are currently no matches scheduled.
     </p>
-    <div v-else class="px-2 pb-4 pt-6 bg-grey-100">
-      <scoring-summary match-format="Modified Scotch" class="mb-12" :matches="getMatches('Modified Scotch')" />
-      <scoring-summary match-format="Fourball" class="mb-12" :matches="getMatches('Fourball')" />
-      <scoring-summary match-format="Alternate Shot" class="mb-12" :matches="getMatches('Alternate Shot')" />
-      <scoring-summary match-format="Scramble" class="mb-12" :matches="getMatches('Scramble')" />
-      <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />
-    </div>
+    <tabs>
+      <tab title="Scotch" class="px-2 pt-6">
+        <scoring-summary match-format="Modified Scotch" class="mb-12" :matches="getMatches('Modified Scotch')" />
+      </tab>
+      <tab title="Fourball" class="px-2 pt-6">
+        <scoring-summary match-format="Fourball" class="mb-12" :matches="getMatches('Fourball')" />
+      </tab>
+      <tab title="Alt Shot" class="px-2 pt-6">
+        <scoring-summary match-format="Alternate Shot" class="mb-12" :matches="getMatches('Alternate Shot')" />
+      </tab>
+      <tab title="Singles" class="px-2 pt-6">
+        <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />
+      </tab>
+    </tabs>
+    <scoring-summary match-format="Scramble" class="mb-12" :matches="getMatches('Scramble')" />
     <router-link v-if="hasPermission('update:tournaments')" :to="{ name: 'edit-tournament', params: { tournamentId: tournamentId }}">
       <floating-action-button action="edit" />
     </router-link>
@@ -34,9 +42,11 @@ import BasePage from '@/components/layout/BasePage';
 import FloatingActionButton from '@/components/buttons/FloatingActionButton';
 import ScoreBar from '@/components/ScoreBar';
 import ScoringSummary from '@/components/ScoringSummary';
+import Tab from '@/components/tabs/Tab';
+import Tabs from '@/components/tabs/Tabs';
 
 export default {
-  components: { BasePage, FloatingActionButton, ScoreBar, ScoringSummary },
+  components: { Tabs, Tab, BasePage, FloatingActionButton, ScoreBar, ScoringSummary },
 
   props: {
     tournamentId: {

@@ -108,12 +108,6 @@ export default {
     },
 
     getStatusText() {
-      const now = DateTime.now();
-
-      if (now < this.teeTime) {
-        return this.teeTime.toLocaleString(DateTime.TIME_24_SIMPLE);
-      }
-
       return this.currentScore.statusText;
     },
   },

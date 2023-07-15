@@ -1,14 +1,14 @@
 <template>
   <div>
-    <ul class="flex shadow-md text-grey-500">
-      <li v-for="(tab, index) in tabs" :key="tab.title" class="flex-grow" @click="selectTab(index)">
+    <div class="flex shadow-md text-grey-500">
+      <a v-for="(tab, index) in tabs" :key="tab.title" :href="tab.href" class="flex-grow" @click="selectTab(index)">
         <div class="font-raleway-bold uppercase tracking-wide pt-5 pb-3 text-center"
              :class="{ 'border-deep-purple-800 border-b-4 text-deep-purple-800': tab.isActive }"
         >
           {{ tab.title }}
         </div>
-      </li>
-    </ul>
+      </a>
+    </div>
     <slot />
   </div>
 </template>
@@ -23,12 +23,19 @@ export default {
   },
 
   mounted() {
+    const { hash } = this.$route;
+
     this.$children.forEach((child, index) => {
       this.tabs.push(child);
-      child.isActive = (index === this.selectedIndex);
+
+      if (hash !== '#' && hash === child.href) {
+        this.selectedIndex = index;
+      } else {
+        child.isActive = false;
+      }
     });
 
-    this.selectTab(0);
+    this.selectTab(this.selectedIndex);
   },
 
   methods: {

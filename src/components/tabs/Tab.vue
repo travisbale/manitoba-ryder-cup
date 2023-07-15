@@ -11,6 +11,11 @@ export default {
       type: String,
       default: 'Tab',
     },
+
+    href: {
+      type: String,
+      default: '#',
+    },
   },
 
   data() {

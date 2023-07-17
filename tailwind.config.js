@@ -337,6 +337,9 @@ module.exports = {
       white: '#fff',
     },
     extend: {
+      borderWidth: {
+        5: '5px',
+      },
       fontFamily: {
         opensans: ['OpenSans'],
         semibold: ['OpenSansSemiBold'],

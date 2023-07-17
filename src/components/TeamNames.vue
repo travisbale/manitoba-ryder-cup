@@ -34,8 +34,8 @@ export default {
   computed: {
     borderColor() {
       return {
-        'border-r-4 border-red-800 justify-end text-right': this.teamColor === 'Red',
-        'border-l-4 border-blue-800': this.teamColor === 'Blue',
+        'border-r-5 border-red-800 justify-end text-right': this.teamColor === 'Red',
+        'border-l-5 border-blue-800': this.teamColor === 'Blue',
       };
     },
   },

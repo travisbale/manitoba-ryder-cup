@@ -14,14 +14,14 @@
       There are currently no matches scheduled.
     </p>
     <tabs>
-      <tab title="Scotch" href="#scotch" class="px-2 pt-6">
-        <scoring-summary match-format="Modified Scotch" class="mb-12" :matches="getMatches('Modified Scotch')" />
-      </tab>
       <tab title="Fourball" href="#fourball" class="px-2 pt-6">
         <scoring-summary match-format="Fourball" class="mb-12" :matches="getMatches('Fourball')" />
       </tab>
       <tab title="Alt Shot" href="#alt-shot" class="px-2 pt-6">
         <scoring-summary match-format="Alternate Shot" class="mb-12" :matches="getMatches('Alternate Shot')" />
+      </tab>
+      <tab title="Scotch" href="#scotch" class="px-2 pt-6">
+        <scoring-summary match-format="Modified Scotch" class="mb-12" :matches="getMatches('Modified Scotch')" />
       </tab>
       <tab title="Singles" href="#singles" class="px-2 pt-6">
         <scoring-summary match-format="Singles" :matches="getMatches('Singles')" />

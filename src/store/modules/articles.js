@@ -5,10 +5,39 @@ export default {
   state: {
     articles: [
       {
+        id: 8,
+        title: 'Ryder Goes to Kenosee',
+        showTitle: true,
+        publishedDate: DateTime.fromISO('2024-07-31'),
+        imageUrl: '/img/golf-kenosee.jpg',
+        author: 'Ryder Commissioner',
+        html: `
+          <p class="mb-6">
+            As selected by the Ryder Cup Competition Committee, Evan Martin and Travis Bale will be the two captains for the 2024 Ryder Cup.
+            Both players are Rossmere Golf and Country Club royalty (meaning that they respect the homes located on holes nos. 1, 2, 3, 6, 7,
+            13, 16, and 17), and are taking the role of captain very seriously. Upon getting the call, Evan immediatley began following
+            fellow Ryder Cup competitors on Golf Canada to track scoring. Travis has decided to use his time elsewhere, working on his
+            patented "LET'S GO!" chant so it can be heard on the other side of Kenosee Lake.
+          </p>
+          <p class="mb-6">
+            This year the tournament will feature three rounds at the prestigious Golf Kenosee golf couse, and one round at the White
+            Bear Lake Golf Course. In order to maximize the number of shots everyone gets to hit at White Bear, the Ryder Cup Committee has
+            decided to start the event with Fourball Friday morning, followed by Alternate Shot in the afternoon both taking place at Golf
+            Kenosee. Then Saturday morning the competitors will begin the day with MM Scotch at White Bear before heading back to Kenosee
+            for Singles.
+          </p>
+          <p class="mb-6">
+            The teams are set and the players are ready. With the narrow fairways, tee advantages look to play a large roll in this year's
+            event. Will we finally have a Ryder Cup come down to the final putt? Or will the writing be on the wall long before Saturday
+            afternoon? September can't come soon enough!
+          </p>
+        `,
+      },
+      {
         id: 7,
         title: 'Ryder Returns to Cragun\'s',
         showTitle: true,
-        publishedDate: DateTime.fromISO('2024-07-07'),
+        publishedDate: DateTime.fromISO('2023-07-07'),
         imageUrl: '/img/cragun.jpg',
         author: 'Ryder Commissioner',
         html: `

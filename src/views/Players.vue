@@ -45,7 +45,17 @@ export default {
     ...mapGetters('tournaments', ['currentTournament']),
 
     sortedPlayers() {
-      return [...this.blueTeam, ...this.redTeam].sort((a, b) => a.hdcp - b.hdcp);
+      return [...this.blueTeam, ...this.redTeam].sort((player1, player2) => {
+        if (player1.tier === player2.tier) return player1.firstName.localeCompare(player2.firstName);
+        if (player1.tier === 'gold') return -1;
+        if (player2.tier === 'gold') return 1;
+        if (player1.tier === 'silver') return -1;
+        if (player2.tier === 'silver') return 1;
+        if (player1.tier === 'black') return -1;
+        if (player2.tier === 'black') return 1;
+        if (player1.tier === 'blue') return -1;
+        return 1;
+      });
     },
   },
 

@@ -92,7 +92,7 @@ export default {
   computed: {
     ...mapState('currentUser', ['currentUser']),
     ...mapState('teeSets', ['teeSet']),
-    ...mapGetters('currentUser', ['isAdmin']),
+    ...mapGetters('currentUser', ['isAdmin', 'hasPermission']),
 
     readonly() {
       // An administrator can always edit the match
@@ -101,13 +101,10 @@ export default {
       // Match cannot be edited before it starts or after it finishes
       if (this.match.finished) { return true; }
 
-      // Anyone participating in an incomplete match can edit it
-      for (let i = 0; i < this.match.participants.length; i++) {
-        if (this.match.participants[i].player.email === this.currentUser.email) {
-          return false;
-        }
-      }
+      // Anyone with the create:scores permission can edit an incomplete match
+      if (this.hasPermission('create:scores')) { return false; }
 
+      // Otherwise the match is readonly
       return true;
     },
 

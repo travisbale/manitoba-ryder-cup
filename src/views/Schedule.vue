@@ -53,14 +53,14 @@
         There are currently no tournaments scheduled
       </p>
       <div v-for="season in seasons" v-else :key="season.year">
-        <div class="w-1/2 h-16 border-r border-grey-400 mb-2" />
+        <div class="w-1/2 h-8 border-r border-grey-400 mb-2" />
         <div class="mb-2 font-bold text-xl text-center">
           {{ season.year }}
         </div>
         <div v-for="t in season.tournaments" :key="t.id" class="pb-4">
-          <div class="w-1/2 h-16 border-r border-grey-400 mb-6" />
+          <div class="w-1/2 h-8 border-r border-grey-400 mb-4" />
           <router-link :to="{ name: 'leaderboard', params: { tournamentId: t.id }}" v-bind="t" class="block">
-            <tournament-card v-bind="t" class="mb-4" />
+            <tournament-card v-bind="t" class="mb-2" />
           </router-link>
         </div>
       </div>

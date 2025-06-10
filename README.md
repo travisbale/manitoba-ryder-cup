@@ -1,5 +1,8 @@
 # The Manitoba Ryder Cup
 
+[![CI](https://github.com/travisbale/manitoba-ryder-cup/actions/workflows/ci.yml/badge.svg)](https://github.com/travisbale/manitoba-ryder-cup/actions/workflows/ci.yml)
+[![CI](https://github.com/travisbale/manitoba-ryder-cup/actions/workflows/deploy.yml/badge.svg)](https://github.com/travisbale/manitoba-ryder-cup/actions/workflows/deploy.yml)
+
 This project serves as the the front end for a live scoring app dedicated to the Manitoba Ryder Cup. It is a single page application built using the Vue.js JavaScript framework.
 
 ## Project setup

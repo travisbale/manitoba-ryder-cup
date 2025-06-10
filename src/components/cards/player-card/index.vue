@@ -1,7 +1,7 @@
 <template>
   <router-link :to="{ name: 'player', params: { playerId: id }}" class="block">
     <base-card class="flex items-center">
-      <template v-slot:image>
+      <template #image>
         <img class="h-32 w-32 object-cover object-top" :src="photoPath || '/img/default-avatar.webp'" :alt="fullName" />
       </template>
       <tier-badge :tier="tier" class="mb-1" />

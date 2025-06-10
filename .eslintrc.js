@@ -37,6 +37,7 @@ module.exports = {
     {
       files: ['*.vue'],
       rules: {
+        'vue/no-mutating-props': 'off',
         'vue/max-attributes-per-line': ['off'],
         'vue/max-len': ['error', {
           code: 120,

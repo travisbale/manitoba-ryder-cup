@@ -1,6 +1,6 @@
 <template>
   <base-card v-on="$listeners">
-    <template v-slot:image>
+    <template #image>
       <img class="w-full h-56 object-cover object-center" :src="imageUrl" alt="image" />
     </template>
     <h4 class="text-3xl font-raleway-semibold mb-2">

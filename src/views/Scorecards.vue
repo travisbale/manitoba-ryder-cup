@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/sunset-green.webp">
-    <template v-slot:header>
+    <template #header>
       My Rounds
     </template>
     <tabs>
@@ -11,7 +11,7 @@
         <div v-for="tournament in tournaments" :key="tournament.id">
           <section-header class="mb-6 text-center">
             {{ tournament.location }}
-            <template v-slot:subheader>
+            <template #subheader>
               {{ tournament.startDate | printDate }} &ndash; {{ tournament.endDate | printDate }}
             </template>
           </section-header>

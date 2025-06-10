@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/fairway.webp">
-    <template v-slot:header>
+    <template #header>
       Reset Password
     </template>
     <div class="p-4 pt-6">
@@ -43,7 +43,7 @@ export default {
 
   methods: {
     sendResetInstructions() {
-      console.log('send instructions');
+      // console.log('send instructions');
       this.sending = true;
 
       axios.post('forgot-password', { email: this.email }).finally(() => {

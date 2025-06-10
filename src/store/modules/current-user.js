@@ -39,20 +39,17 @@ export default {
       });
     },
 
-    refresh({ getters, commit }) {
+    async refresh({ getters, commit }) {
       const config = { xsrfCookieName: 'csrf_refresh_token' };
 
       if (!getters.isLoggedIn) {
-        const refreshing = axios.post('refresh', null, config);
-
-        refreshing
-          .then((response) => { commit('setCurrentUser', response.data); })
-          .catch(() => { commit('setCurrentUser', anonymousUser); });
-
-        return refreshing;
+        try {
+          const response = await axios.post('refresh', null, config);
+          commit('setCurrentUser', response.data);
+        } catch {
+          commit('setCurrentUser', anonymousUser);
+        }
       }
-
-      return Promise.resolve();
     },
 
     logout({ commit }) {

@@ -4,7 +4,7 @@
     :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
     image-url="/img/oceanside.webp"
   >
-    <template v-slot:header>
+    <template #header>
       <div v-if="tournamentId > 0">
         Edit Tournament
       </div>

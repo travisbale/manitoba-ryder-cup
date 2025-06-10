@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/glen-abbey.webp">
-    <template v-slot:header>
+    <template #header>
       News & Media
     </template>
     <div class="p-4 pt-6 bg-grey-100">

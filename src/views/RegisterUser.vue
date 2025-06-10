@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/clubhouse-green.webp">
-    <template v-slot:header>
+    <template #header>
       Create Account
     </template>
     <div class="p-4 pt-6">

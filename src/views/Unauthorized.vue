@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/links-course.webp">
-    <template v-slot:header>
+    <template #header>
       Unauthorized
     </template>
     <div class="px-4 py-8 text-center">

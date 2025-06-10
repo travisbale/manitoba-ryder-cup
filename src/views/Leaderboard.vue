@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/crowd.webp">
-    <template v-slot:header>
+    <template #header>
       <h4 class="font-opensans text-white text-base">
         {{ `${getTeamName('Blue')} vs. ${getTeamName('Red')}` }}
       </h4>

@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/mountain-green.webp">
-    <template v-slot:header>
+    <template #header>
       Tournament Players
     </template>
     <tabs>

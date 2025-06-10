@@ -58,10 +58,7 @@ jobs:
         run: npm install
 
       - name: Build app
-        run: |
-          node -v 
-          npm -v 
-          NODE_OPTIONS=--openssl-legacy-provider npm run build
+        run: npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
@@ -85,5 +82,5 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "dist/*"
+          source: "*"
           target: "/usr/share/nginx/html"

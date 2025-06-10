@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/mountain-course.webp">
-    <template v-slot:header>
+    <template #header>
       Tour History
     </template>
     <div class="p-4 pt-6">

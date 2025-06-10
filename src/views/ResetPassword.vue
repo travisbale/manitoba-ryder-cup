@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/fairway.webp">
-    <template v-slot:header>
+    <template #header>
       Reset Password
     </template>
     <div class="p-4 pt-6">

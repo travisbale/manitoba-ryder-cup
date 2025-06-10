@@ -1,6 +1,6 @@
 <template>
   <base-page back-link-text="Tour Players" :back-link-route="{ name: 'players' }" image-url="/img/ocean-hills.webp">
-    <template v-slot:header>
+    <template #header>
       <div v-if="playerId > 0">
         Edit Player
       </div>

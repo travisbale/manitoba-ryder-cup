@@ -4,7 +4,7 @@
     :back-link-route="{ name: 'scorecard', params: { tournamentId: tournamentId, matchId: matchId }}"
     image-url="/img/fox-harbr.webp"
   >
-    <template v-slot:header>
+    <template #header>
       <div v-if="matchId > 0">
         Edit Match
       </div>

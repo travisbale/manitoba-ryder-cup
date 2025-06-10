@@ -1,9 +1,9 @@
 <template>
   <base-modal :is-open="isOpen" v-on="$listeners">
-    <template v-slot:header>
+    <template #header>
       Add Participants
     </template>
-    <template v-slot:body>
+    <template #body>
       <div v-if="players.length === 0" class="text-center">
         There are no players available to be selected
       </div>
@@ -19,7 +19,7 @@
         />
       </div>
     </template>
-    <template v-slot:footer>
+    <template #footer>
       <div class="flex justify-end">
         <base-button type="secondary" class="mr-2" @click="close">
           Cancel

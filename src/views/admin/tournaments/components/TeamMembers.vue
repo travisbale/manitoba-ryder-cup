@@ -82,8 +82,8 @@ export default {
       };
     },
 
-    deleteParticipant(playerId) {
-      console.log(`playerId: ${playerId}`);
+    deleteParticipant() {
+      // console.log(`playerId: ${playerId}`);
     },
 
     addPlayers(selectedPlayers) {

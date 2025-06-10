@@ -3,7 +3,7 @@
              :back-link-route="{ name: 'leaderboard', params: { tournamentId: tournamentId }}"
              image-url="/img/ocean-green.webp"
   >
-    <template v-slot:header>
+    <template #header>
       Scorecard
       <h4 class="font-opensans text-white text-sm">
         {{ match.teeTime | printDateTime }}
@@ -12,7 +12,7 @@
     <div class="p-4 pt-6">
       <section-header class="mb-4">
         {{ teeSet.course }}
-        <template v-slot:subheader>
+        <template #subheader>
           Par {{ teeSet.par }}, {{ teeSet.yards }} Yards
         </template>
       </section-header>

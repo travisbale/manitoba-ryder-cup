@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/clubhouse-green.webp">
-    <template v-slot:header>
+    <template #header>
       Page Not Found
     </template>
     <div class="px-4 py-8 text-center">

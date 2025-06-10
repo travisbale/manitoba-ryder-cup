@@ -80,7 +80,7 @@ export default {
     ...mapActions('players', ['fetchPlayer', 'savePlayer']),
 
     changePhoto() {
-      console.log('click');
+      // console.log('click');
     },
   },
 };

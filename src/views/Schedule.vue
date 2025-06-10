@@ -1,6 +1,6 @@
 <template>
   <base-page image-url="/img/oceanside.webp">
-    <template v-slot:header>
+    <template #header>
       Tournament History
     </template>
     <div class="p-4 pt-6 bg-grey-100">

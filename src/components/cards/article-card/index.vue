@@ -3,12 +3,9 @@
     <template #image>
       <img class="w-full h-56 object-cover object-center" :src="imageUrl" alt="image" />
     </template>
-    <h4 class="text-3xl font-raleway-semibold mb-2">
+    <h4 class="text-3xl font-raleway-semibold">
       {{ title }}
     </h4>
-    <p class="font-semibold text-sm">
-      By {{ author }}
-    </p>
     <p class="text-sm text-grey-600">
       {{ printDate(publishedDate) }}
     </p>

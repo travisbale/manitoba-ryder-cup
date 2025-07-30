@@ -5,6 +5,139 @@ export default {
   state: {
     articles: [
       {
+        id: 9,
+        title: 'Player Stock Report',
+        showTitle: true,
+        publishedDate: DateTime.fromISO('2025-07-30'),
+        imageUrl: '/img/technical-analysis-chart.jpg',
+        html: `
+          <p class="mb-6">
+            The draft is set for this Friday, August 1st, and following an even match at Elmhurst Country
+            Club, Captain Dan McInnis edged out Captain Nigel Milnes. As a result, McInnis now holds the
+            strategic advantage of choosing either the first overall pick or deferring for the coveted second
+            and third selections.
+          </p>
+          <p class="mb-6">
+            While a full analysis of each player will be released once the teams are finalized, this
+            ghostwriter (and self-appointed draft pundit) offers a few early thoughts on notable player
+            trajectories heading into draft night.
+          </p>
+          <div class="flex my-4 pt-2">
+          <svg class="w-10 h-10 mr-2" viewBox="0 0 48 48" fill="none">
+            <path d="M40.9999 27.0007L40.9999 15.0007L29 15.0007" stroke-width="4" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 37.0002L16.3385 24.5002L26.1846 30.5002L41 15.0002" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+            <h2 class="text-2xl font-semibold">Buy</h2>
+          </div>
+          <p class="mb-6">
+            <strong>Connor Macaulay</strong>
+            <br>
+            A top-15 finish at the Manitoba Amateur is impressive. Going 7-0* against another Ryder Cup
+            competitor (*without “cap nonsense”) during the recent US golf trip sends this player&#39;s stock to
+            the moon.
+          </p>
+          <p class="mb-6">
+            <strong>Mike Kalic</strong>
+            <br>
+            Returning for his second Ryder appearance, the man known as the &quot;McInnis Whisperer&quot; is back
+            with a stronger game and a legendary Gold+ rating when the beer cart is in proximity.
+          </p>
+          <p class="mb-6">
+            <strong>Jon Ray</strong>
+            <br>
+            With his second career hole-in-one (and now one a golf course that remains available to play),
+            this player is coming in hot just in time for draft night.
+          </p>
+          <p class="mb-6">
+            <strong>Stu Shiells</strong>
+            <br>
+            With weddings scheduled for Ryder Cup weekend at Danceland, Elkhorn Resort, and the
+            Wishing Well, this player is highly motivated to keep his matches short and efficient.
+          </p>
+          <p class="mb-6">
+            <strong>Garry Hargreaves</strong>
+            <br>
+            Course knowledge is critical at CLGC, and no competitor is more familiar than Garry. The only
+            player in draft who has won a championship at the prestigious Tamarack Golf Tournament, this
+            match play specialist will look to channel his junior success. Also owns the title for the most
+            enthusiastic celebration in Ryder Cup history.
+          </p>
+
+          <div class="flex my-4 pt-2">
+            <svg class="w-10 h-10 mr-2" fill="#000" viewBox="0 0 24 24">
+              <path d="M23 13H2v-2h21v2z"/>
+            </svg>
+            <h2 class="text-2xl font-semibold">Hold</h2>
+          </div>
+          <p class="mb-6">
+            <strong>Travis Bale</strong>
+            <br>
+            With draft groupings now set, this player—long known for seeking any edge (note: this isn’t a
+            net event)—can finally shift into Ryder-ready mode. Expect the 97s to become 79s soon
+            enough.
+          </p>
+          <p class="mb-6">
+            <strong>Jason Gunnlaugson</strong>
+            <br>
+            Don't be fooled by the self-doubt, this course suits his precision game perfectly. The only
+            question: can he finally escape the ghost of Taylor Riedel from Ryder Cups past?
+          </p>
+          <p class="mb-6">
+            <strong>Blair Horn</strong>
+            <br>
+            Despite limited action this season, he’s off on a week-long BC golf trip to get into form. Insider
+            note: he always golfs in pants—an edge when temperatures drop at CLGC.
+          </p>
+          <p class="mb-6">
+            <strong>Harbinder Benning</strong>
+            <br>
+            The Ryder’s high-beta stock. This player has lost—and found—his game (and spiritual
+            alignment) more often than a kid misplaces a water bottle. While not quite rated Gold+, there&#39;s
+            serious upside here if a captain can help him “find religion.”
+          </p>
+          <p class="mb-6">
+            <strong>Keith Van Walleghem</strong>
+            <br>
+            Now living in the alternate universe of Wheat City Golf Club&#39;s Thursday night league, he&#39;s kept
+            his game (and scores) under wraps. A dependable glue guy with a Gold+ pedigree… once he
+            gets his farm chores done.
+          </p>
+
+          <div class="flex my-4 pt-2">
+            <svg class="w-10 h-10 mr-2" viewBox="0 0 24 24" fill="none">
+              <path d="M21 17L13 9L9 13L3 7M21 17H15M21 17V11" stroke-width="2.5" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <h2 class="text-2xl font-semibold">Sell</h2>
+          </div>
+          <p class="mb-6">
+            <strong>Adam Sefton / Iain McDonald</strong>
+            <br>
+            This isn’t a knock on their 2025 seasons, but no one expects them to replicate their 2024 clutch
+            heroics for Team Martin. Reality likely returns in 2025. Adam’s stock gets a slight bump for
+            being the only competitor who traveled to Bandon Dunes twice in consecutive months.
+          </p>
+          <p class="mb-6">
+            <strong>Evan Martin</strong>
+            <br>
+            Somehow both the coldest and hottest player in the field. After captaining the 2024 champs and
+            again earning the title of &quot;Best Looking Member at Rossmere&quot; (per the cart girls—better luck
+            next year, Fordyce), his 2025 play has been subpar. Still, his tactical mind makes him an asset.
+            Expect him to go early in the blue group.
+          </p>
+          <p class="mb-12">
+            <strong>Jusin Rabe</strong>
+            <br>
+            Traveling for golf is one thing—but for baseball? Priorities, please. Still, this Ryder vet brings
+            value with deep CLGC knowledge. The only player to record a hole-in-one in Ryder Cup play,
+            he’ll look to rekindle that magic on the 17th hole this year.
+          </p>
+
+        <p class="mb-6">
+          Stay tuned for full team breakdowns post draft...
+        </p>
+        `,
+      },
+      {
         id: 8,
         title: 'Ryder Goes to Kenosee',
         showTitle: true,

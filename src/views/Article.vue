@@ -8,10 +8,7 @@
       </div>
     </div>
     <div class="p-4 pt-6 text leading-relaxed">
-      <div class="font-semibold mb-1">
-        By {{ article.author }}
-      </div>
-      <div class="text-sm text-grey-600 mb-4">
+      <div class="flex text-sm text-grey-600 mb-2">
         {{ printDate(article.publishedDate) }}
       </div>
       <!-- eslint-disable-next-line -->

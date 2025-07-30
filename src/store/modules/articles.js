@@ -78,13 +78,13 @@ export default {
             enough.
           </p>
           <p class="mb-6">
-            <strong>Jason Gunnlaugson</strong>
+            <strong>Blair Horn</strong>
             <br>
             Don't be fooled by the self-doubt, this course suits his precision game perfectly. The only
             question: can he finally escape the ghost of Taylor Riedel from Ryder Cups past?
           </p>
           <p class="mb-6">
-            <strong>Blair Horn</strong>
+            <strong>Jason Gunnlaugson</strong>
             <br>
             Despite limited action this season, he’s off on a week-long BC golf trip to get into form. Insider
             note: he always golfs in pants—an edge when temperatures drop at CLGC.

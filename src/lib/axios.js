@@ -10,10 +10,27 @@ const instance = axios.create({
   baseURL: process.env.VUE_APP_API_URL,
   // Include cookies in cross-site Access-Control requests
   withCredentials: true,
-  // The name of the cookie sent as a CSRF token
-  xsrfCookieName: 'csrf_access_token',
-  // The name of the HTTP header that carries the CSRF token
-  xsrfHeaderName: 'X-CSRF-TOKEN',
+});
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
+instance.interceptors.request.use((config) => {
+  const isRefreshRequest = config.url?.includes('refresh');
+  const csrfToken = getCookie(isRefreshRequest ? 'csrf_refresh_token' : 'csrf_access_token');
+
+  if (csrfToken) {
+    config.headers['X-CSRF-TOKEN'] = csrfToken;
+  }
+
+  return config;
+}, (error) => {
+  return Promise.reject(error);
 });
 
 // Set an interceptor to handle generic errors

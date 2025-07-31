@@ -4,13 +4,13 @@
       <div class="font-italic">
         {{ getMember(1).firstName }}
       </div>
-      <div class="font-bold uppercase">
+      <div class="font-semibold uppercase">
         {{ getMember(1).lastName }}
       </div>
       <div v-if="members.length > 1" class="font-italic mt-4">
         {{ getMember(2).firstName }}
       </div>
-      <div v-if="members.length > 1" class="font-bold uppercase">
+      <div v-if="members.length > 1" class="font-semibold uppercase">
         {{ getMember(2).lastName }}
       </div>
     </div>

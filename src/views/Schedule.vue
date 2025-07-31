@@ -17,7 +17,7 @@
       </p>
       <div class="flex rounded-md overflow-hidden border border-grey-300 shadow w-full bg-white py-4 mb-12">
         <div class="w-1/3 text-center px-4">
-          <div class="font-bold text-4xl leading-none mb-2">
+          <div class="font-semibold text-4xl leading-none mb-2">
             {{ tournaments.length }}
           </div>
           <div class="uppercase text-xs text-grey-600">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="w-1/3 border-l border-r border-grey-400 text-center px-4">
-          <div class="font-bold text-4xl leading-none mb-2">
+          <div class="font-semibold text-4xl leading-none mb-2">
             {{ totalMatches }}
           </div>
           <div class="uppercase text-xs text-grey-600">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="w-1/3 text-center px-4">
-          <div class="font-bold text-4xl leading-none mb-2">
+          <div class="font-semibold text-4xl leading-none mb-2">
             {{ players.length }}
           </div>
           <div class="uppercase text-xs text-grey-600">
@@ -54,7 +54,7 @@
       </p>
       <div v-for="season in seasons" v-else :key="season.year">
         <div class="w-1/2 h-8 border-r border-grey-400 mb-2" />
-        <div class="mb-2 font-bold text-xl text-center">
+        <div class="mb-2 font-semibold text-xl text-center">
           {{ season.year }}
         </div>
         <div v-for="t in season.tournaments" :key="t.id" class="pb-4">

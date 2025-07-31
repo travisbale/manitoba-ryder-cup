@@ -11,7 +11,7 @@
           <h1 class="text-3xl font-raleway-semibold">
             {{ player.firstName }} {{ player.lastName }}
           </h1>
-          <div class="font-semibold text-grey-600 mr-2">
+          <div class="text-grey-600 mr-2">
             {{ record }} &bull; {{ player.cups }} {{ cupText }}
           </div>
         </div>

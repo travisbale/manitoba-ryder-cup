@@ -3,7 +3,7 @@
     <base-card class="mb-4">
       <div class="flex">
         <div class="text-center mr-8">
-          <div class="font-bold text-6xl leading-none">
+          <div class="font-semibold text-6xl leading-none">
             {{ number }}
           </div>
           <div class="text-sm text-grey-700">

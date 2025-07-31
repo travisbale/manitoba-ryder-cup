@@ -3,7 +3,7 @@
     <site-navigation />
     <div class="flex justify-center flex-grow bg-cover" :style="style">
       <div class="w-4/5 md:w-3/4 lg:w-2/5 lg:container lg:mx-auto">
-        <h1 class="font-bold text-3xl text-center text-white mt-16 mb-12">
+        <h1 class="font-semibold text-3xl text-center text-white mt-16 mb-12">
           Welcome Back
         </h1>
         <base-alert v-if="errorMessage" variant="error" class="mb-6">

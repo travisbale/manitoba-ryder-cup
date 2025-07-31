@@ -4,7 +4,7 @@
       <div class="w-2/5 p-2 shadow rounded-l border border-r-0 border-grey-300 truncate" :class="blueTeamClasses">
         {{ blueTeam }}
       </div>
-      <div class="w-1/5 py-3 text-lg shadow-md rounded border font-bold uppercase tracking-wide" :class="scoreClasses">
+      <div class="w-1/5 py-3 text-lg shadow-md rounded border font-semibold uppercase tracking-wide" :class="scoreClasses">
         <match-status :status-text="getStatusText()" />
       </div>
       <div class="w-2/5 p-2 shadow rounded-r border border-l-0 border-grey-300 truncate" :class="redTeamClasses">

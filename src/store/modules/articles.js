@@ -25,8 +25,8 @@ export default {
 
           <div class="flex my-4 pt-2">
           <svg class="w-12 h-12 mr-2" viewBox="0 0 48 48" fill="none">
-            <path d="M40.9999 27.0007L40.9999 15.0007L29 15.0007" stroke-width="4" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M6 37.0002L16.3385 24.5002L26.1846 30.5002L41 15.0002" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M40.9999 27.0007L40.9999 15.0007L29 15.0007" stroke-width="4" stroke="#388e3c" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6 37.0002L16.3385 24.5002L26.1846 30.5002L41 15.0002" stroke="#388e3c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
             <h2 class="text-2xl font-semibold mt-1">Buy</h2>
           </div>
@@ -65,7 +65,7 @@ export default {
           </p>
 
           <div class="flex my-4 pt-2">
-            <svg class="w-12 h-12 mr-2" fill="#000" viewBox="0 0 24 24">
+            <svg class="w-12 h-12 mr-2" fill="#fbc02d" viewBox="0 0 24 24">
               <path d="M23 13H2v-2h21v2z"/>
             </svg>
             <h2 class="text-2xl font-semibold mt-1">Hold</h2>
@@ -106,7 +106,7 @@ export default {
 
           <div class="flex my-4 pt-2">
             <svg class="w-12 h-12 mr-2" viewBox="0 0 24 24" fill="none">
-              <path d="M21 17L13 9L9 13L3 7M21 17H15M21 17V11" stroke-width="2.5" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 17L13 9L9 13L3 7M21 17H15M21 17V11" stroke-width="2.5" stroke="#d32f2f" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <h2 class="text-2xl font-semibold mt-1">Sell</h2>
           </div>

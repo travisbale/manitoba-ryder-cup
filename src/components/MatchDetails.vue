@@ -1,19 +1,19 @@
 <template>
   <div class="font-bold" :class="textColor">
     <div v-if="statusText.indexOf('UP') != -1" class="flex items-center">
-      <span class="text-6xl">{{ statusText.substring(0, statusText.indexOf(' ')) }}</span>
+      <span class="text-6xl font-semibold">{{ statusText.substring(0, statusText.indexOf(' ')) }}</span>
       <span class="text-3xl pt-2 tracking-tighter">
         {{ statusText.substring(statusText.indexOf(' ') + 1) }}
       </span>
     </div>
     <div v-else-if="statusText.indexOf('&') != -1" class="flex items-center">
-      <span class="text-6xl">{{ statusText.substring(0, statusText.indexOf(' ')) }}</span>
-      <span class="text-4xl pt-1">
+      <span class="text-6xl font-semibold">{{ statusText.substring(0, statusText.indexOf(' ')) }}</span>
+      <span class="text-4xl pt-1 mx-1">
         &
       </span>
-      <span class="text-6xl">{{ statusText.substring(statusText.indexOf('&') + 2) }}</span>
+      <span class="text-6xl font-semibold">{{ statusText.substring(statusText.indexOf('&') + 2) }}</span>
     </div>
-    <div v-else class="text-5xl py-1">
+    <div v-else class="text-5xl py-1 font-semibold">
       {{ statusText }}
     </div>
   </div>

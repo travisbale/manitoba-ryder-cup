@@ -5,6 +5,78 @@ export default {
   state: {
     articles: [
       {
+        id: 10,
+        title: 'McInnes vs. Milnes',
+        showTitle: true,
+        publishedDate: DateTime.fromISO('2025-08-26'),
+        imageUrl: '/img/mcinnes-milnes.jpg',
+        html: `
+          <div class="mb-12">
+            <p class="mb-4">
+              Following a draft filled with surprises, Teams McInnes and Milnes are locked in for this year’s highly
+              anticipated Manitoba Ryder Cup. While neither captain is known for vocal leadership, both stepped up
+              during the draft and stamped their identities firmly on their squads.
+            </p>
+            <p class="mb-4">
+              The battle lines are clearly drawn: Team McInnes features players most at home threading shots through
+              the trees of Niakwa, Rossmere, and his beloved Elmhurst. In contrast, Team Milnes leans into its
+              linksland roots, stacking the roster with players from the open grounds of Southwood and Western
+              Manitoba—a nod to his English heritage.
+            </p>
+            <p>
+              With this year’s event taking place just weeks before the USA vs. Europe Ryder Cup at Bethpage Black,
+              the 2025 profiles carry a distinctly international flavor.
+            </p>
+          </div>
+          <div class="mb-8">
+            <div class="mb-4">
+              <strong>Dan Mcinnes — Captain Team USA</strong>
+            </div>
+            <p class="mb-4">
+              Known for his intense glare and uncompromising attitude, McInnes might carry a Scottish name, but he’s
+              embraced the swagger of a brash American captain à la Keegan Bradley. Built more like Brooks Koepka,
+              his game resembles the steady, tactical styles of Collin Morikawa or Brian Harman.
+            </p>
+            <p class="mb-4">
+              His shot-shaping and disciplined play suit the tree-lined fairways of Clear Lake. But questions remain: Will
+              his unique brand of motivation resonate with his team? (See: Opus Dei scenes from The Da Vinci
+              Code...). Once the matches begin, this top-rated Blue player gives his side a clear edge in any contest.
+            </p>
+            <p class="mb-4">
+              Despite the on-paper advantage, there’s one lingering concern—availability. Rumor has it McInnes played
+              just 52% of the holes during a recent visit to Canada’s #1-ranked course. He’d be wise to brush up on the
+              official Ryder Cup rulebook to avoid leading his team off the course—and to the 19th hole—too early.
+            </p>
+          </div>
+          <div class="mb-8">
+            <div class="mb-4">
+              <strong>Nigel Milnes — Captain Team Europe</strong>
+            </div>
+            <p class="mb-4">
+              A man of few words with a quiet demeanour, Milnes shares the attributes with Europe’s 2023 Ryder Cup
+              captain Luke Donald. Diminutive in stature but not in impact, Milnes is known for his precision iron
+              play—a game tailor-made for Clear Lake’s demanding layout (and, some say, your local Tuesday morning
+              ladies’ league).
+            </p>
+            <p class="mb-4">
+              Milnes’ height, playing style, and post-round behavior all evoke memories of Team Europe legend Ian
+              Woosnam. Known to find an extra gear once beer sales open, the real challenge for Milnes may be
+              managing consumption more than club selection. Now elevated to a leadership role, one question looms:
+              Can he strike the right balance between leadership and libation?
+            </p>
+            <p class="mb-12">
+              One thing's not in doubt: his commitment. In 2023, Milnes crossed international borders with a sprained
+              MCL just to compete. And while some of his top draft picks raised a few eyebrows, Milnes will look to
+              prove that his vision leads to a masterpiece, not a paint-by-numbers performance on match day.
+            </p>
+            <p>
+              Stay tuned for a full analysis, where we’ll compare the rosters of Team McInnes (Team USA) and Team
+              Milnes (Team Europe) with direct player comparisons.
+            </p>
+          </div>
+        `,
+      },
+      {
         id: 9,
         title: 'Player Stock Report',
         showTitle: true,

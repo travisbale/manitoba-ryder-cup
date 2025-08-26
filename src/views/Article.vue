@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="p-4 pt-6 text leading-relaxed">
-      <div class="flex text-sm text-grey-600 mb-2">
+      <div class="flex text-sm text-grey-600 mb-4">
         {{ printDate(article.publishedDate) }}
       </div>
       <!-- eslint-disable-next-line -->
